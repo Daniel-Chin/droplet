@@ -18,10 +18,10 @@ dtheta2=L / Nb2 % IB point spacing
 % km2=[Nb2,(1:(Nb2-1))] % IB index shifted right
 
 K=1 % Elastic stiffness
-WALL_SITFFNESS = 10;
+WALL_STIFFNESS = 100;
 rho=1 % Fluid density
 mu=0.01 % viscosity
-tmax=1 % Run until time
+tmax=5 % Run until time
 dt=0.01 % Time step
 clockmax=ceil(tmax/dt)
 
@@ -32,7 +32,8 @@ X = (L/2) + (L/4)*[cos(theta), sin(theta)];
 
 k2=0:(Nb2-1);
 theta2 = k2'*dtheta2;
-X2 = [0, theta2];
+X2 = zeros(Nb2, 2);
+X2(:, 2) = theta2;
 PERFECT_WALL = X2;
 
 u=zeros(N,N,2);

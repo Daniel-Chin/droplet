@@ -4,8 +4,10 @@
 % https://www.math.nyu.edu/faculty/peskin/ib_lecture_notes/index.html
 % Vectorized and commented by Tristan Goodwill,2019.4
 %% Initialize simulation
+clc; clear all;
 global dt Nb N h rho mu ip im a;
 global kp km dtheta K;
+global WALL_STIFFNESS PERFECT_WALL;
 initialize
 init_a
 
@@ -14,7 +16,7 @@ for clock=1:clockmax
   XX=X+(dt/2)*vec_interp(u, X, Nb); % Euler step to midpoint
   XX2=X2+(dt/2)*vec_interp(u, X2, Nb2); % Euler step to midpoint
   ff=vec_spread(Force(XX, kp, km, dtheta, K), XX, dtheta, Nb); % Force at midpoint
-  ff2=vec_spread(ForceWall(XX2), XX2, dtheta2, Nb2); % Force at midpoint
+  ff2=vec_spread(ForceWall(XX2, WALL_STIFFNESS, PERFECT_WALL), XX2, dtheta2, Nb2); % Force at midpoint
   [u,uu]=fluid(u,ff + ff2); % Step Fluid Velocity
   X=X+dt*vec_interp(uu, XX, Nb); % full step using midpoint velocity
   X2=X2+dt*vec_interp(uu, XX2, Nb2); % full step using midpoint velocity

@@ -1,3 +1,3 @@
-function F=ForceWall(X)
+function F=ForceWall(X, K, PERFECT_WALL)
 % penalty
-F=WALL_SITFFNESS*(PERFECT_WALL - X);
+F=K*(PERFECT_WALL - X);
