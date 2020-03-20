@@ -21,13 +21,13 @@ Nb2=ceil((L+1) / (h*.5)) % Number of IB points
 dtheta2=L / Nb2 % IB point spacing
 
 K=1 % Elastic stiffness
-WALL_STIFFNESS = 500;
+WALL_STIFFNESS = 1000;
 NAIL_STIFF = 500;
 rho=1 % Fluid density
 mu=0.01 % viscosity
 tmax=3 % Run until time
 % dt=0.01 % Time step
-dt=0.002 % Time step
+dt=0.005 % Time step
 clockmax=ceil(tmax/dt)
 
 %% Initialize boundary and velocity

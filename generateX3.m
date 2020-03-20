@@ -1,6 +1,6 @@
 function [X3, Nb3, dtheta3]=generateX3(N, h, L)
-STEP = 4;
-dtheta3 = STEP * .1;
+STEP = 1;
+dtheta3 = STEP * 1;
 Nb3 = 0;
 for j = ceil(STEP / 2) : STEP : N-1
   for k = ceil(STEP / 2) : STEP : N-1
