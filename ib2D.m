@@ -11,13 +11,13 @@ init_a
 
 %% Run simulation
 for clock=1:clockmax
-  XX=X+(dt/2)*vec_interp(u,X); % Euler step to midpoint
-  XX2=X2+(dt/2)*vec_interp(u,X2); % Euler step to midpoint
-  ff=vec_spread(Force(XX),XX); % Force at midpoint
-  ff2=vec_spread(Force(XX2),XX2); % Force at midpoint
+  XX=X+(dt/2)*vec_interp(u, X, Nb); % Euler step to midpoint
+  XX2=X2+(dt/2)*vec_interp(u, X2, Nb2); % Euler step to midpoint
+  ff=vec_spread(Force(XX, kp, km, dtheta, K), XX, dtheta, Nb); % Force at midpoint
+  ff2=vec_spread(ForceWall(XX2), XX2, dtheta2, Nb2); % Force at midpoint
   [u,uu]=fluid(u,ff + ff2); % Step Fluid Velocity
-  X=X+dt*vec_interp(uu,XX); % full step using midpoint velocity
-  X2=X2+dt*vec_interp(uu,XX2); % full step using midpoint velocity
+  X=X+dt*vec_interp(uu, XX, Nb); % full step using midpoint velocity
+  X2=X2+dt*vec_interp(uu, XX2, Nb2); % full step using midpoint velocity
   
   %animation:
   vorticity=(u(ip,:,2)-u(im,:,2)-u(:,ip,1)+u(:,im,1))/(2*h);

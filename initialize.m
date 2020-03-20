@@ -12,12 +12,13 @@ dtheta=2*pi/Nb % IB point spacing
 kp=[(2:Nb),1] % IB index shifted left
 km=[Nb,(1:(Nb-1))] % IB index shifted right
 
-Nb2=ceil(pi*(L/2)/(h/2)) % Number of IB points
-dtheta2=2*pi/Nb2 % IB point spacing
-kp2=[(2:Nb2),1] % IB index shifted left
-km2=[Nb2,(1:(Nb2-1))] % IB index shifted right
+Nb2=ceil((L+1) / (h/2)) % Number of IB points
+dtheta2=L / Nb2 % IB point spacing
+% kp2=[(2:Nb2),1] % IB index shifted left
+% km2=[Nb2,(1:(Nb2-1))] % IB index shifted right
 
 K=1 % Elastic stiffness
+WALL_SITFFNESS = 10;
 rho=1 % Fluid density
 mu=0.01 % viscosity
 tmax=1 % Run until time
@@ -28,7 +29,11 @@ clockmax=ceil(tmax/dt)
 k=0:(Nb-1);
 theta = k'*dtheta;
 X = (L/2) + (L/4)*[cos(theta), sin(theta)];
-X2 = (L*.3) + (L*.2)*[cos(theta), sin(theta)];
+
+k2=0:(Nb2-1);
+theta2 = k2'*dtheta2;
+X2 = [0, theta2];
+PERFECT_WALL = X2;
 
 u=zeros(N,N,2);
 j1=0:(N-1); % Initialize fluid velocity as (0,sin(2*pi*x/L))

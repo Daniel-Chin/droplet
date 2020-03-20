@@ -1,6 +1,6 @@
-function f=vec_spread(F,X)
+function f=vec_spread(F, X, dtheta, Nb)
 % spread F to grid
-global h N dtheta Nb;
+global h N;
 
 c=dtheta/(h*h);
 f=zeros(N,N,2);

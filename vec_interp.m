@@ -1,6 +1,6 @@
-function U=vec_interp(u,X)
+function U=vec_interp(u, X, Nb)
 % interpolate fluid velocity to the body
-global Nb h;
+global h;
 global N;
 U=zeros(Nb,2);
 s=X/h; % Get body position relative to grid
