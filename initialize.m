@@ -6,10 +6,17 @@ N=64 % Number of grid cells
 h=L/N % Grid spacing
 ip=[(2:N),1] % Grid index shifted left
 im=[N,(1:(N-1))] % Grid index shifted right
+
 Nb=ceil(pi*(L/2)/(h/2)) % Number of IB points
 dtheta=2*pi/Nb % IB point spacing
 kp=[(2:Nb),1] % IB index shifted left
 km=[Nb,(1:(Nb-1))] % IB index shifted right
+
+Nb2=ceil(pi*(L/2)/(h/2)) % Number of IB points
+dtheta2=2*pi/Nb2 % IB point spacing
+kp2=[(2:Nb2),1] % IB index shifted left
+km2=[Nb2,(1:(Nb2-1))] % IB index shifted right
+
 K=1 % Elastic stiffness
 rho=1 % Fluid density
 mu=0.01 % viscosity
@@ -21,6 +28,7 @@ clockmax=ceil(tmax/dt)
 k=0:(Nb-1);
 theta = k'*dtheta;
 X = (L/2) + (L/4)*[cos(theta), sin(theta)];
+X2 = (L*.3) + (L*.2)*[cos(theta), sin(theta)];
 
 u=zeros(N,N,2);
 j1=0:(N-1); % Initialize fluid velocity as (0,sin(2*pi*x/L))
@@ -43,10 +51,10 @@ set(gcf,'double','on')
 contour(xgrid,ygrid,vorticity,values)
 hold on
 plot(X(:,1),X(:,2),'ko')
+plot(X2(:,1),X2(:,2),'ko')
 axis([0,L,0,L])
 caxis(valminmax)
 axis equal
 axis manual
 drawnow
 hold off
-

@@ -12,15 +12,19 @@ init_a
 %% Run simulation
 for clock=1:clockmax
   XX=X+(dt/2)*vec_interp(u,X); % Euler step to midpoint
+  XX2=X2+(dt/2)*vec_interp(u,X2); % Euler step to midpoint
   ff=vec_spread(Force(XX),XX); % Force at midpoint
-  [u,uu]=fluid(u,ff); % Step Fluid Velocity
+  ff2=vec_spread(Force(XX2),XX2); % Force at midpoint
+  [u,uu]=fluid(u,ff + ff2); % Step Fluid Velocity
   X=X+dt*vec_interp(uu,XX); % full step using midpoint velocity
+  X2=X2+dt*vec_interp(uu,XX2); % full step using midpoint velocity
   
   %animation:
   vorticity=(u(ip,:,2)-u(im,:,2)-u(:,ip,1)+u(:,im,1))/(2*h);
   contour(xgrid,ygrid,vorticity,values)
   hold on
   plot(X(:,1),X(:,2),'ko')
+  plot(X2(:,1),X2(:,2),'ko')
   axis([0,L,0,L])
   caxis(valminmax)
   axis equal
@@ -28,4 +32,3 @@ for clock=1:clockmax
   drawnow
   hold off
 end
-
