@@ -27,6 +27,13 @@ for clock=1:clockmax
   
   %animation:
   vorticity=(u(ip,:,2)-u(im,:,2)-u(:,ip,1)+u(:,im,1))/(2*h);
+  % dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
+  % values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
+  % if any(values)
+  %   valminmax=[min(values),max(values)];
+  % else
+  %   valminmax = [-69 69];
+  % end
   contour(xgrid,ygrid,vorticity,values)
   hold on
   plot(X(:,1),X(:,2),'ko')
