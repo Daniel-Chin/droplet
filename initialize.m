@@ -43,8 +43,6 @@ X2 = zeros(Nb2, 2);  % first column has fluid value and wall
 X2(:, 2) = theta2;
 PERFECT_WALL = X2;
 
-[X3, Nb3, dtheta3] = generateX3(N, h, L);
-
 u=zeros(N,N,2);
 % j1=0:(N-1); % Initialize fluid velocity as (0,sin(2*pi*x/L))
 % x=j1'*h;
