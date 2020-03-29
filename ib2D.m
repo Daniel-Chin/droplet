@@ -18,9 +18,10 @@ for clock=1:clockmax
   XX3=X3+(dt/2)*vec_interp(u, X3, Nb3); % Euler step to midpoint
   ff=vec_spread(ForceSurface(XX, kp, km, dtheta, K, NAILS, NAIL_STIFF), XX, dtheta, Nb); % Force at midpoint
   ff2=vec_spread(ForceWall(XX2, WALL_STIFFNESS, PERFECT_WALL), XX2, dtheta2, Nb2); % Force at midpoint
-  % ff2(:, :, 2) = zeros(N, N); % Release the wall vertically
   ff3=vec_spread(ForceGravel(Nb3), XX3, dtheta3, Nb3); % Force at midpoint
-  [u,uu]=fluid(u,ff + ff2 + ff3); % Step Fluid Velocity
+  total_ff = ff + ff2 + ff3;
+  total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
+  [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
   X=X+dt*vec_interp(uu, XX, Nb); % full step using midpoint velocity
   X2=X2+dt*vec_interp(uu, XX2, Nb2); % full step using midpoint velocity
   X3=X3+dt*vec_interp(uu, XX3, Nb3); % full step using midpoint velocity
@@ -43,8 +44,9 @@ for clock=1:clockmax
   caxis(valminmax)
   axis equal
   axis manual
+  title(clock * dt);
   drawnow
-  saveas(gcf, sprintf('./output/%d.png', clock));
+  % saveas(gcf, sprintf('./output/%d.png', clock));
   hold off
   % pause(.1)
 end

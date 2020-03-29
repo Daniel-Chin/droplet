@@ -1,9 +1,8 @@
 %initialize.m
 %% Initialize Parameters and special indices
 
-L=1.0; % Box size
-N=64; % Number of grid cells
-% N=128; % Number of grid cells
+L=2.0; % Box size
+N=128; % Number of grid cells
 h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
 im=[N,(1:(N-1))]; % Grid index shifted right
@@ -20,6 +19,8 @@ km=[Nb,(1:(Nb-1))]; % IB index shifted right
 Nb2=ceil((L+1) / (h*.5)); % Number of IB points
 dtheta2=L / Nb2; % IB point spacing
 
+% DROPLET_LEFT = 
+
 K=1; % Elastic stiffness
 WALL_STIFFNESS = 1000;
 NAIL_STIFF = 500;
@@ -33,12 +34,12 @@ clockmax=ceil(tmax/dt);
 %% Initialize boundary and velocity
 k=0:(Nb-1);
 theta = k'*dtheta;
-X = [L*0.00, L/2] + (L/4)*[sin(theta*4), cos(theta*4)];
+X = [L*0.00, L/2] + (L/8)*[sin(theta*2), cos(theta*2)];
 NAILS = [X(1, :); X(end, :)];
 
 k2=0:(Nb2-1);
 theta2 = k2'*dtheta2;
-X2 = zeros(Nb2, 2);
+X2 = zeros(Nb2, 2);  % first column has fluid value and wall
 X2(:, 2) = theta2;
 PERFECT_WALL = X2;
 
@@ -79,3 +80,6 @@ set(gcf,'double','on')
 % axis manual
 % drawnow
 % hold off
+
+MIRROR = ones(1, 1, 2);
+MIRROR(1, 1, 1) = -1;
