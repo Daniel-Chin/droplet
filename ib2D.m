@@ -22,6 +22,9 @@ for clock=1:clockmax
   total_ff = ff + ff2 + ff3;
   total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
   [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
+  % vertical flow
+  % u(end, 1) = VERTICAL_FLOW;
+  % uu(end, 1) = VERTICAL_FLOW;
   X=X+dt*vec_interp(uu, XX, Nb); % full step using midpoint velocity
   X2=X2+dt*vec_interp(uu, XX2, Nb2); % full step using midpoint velocity
   X3=X3+dt*vec_interp(uu, XX3, Nb3); % full step using midpoint velocity
@@ -35,12 +38,12 @@ for clock=1:clockmax
   % else
   %   valminmax = [-69 69];
   % end
-  contour(xgrid,ygrid,vorticity,values)
+  contour(xgrid,ygrid,vorticity(1:end/2, :),values)
   hold on
   plot(X(:,1),X(:,2),'ko')
   plot(X2(:,1),X2(:,2),'bo')
-  plot(X3(:,1),X3(:,2),'ro')
-  axis([0,L,0,L])
+  plot(X3(:,1),X3(:,2),'r.')
+  axis([-L/100,L/2,0,L])
   caxis(valminmax)
   axis equal
   axis manual

@@ -56,10 +56,12 @@ u=zeros(N,N,2);
 % dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
 % values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
 % valminmax=[min(values),max(values)];
-xgrid=zeros(N,N);
-ygrid=zeros(N,N);
+xgrid=zeros(N/2,N);
+ygrid=zeros(N/2,N);
 for j=0:(N-1)
-  xgrid(j+1,:)=j*h;
+  if j < N/2
+    xgrid(j+1,:)=j*h;
+  end
   ygrid(:,j+1)=j*h;
 end
 
@@ -83,3 +85,4 @@ set(gcf,'double','on')
 
 MIRROR = ones(1, 1, 2);
 MIRROR(1, 1, 1) = -1;
+VERTICAL_FLOW = 1;
