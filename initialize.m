@@ -1,8 +1,10 @@
 %initialize.m
 %% Initialize Parameters and special indices
 
-L=2.0; % Box size
+% dt=0.01 % Time step
+dt=0.003; % Time step
 N=128; % Number of grid cells
+L=2.0; % Box size
 h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
 im=[N,(1:(N-1))]; % Grid index shifted right
@@ -26,9 +28,7 @@ WALL_STIFFNESS = 1000;
 NAIL_STIFF = 500;
 rho=1; % Fluid density
 mu=0.01; % viscosity
-tmax=3; % Run until time
-% dt=0.01 % Time step
-dt=0.005; % Time step
+tmax=4; % Run until time
 clockmax=ceil(tmax/dt);
 
 %% Initialize boundary and velocity
@@ -84,3 +84,9 @@ set(gcf,'double','on')
 MIRROR = ones(1, 1, 2);
 MIRROR(1, 1, 1) = -1;
 VERTICAL_FLOW = 1;
+
+gravity_helper = ones(Nb, 2);
+gravity_frontier = [];
+gravity_per_cell = - 1200 * h; % should be related to density and h
+
+render_i = 0;
