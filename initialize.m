@@ -1,8 +1,7 @@
 %initialize.m
 %% Initialize Parameters and special indices
 
-% dt=0.01 % Time step
-dt=0.003; % Time step
+dt=0.006; % Time step
 N=128; % Number of grid cells
 L=2.0; % Box size
 h=L/N; % Grid spacing
@@ -87,6 +86,6 @@ VERTICAL_FLOW = 1;
 
 gravity_helper = ones(Nb, 2);
 gravity_frontier = [];
-gravity_per_cell = - 1200 * h; % should be related to density and h
+gravity_per_cell = - 80000 * h^2; % should be related to density and h
 
 render_i = 0;

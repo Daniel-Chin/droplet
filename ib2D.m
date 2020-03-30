@@ -44,7 +44,7 @@ for clock=1:clockmax
   plot([h*2 h*2], [0 L], 'r');
   plot(X(:,1),X(:,2),'k.')
   plot(X2(:,1),X2(:,2),'b.')
-  plot(L/32, L*.4, 'ro')
+  plot(L/32, L*.42, 'ro')
   % axis([-L/100,L/2,0,L])
   caxis(valminmax)
   axis equal
