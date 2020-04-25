@@ -6,7 +6,7 @@ surface_grid = vec_spread(gravity_helper, XX, dtheta, Nb);
 max_surface_grid = max(max(surface_grid(:, :, 1)));
 surface_grid = surface_grid(:, :, 1) ./ max_surface_grid;
 gravity_frontier = zeros(size(gravity_frontier));
-gravity_frontier(1, :) = [ceil(L/32 / h), ceil(L*.42 / h), 0];
+gravity_frontier(1, :) = [gravity_soul(1), gravity_soul(2), 0];
 gravity_frontier_top = 1;
 gravity_visited = false(N, N);
 gravity_render_i = 0;
@@ -46,13 +46,13 @@ while gravity_frontier_top ~= 0
     end
   end
   gravity_visited = gravity_visited | gravity_to_visit >= 1;
-  % if mod(clock, 16) == 0 && gravity_render_i == 0
+  % if mod(clock, 8) == 0 && gravity_render_i == 0
   %   pixels = zeros(N, N, 3);
   %   pixels(end:-1:1, :, 1) = surface_grid';
   %   pixels(end:-1:1, :, 2) = gravity' ./ gravity_per_cell;
   %   image(pixels);
-  %   pause(.05)
-  %   saveFrame();
+  %   pause(.1)
+  %   % saveFrame();
   % end
   gravity_render_i = mod(gravity_render_i + 1, 2);
   gravity_frontier_top = new_gravity_frontier_i;
@@ -65,3 +65,5 @@ end
 % end
 sum_gravity = sum(gravity, 'all');
 display(sum_gravity);
+
+gravity_soul(2) = ceil((X(1, 2) * .3 + X(end, 2) * .7) / h);
