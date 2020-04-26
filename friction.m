@@ -1,5 +1,6 @@
-function f=friction(angle, v, advance_or_recede, NO_SLIP_FORCE)
+function f=friction(angle, v, upper_or_lower, NO_SLIP_FORCE)
 % v: contact line speed
+advance_or_recede = xor(upper_or_lower, v < 0);
 if advance_or_recede
   if angle > 1.117
     if angle > 2
@@ -10,13 +11,13 @@ if advance_or_recede
   else
     mu = - 19.1 * angle + 30.31;
   end
+  f = - mu * v;
+  display(f);
+  if f < 0
+    f = f - NO_SLIP_FORCE;
+  else
+    f = f + NO_SLIP_FORCE;
+  end
 else
-  mu = 0;
-end
-f = - mu * v * .01;
-display(f);
-if f < 0
-  f = f - NO_SLIP_FORCE;
-else
-  f = f + NO_SLIP_FORCE;
+  f = 0;
 end

@@ -100,7 +100,7 @@ gravity_soul = [ceil(L/32 / h), ceil(L*.42 / h)];
 
 render_i = 0;
 
-NO_SLIP_FORCE = .01;
+NO_SLIP_FORCE = 200;
 SLIP_LENGTH = .04;
 SLIP_LENGTH_COEF = h / SLIP_LENGTH;
 NO_SLIP_FORCE = NO_SLIP_FORCE * SLIP_LENGTH_COEF;

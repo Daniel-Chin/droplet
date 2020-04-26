@@ -64,7 +64,11 @@ end
 %   end
 % end
 sum_gravity = sum(gravity, 'all');
-display(sum_gravity);
+fprintf("Gravity: ");
+for j=1:round(-sum_gravity * .007)
+  fprintf('#');
+end
+fprintf('\n');
 
 % gravity_soul(2) = ceil((X(1, 2) * .2 + X(end, 2) * .8) / h);
 gravity_soul = floor(mean(X(X(:, 1) > h, :)) ./ h) + [0 0];

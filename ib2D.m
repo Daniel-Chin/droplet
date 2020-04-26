@@ -37,6 +37,7 @@ for clock=1:clockmax
   computeGravity();
   total_ff(:, :, 2) = total_ff(:, :, 2) + gravity;
   total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
+  display(sum(sum(total_ff, 1), 2));
   [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
   % vertical flow
   % u(end, 1) = VERTICAL_FLOW;
@@ -49,9 +50,9 @@ for clock=1:clockmax
   % plot([0 0], [0 L], 'r');
   plot([h h], [0 L], 'r');
   plot([h*2 h*2], [0 L], 'r');
+  plot(X3(:,1),X3(:,2),'b.')
+  plot(X2(:,1),X2(:,2),'g.')
   plot(X(:,1),X(:,2),'k.')
-  plot(X2(:,1),X2(:,2),'b.')
-  plot(X3(:,1),X3(:,2),'g.')
   plot(gravity_soul(1) * h, gravity_soul(2) * h, 'rx')
   % axis([-L/100,L/2,0,L])
   caxis(valminmax)

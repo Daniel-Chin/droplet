@@ -4,31 +4,28 @@ F=K*(PERFECT_WALL - XX2);
 new_X2 = X2;
 
 contact_line_velocity = vec_interp(u, X, Nb);
-recede_velocity = contact_line_velocity(1, 2);
-advance_velocity = contact_line_velocity(end, 2);
+upper_velocity = contact_line_velocity(1, 2);
+lower_velocity = contact_line_velocity(end, 2);
 
-recede_tangent = X(2, :) - X(1, :);
-recede_angle = pi/2 + atan(recede_tangent(2) / recede_tangent(1));
-recede_static_limit = friction(recede_angle, recede_velocity, false, NO_SLIP_FORCE) * SLIP_LENGTH_COEF;
+upper_tangent = X(2, :) - X(1, :);
+upper_angle = pi/2 + atan(upper_tangent(2) / upper_tangent(1));
+upper_static_limit = friction(upper_angle, upper_velocity, true, NO_SLIP_FORCE) * SLIP_LENGTH_COEF;
 
-advance_tangent = X(end-1, :) - X(end, :);
-advance_angle = pi/2 - atan(advance_tangent(2) / advance_tangent(1));
-advance_static_limit = friction(advance_angle, advance_velocity, true, NO_SLIP_FORCE) * SLIP_LENGTH_COEF;
+lower_tangent = X(end-1, :) - X(end, :);
+lower_angle = pi/2 - atan(lower_tangent(2) / lower_tangent(1));
+lower_static_limit = friction(lower_angle, lower_velocity, false, NO_SLIP_FORCE) * SLIP_LENGTH_COEF;
 
 y_mid = (X(1, 2) + X(end, 2)) / 2;
 for j=1:Nb2
   if XX2(j, 2) > y_mid
-    recede_static = F(j, 2);
-    if recede_static / recede_static_limit > 1
-      F(j, 2) = recede_static_limit;
-      new_X2(j, 2) = PERFECT_WALL(j, 2) - recede_static_limit / K;
-    end
+    the_limit = upper_static_limit;
   else
-    advance_static = F(j, 2);
-    if advance_static / advance_static_limit > 1
-      % disp(j);disp(advance_static / advance_static_limit);
-      F(j, 2) = advance_static_limit;
-      new_X2(j, 2) = PERFECT_WALL(j, 2) - advance_static_limit / K;
-    end
+    the_limit = lower_static_limit;
+  end
+  intention = F(j, 2);
+  if intention / the_limit > 1
+    % disp(j);disp(intention / the_limit);
+    F(j, 2) = the_limit;
+    new_X2(j, 2) = PERFECT_WALL(j, 2) - the_limit / K;
   end
 end
