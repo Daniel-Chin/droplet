@@ -12,12 +12,16 @@ if advance_or_recede
     mu = - 19.1 * angle + 30.31;
   end
   f = - mu * v;
-  display(f);
-  if f < 0
+  if v > 0
     f = f - NO_SLIP_FORCE;
   else
     f = f + NO_SLIP_FORCE;
   end
 else
   f = 0;
+  if v > 0
+    f = f - NO_SLIP_FORCE;
+  else
+    f = f + NO_SLIP_FORCE;
+  end
 end

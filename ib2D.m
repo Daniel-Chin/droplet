@@ -31,13 +31,12 @@ for clock=1:clockmax
   XX2=X2+(dt/2)*vec_interp(u, X2, Nb2); % Euler step to midpoint
   XX3 = X3+(dt/2) * vec_interp(u, X3, Nb3); % Euler step to midpoint
   ff=vec_spread(ForceSurface(XX, kp, km, dtheta, K), XX, dtheta, Nb); % Force at midpoint
-  [force_wall, X2] = ForceWall(XX2, WALL_STIFFNESS, PERFECT_WALL, u, XX, Nb, Nb2, NO_SLIP_FORCE, X2, SLIP_LENGTH_COEF);
+  [force_wall, X2] = ForceWall(XX2, WALL_STIFFNESS, PERFECT_WALL, u, XX, Nb, Nb2, NO_SLIP_FORCE, X2, SLIP_LENGTH_COEF, h);
   ff2 = vec_spread(force_wall, XX2, dtheta2, Nb2); % Force at midpoint
   total_ff = ff + ff2;
   computeGravity();
   total_ff(:, :, 2) = total_ff(:, :, 2) + gravity;
   total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
-  display(sum(sum(total_ff, 1), 2));
   [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
   % vertical flow
   % u(end, 1) = VERTICAL_FLOW;
@@ -48,11 +47,12 @@ for clock=1:clockmax
   [X, Nb, kp, km] = surfaceResample(X, Nb, dtheta);
 
   % plot([0 0], [0 L], 'r');
+  plot([0 0], [0 L], 'r');
   plot([h h], [0 L], 'r');
   plot([h*2 h*2], [0 L], 'r');
-  plot(X3(:,1),X3(:,2),'b.')
-  plot(X2(:,1),X2(:,2),'g.')
-  plot(X(:,1),X(:,2),'k.')
+  plot(X3(:,1),X3(:,2),'k.')
+  plot(X2(:,1),X2(:,2),'k.')
+  plot(X(:,1),X(:,2),'b.')
   plot(gravity_soul(1) * h, gravity_soul(2) * h, 'rx')
   % axis([-L/100,L/2,0,L])
   caxis(valminmax)

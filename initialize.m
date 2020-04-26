@@ -20,10 +20,11 @@ km=[Nb,(1:(Nb-1))]; % IB index shifted right
 Nb2=ceil((L+1) / (h*.5)); % Number of IB points
 dtheta2=L / Nb2; % IB point spacing
 
-Nb3x = floor((N/4));
-Nb3y = floor((N/2));
+Nb3_space = 2;
+Nb3x = floor((N/2 / Nb3_space));
+Nb3y = floor((N / Nb3_space));
 Nb3 = Nb3x * Nb3y; % Number of IB points
-dtheta3 = h * 2; % IB point spacing
+dtheta3 = h * Nb3_space; % IB point spacing
 
 K=150; % Surface tension coefficient
 WALL_STIFFNESS = 3000;
@@ -35,7 +36,7 @@ clockmax=ceil(tmax/dt);
 %% Initialize boundary and velocity
 k=0:(Nb-1);
 theta = k'*dtheta;
-X = [L*0.00, L/2] + (L/8)*[sin(theta*2), cos(theta*2)];
+X = [L*0.00, L*0.8] + (L/8)*[sin(theta*2), cos(theta*2)];
 
 k2=0:(Nb2-1);
 theta2 = k2'*dtheta2;
@@ -95,12 +96,12 @@ VERTICAL_FLOW = 1;
 
 gravity_helper = ones(Nb, 2);
 gravity_frontier = [];
-gravity_per_cell = - 50000 * h^2; % should be related to density and h
-gravity_soul = [ceil(L/32 / h), ceil(L*.42 / h)];
+gravity_per_cell = - 40000 * h^2; % should be related to density and h
+gravity_soul = [ceil(L/32 / h), ceil(L*.8 / h)];
 
 render_i = 0;
 
-NO_SLIP_FORCE = 200;
+NO_SLIP_FORCE = 10;
 SLIP_LENGTH = .04;
 SLIP_LENGTH_COEF = h / SLIP_LENGTH;
 NO_SLIP_FORCE = NO_SLIP_FORCE * SLIP_LENGTH_COEF;

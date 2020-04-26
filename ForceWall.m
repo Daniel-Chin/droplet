@@ -1,4 +1,4 @@
-function [F, new_X2]=ForceWall(XX2, K, PERFECT_WALL, u, X, Nb, Nb2, NO_SLIP_FORCE, X2, SLIP_LENGTH_COEF)
+function [F, new_X2]=ForceWall(XX2, K, PERFECT_WALL, u, X, Nb, Nb2, NO_SLIP_FORCE, X2, SLIP_LENGTH_COEF, h)
 % penalty
 F=K*(PERFECT_WALL - XX2);
 new_X2 = X2;
@@ -24,7 +24,7 @@ for j=1:Nb2
   end
   intention = F(j, 2);
   if intention / the_limit > 1
-    % disp(j);disp(intention / the_limit);
+    fprintf('Slip! y=%.1f, level=%.2f \n', j * h, intention / the_limit);
     F(j, 2) = the_limit;
     new_X2(j, 2) = PERFECT_WALL(j, 2) - the_limit / K;
   end
