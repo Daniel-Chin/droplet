@@ -1,1 +1,1 @@
-ffmpeg -r 10 -i ./output/%%d.png output.mp4
+ffmpeg -r 20 -i ./output/%%d.png output.mp4

@@ -13,7 +13,8 @@ if advance_or_recede
 else
   mu = 0;
 end
-f = - mu * v;
+f = - mu * v * .01;
+display(f);
 if f < 0
   f = f - NO_SLIP_FORCE;
 else

@@ -66,4 +66,5 @@ end
 sum_gravity = sum(gravity, 'all');
 display(sum_gravity);
 
-gravity_soul(2) = ceil((X(1, 2) * .3 + X(end, 2) * .7) / h);
+% gravity_soul(2) = ceil((X(1, 2) * .2 + X(end, 2) * .8) / h);
+gravity_soul = floor(mean(X) ./ h) + [0 -3];

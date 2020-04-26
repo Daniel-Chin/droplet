@@ -2,7 +2,7 @@
 %% Initialize Parameters and special indices
 
 dt=0.006; % Time step
-N=64; % Number of grid cells
+N=96; % Number of grid cells
 L=2.0; % Box size
 h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
@@ -25,7 +25,7 @@ Nb3y = floor((N/2));
 Nb3 = Nb3x * Nb3y; % Number of IB points
 dtheta3 = h * 2; % IB point spacing
 
-K=100; % Surface tension coefficient
+K=150; % Surface tension coefficient
 WALL_STIFFNESS = 3000;
 rho=1; % Fluid density
 mu=0.01; % viscosity
@@ -95,12 +95,12 @@ VERTICAL_FLOW = 1;
 
 gravity_helper = ones(Nb, 2);
 gravity_frontier = [];
-gravity_per_cell = - 60000 * h^2; % should be related to density and h
+gravity_per_cell = - 50000 * h^2; % should be related to density and h
 gravity_soul = [ceil(L/32 / h), ceil(L*.42 / h)];
 
 render_i = 0;
 
-NO_SLIP_FORCE = 1;
+NO_SLIP_FORCE = .01;
 SLIP_LENGTH = .04;
 SLIP_LENGTH_COEF = h / SLIP_LENGTH;
 NO_SLIP_FORCE = NO_SLIP_FORCE * SLIP_LENGTH_COEF;

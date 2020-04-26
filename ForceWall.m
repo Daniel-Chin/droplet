@@ -21,15 +21,13 @@ for j=1:Nb2
     recede_static = F(j, 2);
     if recede_static / recede_static_limit > 1
       F(j, 2) = recede_static_limit;
-      F(j, 2) =0;
       new_X2(j, 2) = PERFECT_WALL(j, 2) - recede_static_limit / K;
     end
   else
     advance_static = F(j, 2);
     if advance_static / advance_static_limit > 1
-      disp(j);disp(advance_static / advance_static_limit);
+      % disp(j);disp(advance_static / advance_static_limit);
       F(j, 2) = advance_static_limit;
-      F(j, 2) =0;
       new_X2(j, 2) = PERFECT_WALL(j, 2) - advance_static_limit / K;
     end
   end

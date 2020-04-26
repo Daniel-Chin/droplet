@@ -3,6 +3,7 @@
 % Original Code by Charlie Peskin:
 % https://www.math.nyu.edu/faculty/peskin/ib_lecture_notes/index.html
 % Vectorized and commented by Tristan Goodwill,2019.4
+% Gravity, multi-phase, wall, surface tension by Daniel Chin
 %% Initialize simulation
 clc; clear all; close all;
 global dt Nb N h rho mu ip im a;
@@ -13,6 +14,19 @@ init_a
 
 %% Run simulation
 for clock=1:clockmax
+  hold off
+  %animation:
+  vorticity=(u(ip,:,2)-u(im,:,2)-u(:,ip,1)+u(:,im,1))/(2*h);
+  % dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
+  % values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
+  % if any(values)
+  %   valminmax=[min(values),max(values)];
+  % else
+  %   valminmax = [-69 69];
+  % end
+  contour(xgrid,ygrid,vorticity(1:end/2, :),values);
+  hold on
+
   XX=X+(dt/2)*vec_interp(u, X, Nb); % Euler step to midpoint
   XX2=X2+(dt/2)*vec_interp(u, X2, Nb2); % Euler step to midpoint
   XX3 = X3+(dt/2) * vec_interp(u, X3, Nb3); % Euler step to midpoint
@@ -32,32 +46,20 @@ for clock=1:clockmax
   X3 = X3 + dt * vec_interp(uu, XX3, Nb3); % full step using midpoint velocity  
   [X, Nb, kp, km] = surfaceResample(X, Nb, dtheta);
 
-  %animation:
-  vorticity=(u(ip,:,2)-u(im,:,2)-u(:,ip,1)+u(:,im,1))/(2*h);
-  % dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
-  % values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
-  % if any(values)
-  %   valminmax=[min(values),max(values)];
-  % else
-  %   valminmax = [-69 69];
-  % end
-  contour(xgrid,ygrid,vorticity(1:end/2, :),values)
-  hold on
   % plot([0 0], [0 L], 'r');
   plot([h h], [0 L], 'r');
   plot([h*2 h*2], [0 L], 'r');
   plot(X(:,1),X(:,2),'k.')
   plot(X2(:,1),X2(:,2),'b.')
   plot(X3(:,1),X3(:,2),'g.')
-  plot(gravity_soul(1) * h, gravity_soul(2) * h, 'ro')
+  plot(gravity_soul(1) * h, gravity_soul(2) * h, 'rx')
   % axis([-L/100,L/2,0,L])
   caxis(valminmax)
   axis equal
   axis manual
-  title(clock * dt);
+  title(sprintf('%.3f', clock * dt));
   drawnow
   saveFrame();
-  hold off
 
   if clock == 333
     gravity_per_cell = - 100000 * h^2;
