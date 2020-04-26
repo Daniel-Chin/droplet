@@ -1,7 +1,7 @@
 %initialize.m
 %% Initialize Parameters and special indices
 
-dt=0.006; % Time step
+dt=0.005; % Time step
 N=96; % Number of grid cells
 L=2.0; % Box size
 h=L/N; % Grid spacing
@@ -13,7 +13,7 @@ im=[N,(1:(N-1))]; % Grid index shifted right
 % kp=[(2:Nb),1] % IB index shifted left
 % km=[Nb,(1:(Nb-1))] % IB index shifted right
 Nb=ceil(pi*(L/4) / (h*.5)); % Number of IB points
-dtheta=pi*(L/4) / Nb; % IB point spacing
+dtheta=pi*(L/4) / (Nb-1); % IB point spacing
 kp=[(2:Nb),1]; % IB index shifted left
 km=[Nb,(1:(Nb-1))]; % IB index shifted right
 
@@ -30,12 +30,12 @@ K=150; % Surface tension coefficient
 WALL_STIFFNESS = 3000;
 rho=1; % Fluid density
 mu=0.01; % viscosity
-tmax=4; % Run until time
+tmax=5; % Run until time
 clockmax=ceil(tmax/dt);
 
 %% Initialize boundary and velocity
 k=0:(Nb-1);
-theta = k'*dtheta;
+theta = k' * dtheta;
 X = [L*0.00, L*0.8] + (L/8)*[sin(theta*2), cos(theta*2)];
 
 k2=0:(Nb2-1);
@@ -96,12 +96,15 @@ VERTICAL_FLOW = 1;
 
 gravity_helper = ones(Nb, 2);
 gravity_frontier = [];
-gravity_per_cell = - 40000 * h^2; % should be related to density and h
+big_G = 40000;
 gravity_soul = [ceil(L/32 / h), ceil(L*.8 / h)];
 
 render_i = 0;
 
-NO_SLIP_FORCE = 10;
+NO_SLIP_FORCE = 50;
 SLIP_LENGTH = .04;
 SLIP_LENGTH_COEF = h / SLIP_LENGTH;
-NO_SLIP_FORCE = NO_SLIP_FORCE * SLIP_LENGTH_COEF;
+
+fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
+  NO_SLIP_FORCE*SLIP_LENGTH_COEF / (dtheta2*WALL_STIFFNESS/2) ...
+);

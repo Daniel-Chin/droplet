@@ -1,5 +1,6 @@
 % assumes (L/32, L*.4) is inside the boundary
 % first spread, then fill!!!
+gravity_per_cell = - big_G * h^2; % should be related to density and h
 gravity = zeros(N, N);
 
 surface_grid = vec_spread(gravity_helper, XX, dtheta, Nb);
@@ -65,7 +66,7 @@ end
 % end
 sum_gravity = sum(gravity, 'all');
 fprintf("Gravity: ");
-for j=1:round(-sum_gravity * .007)
+for j=1:round(-sum_gravity * .005)
   fprintf('#');
 end
 fprintf('\n');
