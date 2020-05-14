@@ -38,17 +38,12 @@ for clock=1:clockmax
   computeGravity();
   total_ff(:, :, 2) = total_ff(:, :, 2) + gravity;
   total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
-  [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
-  % Left wall
-  u (1, :, 1) = 0;
-  uu(1, :, 1) = 0;
-  u (2, :, 1) = 0;
-  uu(2, :, 1) = 0;
+  [u, uu] = waterFluid(u, total_ff, PHASE_PENAL_ITER, ZERO_FORCE, gravity, N, surface_grid, MIRROR);
   % vertical flow
-  u(:, end, 2) = VERTICAL_FLOW;
-  uu(:, end, 2) = VERTICAL_FLOW;
-  u(:, end-1, 2) = VERTICAL_FLOW;
-  uu(:, end-1, 2) = VERTICAL_FLOW;
+  % u(:, end, 2) = VERTICAL_FLOW;
+  % uu(:, end, 2) = VERTICAL_FLOW;
+  % u(:, end-1, 2) = VERTICAL_FLOW;
+  % uu(:, end-1, 2) = VERTICAL_FLOW;
 
   X=X+dt*vec_interp(uu, XX, Nb); % full step using midpoint velocity
   X2=X2+dt*vec_interp(uu, XX2, Nb2); % full step using midpoint velocity
@@ -74,7 +69,7 @@ for clock=1:clockmax
   saveFrame();
   % pause(1);
 
-  if clock == 400
-    big_G = 85000;
+  if clock == floor(1.5 / dt)
+    big_G = 120000;
   end
 end

@@ -1,7 +1,7 @@
 %initialize.m
 %% Initialize Parameters and special indices
 
-dt=0.004; % Time step
+dt=0.003; % Time step
 N=128; % Number of grid cells
 L=2.0; % Box size
 h=L/N; % Grid spacing
@@ -96,16 +96,19 @@ VERTICAL_FLOW = 1;
 
 gravity_helper = ones(Nb, 2);
 gravity_frontier = [];
-big_G = 55000;
+big_G = 60000;
 gravity_soul = [ceil(L/32 / h), ceil(L*.8 / h)];
 
 render_i = 0;
 
-NO_SLIP_FORCE = 80;
-FRICTION_ADJUST = .1;
-SLIP_LENGTH = .04;
+NO_SLIP_FORCE = 65;
+FRICTION_ADJUST = 0;
+SLIP_LENGTH = .05;  % = visual slip length / 2, assuming linear
 SLIP_LENGTH_COEF = h / SLIP_LENGTH;
 
 fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
   NO_SLIP_FORCE*SLIP_LENGTH_COEF / (dtheta2*WALL_STIFFNESS/2) ...
 );
+
+PHASE_PENAL_ITER = 10;
+ZERO_FORCE = zeros(N, N, 2);
