@@ -75,6 +75,6 @@ for clock=1:clockmax
   % pause(1);
 
   if clock == 400
-    big_G = 80000;
+    big_G = 85000;
   end
 end

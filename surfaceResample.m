@@ -40,8 +40,10 @@ if new_X(1, 1) > dtheta / 2
 end
 if new_X(new_Nb, 1) > dtheta / 2
   v = vec_interp(u, new_X(new_Nb, :), 1);
+  v = v ./ norm(v);
+  v(1) = max(.1, v(1)); % safeguard
   new_Nb = new_Nb + 1;
-  new_X(new_Nb, :) = new_X(new_Nb - 1, :) - v ./ norm(v) * dtheta;
+  new_X(new_Nb, :) = new_X(new_Nb - 1, :) - v * dtheta;
   % plot(new_X(new_Nb, 1), new_X(new_Nb, 2), 'bo');
 end
 
