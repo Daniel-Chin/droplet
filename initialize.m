@@ -96,12 +96,13 @@ VERTICAL_FLOW = 1;
 
 gravity_helper = ones(Nb, 2);
 gravity_frontier = [];
-big_G = 40000;
+big_G = 60000;
 gravity_soul = [ceil(L/32 / h), ceil(L*.8 / h)];
 
 render_i = 0;
 
-NO_SLIP_FORCE = 50;
+NO_SLIP_FORCE = 70;
+FRICTION_ADJUST = .2;
 SLIP_LENGTH = .04;
 SLIP_LENGTH_COEF = h / SLIP_LENGTH;
 
