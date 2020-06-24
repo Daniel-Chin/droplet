@@ -1,7 +1,7 @@
 %initialize.m
 %% Initialize Parameters and special indices
 
-dt=0.004; % Time step
+dt=0.003; % Time step
 N=96; % Number of grid cells
 L=2.0; % Box size
 h=L/N; % Grid spacing
@@ -26,13 +26,14 @@ Nb3y = floor((N / Nb3_space));
 Nb3 = Nb3x * Nb3y; % Number of IB points
 dtheta3 = h * Nb3_space; % IB point spacing
 
-K=150; % Surface tension coefficient
-WALL_STIFFNESS = 3000;
+K=0.3; % Surface tension coefficient
+WALL_STIFFNESS = 10;
 rho=.0013; % air density
 rho_heavy=1; % water density
-mu=0.01; % viscosity
+mu=0.0001; % viscosity
 tmax=6; % Run until time
 clockmax=ceil(tmax/dt);
+big_G = 6;
 
 %% Initialize boundary and velocity
 k=0:(Nb-1);
@@ -85,11 +86,9 @@ MIRROR = ones(1, 1, 2);
 MIRROR(1, 1, 1) = -1;
 VERTICAL_FLOW = 1;
 
-big_G = 60000;
-
 render_i = 0;
 
-NO_SLIP_FORCE = 60;
+NO_SLIP_FORCE = .1;
 FRICTION_ADJUST = .1;
 SLIP_LENGTH = .04;
 SLIP_LENGTH_COEF = h / SLIP_LENGTH;

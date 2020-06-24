@@ -39,11 +39,10 @@ for clock=1:clockmax
   force4 = forcePib(YY4 - XX4, pIB_STIFF);
   ff4 = vec_spread(force4, XX4, dtheta4, Nb4);
   force4_g = force4;
-  % force4_g(:, 2) = force4_g(:, 2) - MASS_PER_POINT * big_G;
+  force4_g(:, 2) = force4_g(:, 2) + MASS_PER_POINT * big_G;
   V4 = V4 - force4_g * dt / MASS_PER_POINT;
   Y4 = Y4 + V4 * dt;
-  % total_ff = ff + ff2 + ff4;
-  total_ff = ff + ff2;
+  total_ff = ff + ff2 + ff4;
   total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
   [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
   % Left wall
@@ -61,7 +60,7 @@ for clock=1:clockmax
   X2=X2+dt*vec_interp(uu, XX2, Nb2); % full step using midpoint velocity
   X2(:, 1) = PERFECT_WALL(:, 1);
   X3 = X3 + dt * vec_interp(uu, XX3, Nb3); % full step using midpoint velocity  
-  % X4 = X4 + dt * vec_interp(uu, XX4, Nb4); % full step using midpoint velocity  
+  X4 = X4 + dt * vec_interp(uu, XX4, Nb4); % full step using midpoint velocity  
   [X, Nb, kp, km] = surfaceResample(X, Nb, dtheta, u);
   warpIndicators;
 
@@ -70,14 +69,14 @@ for clock=1:clockmax
   plot([h h], [0 L], 'r');
   plot([h*2 h*2], [0 L], 'r');
   plot(X3(:,1),X3(:,2),'k.')
+  plot(X4(:,1),X4(:,2),'g.')
   plot(X2(:,1),X2(:,2),'k.')
   plot(X(:,1),X(:,2),'b.')
-  plot(X4(:,1),X4(:,2),'g.')
   % axis([-L/100,L/2,0,L])
   caxis(valminmax)
   axis equal
   axis manual
-  title(sprintf('t = %.3f, G = %.1f', clock * dt, -big_G / 10000));
+  title(sprintf('t = %.3f, G = %.1f', clock * dt, big_G));
   drawnow
   saveFrame();
   % pause(1);
