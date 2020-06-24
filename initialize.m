@@ -2,7 +2,7 @@
 %% Initialize Parameters and special indices
 
 dt=0.004; % Time step
-N=128; % Number of grid cells
+N=96; % Number of grid cells
 L=2.0; % Box size
 h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
@@ -59,10 +59,6 @@ X3 = reshape(X3(:, 1:Nb3x, :), Nb3, 2);
 initInertia;
 
 u=zeros(N,N,2);
-% j1=0:(N-1); % Initialize fluid velocity as (0,sin(2*pi*x/L))
-% x=j1'*h;
-% u(j1+1,:,2)=sin(2*pi*x/L)*ones(1,N);
-% u(j1+1,:,2)=sin(2*pi*x/L)*ones(1,N) * (-1);
 
 %% Initialize animation
 % vorticity=(u(ip,:,2)-u(im,:,2)-u(:,ip,1)+u(:,im,1))/(2*h);
@@ -84,26 +80,12 @@ values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
 valminmax=[min(values),max(values)];
 
 set(gcf,'double','on')
-% contour(xgrid,ygrid,vorticity,values)
-% hold on
-% plot(X(:,1),X(:,2),'ko')
-% plot(X2(:,1),X2(:,2),'ko')
-% plot(X3(:,1),X3(:,2),'ko')
-% axis([0,L,0,L])
-% caxis(valminmax)
-% axis equal
-% axis manual
-% drawnow
-% hold off
 
 MIRROR = ones(1, 1, 2);
 MIRROR(1, 1, 1) = -1;
 VERTICAL_FLOW = 1;
 
-gravity_helper = ones(Nb, 2);
-gravity_frontier = [];
 big_G = 60000;
-gravity_soul = [ceil(L/32 / h), ceil(L*.8 / h)];
 
 render_i = 0;
 
