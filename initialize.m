@@ -28,7 +28,8 @@ dtheta3 = h * Nb3_space; % IB point spacing
 
 K=150; % Surface tension coefficient
 WALL_STIFFNESS = 3000;
-rho=1; % Fluid density
+rho=.0013; % air density
+rho_heavy=1; % water density
 mu=0.01; % viscosity
 tmax=6; % Run until time
 clockmax=ceil(tmax/dt);
@@ -36,7 +37,10 @@ clockmax=ceil(tmax/dt);
 %% Initialize boundary and velocity
 k=0:(Nb-1);
 theta = k' * dtheta;
-X = [L*0.00, L*0.8] + (L/8)*[sin(theta*2), cos(theta*2)];
+init_circle_x = 0;
+init_circle_y = L * 0.8;
+init_circle_r = L / 8;
+X = [init_circle_x, init_circle_y] + init_circle_r * [sin(theta*2), cos(theta*2)];
 
 k2=0:(Nb2-1);
 theta2 = k2'*dtheta2;
@@ -51,6 +55,8 @@ for j=1:Nb3y
   X3(:, j, 2) = theta3';
 end
 X3 = reshape(X3(:, 1:Nb3x, :), Nb3, 2);
+
+initInertia;
 
 u=zeros(N,N,2);
 % j1=0:(N-1); % Initialize fluid velocity as (0,sin(2*pi*x/L))
@@ -96,12 +102,12 @@ VERTICAL_FLOW = 1;
 
 gravity_helper = ones(Nb, 2);
 gravity_frontier = [];
-big_G = 55000;
+big_G = 60000;
 gravity_soul = [ceil(L/32 / h), ceil(L*.8 / h)];
 
 render_i = 0;
 
-NO_SLIP_FORCE = 80;
+NO_SLIP_FORCE = 60;
 FRICTION_ADJUST = .1;
 SLIP_LENGTH = .04;
 SLIP_LENGTH_COEF = h / SLIP_LENGTH;

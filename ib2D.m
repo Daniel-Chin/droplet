@@ -74,7 +74,7 @@ for clock=1:clockmax
   saveFrame();
   % pause(1);
 
-  if clock == 400
-    big_G = 85000;
+  if clock == floor(1.5 / dt)
+    big_G = 100000;
   end
 end
