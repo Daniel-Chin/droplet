@@ -51,10 +51,10 @@ for clock=1:clockmax
   u (2, :, 1) = 0;
   uu(2, :, 1) = 0;
   % vertical flow
-  u(:, end, 2) = VERTICAL_FLOW;
-  uu(:, end, 2) = VERTICAL_FLOW;
-  u(:, end-1, 2) = VERTICAL_FLOW;
-  uu(:, end-1, 2) = VERTICAL_FLOW;
+  u(3:end, end, 2) = VERTICAL_FLOW;
+  uu(3:end, end, 2) = VERTICAL_FLOW;
+  u(3:end, end-1, 2) = VERTICAL_FLOW;
+  uu(3:end, end-1, 2) = VERTICAL_FLOW;
 
   X=X+dt*vec_interp(uu, XX, Nb); % full step using midpoint velocity
   X2=X2+dt*vec_interp(uu, XX2, Nb2); % full step using midpoint velocity

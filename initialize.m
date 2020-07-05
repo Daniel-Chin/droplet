@@ -1,7 +1,7 @@
 %initialize.m
 %% Initialize Parameters and special indices
 
-dt=0.003; % Time step
+dt=0.002; % Time step
 N=96; % Number of grid cells
 L=2.0; % Box size
 h=L/N; % Grid spacing
@@ -27,7 +27,7 @@ Nb3 = Nb3x * Nb3y; % Number of IB points
 dtheta3 = h * Nb3_space; % IB point spacing
 
 K=0.3; % Surface tension coefficient
-WALL_STIFFNESS = 10;
+WALL_STIFFNESS = 35;
 rho=.0013; % air density
 rho_heavy=1; % water density
 mu=0.0001; % viscosity
