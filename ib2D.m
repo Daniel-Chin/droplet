@@ -45,20 +45,14 @@ for clock=1:clockmax
   total_ff = ff + ff2 + ff4;
   total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
   [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
-  % Left wall
-  u (1, :, 1) = 0;
-  uu(1, :, 1) = 0;
-  u (2, :, 1) = 0;
-  uu(2, :, 1) = 0;
   % vertical flow
-  u(3:end, end, 2) = VERTICAL_FLOW;
-  uu(3:end, end, 2) = VERTICAL_FLOW;
-  u(3:end, end-1, 2) = VERTICAL_FLOW;
-  uu(3:end, end-1, 2) = VERTICAL_FLOW;
+  % u (3:end, end  , 2) = VERTICAL_FLOW;
+  % uu(3:end, end  , 2) = VERTICAL_FLOW;
+  % u (3:end, end-1, 2) = VERTICAL_FLOW;
+  % uu(3:end, end-1, 2) = VERTICAL_FLOW;
 
   X=X+dt*vec_interp(uu, XX, Nb); % full step using midpoint velocity
-  X2=X2+dt*vec_interp(uu, XX2, Nb2); % full step using midpoint velocity
-  X2(:, 1) = PERFECT_WALL(:, 1);
+  X2=X2+dt*vec_interp(uu, X2, Nb2); % full step using midpoint velocity
   X3 = X3 + dt * vec_interp(uu, XX3, Nb3); % full step using midpoint velocity  
   X4 = X4 + dt * vec_interp(uu, XX4, Nb4); % full step using midpoint velocity  
   [X, Nb, kp, km] = surfaceResample(X, Nb, dtheta, u);

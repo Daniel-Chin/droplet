@@ -1,7 +1,6 @@
 function [F, new_X2]=ForceWall(XX2, K, PERFECT_WALL, u, X, Nb, Nb2, NO_SLIP_FORCE, X2, SLIP_LENGTH_COEF, h, FRICTION_ADJUST)
 % penalty
 F=K*(PERFECT_WALL - XX2);
-F(:, 1) = 0;
 new_X2 = X2;
 
 contact_line_velocity = vec_interp(u, X, Nb);
