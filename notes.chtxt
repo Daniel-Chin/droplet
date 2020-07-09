@@ -1,0 +1,117 @@
+2/28 {
+    Peskin the immersed boundary method (simple notes)
+    Boundary space step = 1/2 grid radius
+    Scatter points into the object. A hack. This is to add mass to droplet
+    
+    water and air?
+    discret points: tension energy? tension force?
+    
+    
+    Adaptive Mesh Refinement? Code? 
+        start from IBM vanilla
+}
+3/13 {
+    contraint the wall contact point to be fixed in x axis
+}
+3/20 {
+    * Right border: symmetry 
+    * Approach infinite domain. Big box -> the boundary does not matter (5x - [10x]... Ask Guanhua for related paper)
+    * Add vertical flow
+    * Left border: part no-slip, part slip
+}
+3/26 {
+    Slip wall simulation method
+    friction?
+    D-theta for 1D and 2D
+        no in-industry experience. Observe outcome
+    Tunnel flux
+        dictate uu forcibly, for two rows
+    symmetry border?
+        WALL: x = 0 & x = 1 two walls, where x = 0.5 has fluid value
+        fluid.m determines the boundary to be periodic
+    Surface tension wrong
+        Energy = boundary length * surface tension constant
+        small force / resample
+    Peskin student project: lubrication
+    Remove initial u
+    Testing: {
+        is timestep small enough?
+        try tweaking gravity and tension constant and see if simulation makes sense
+    }
+}
+todo {
+    Surface tension wrong
+        Energy = boundary length * surface tension constant
+        small force / resample
+    Peskin student project: lubrication
+    Testing: {
+        is timestep small enough?
+        try tweaking gravity and tension constant and see if simulation makes sense
+    }
+}
+4/4 {
+    real life droplet equilibrium has long tail. Why?
+    Surface tension: same as simple case spring with res length = 0?
+    vertical flow: smooth funciton (tanh)
+        eq 43 in tissue engineering paper: example of using tanh
+    Wall is not relatively stable to flow?
+}
+4/5 {
+    to check: area conserve? 
+    three questions {
+        water + air
+        contact line problem
+        surface tension
+    }
+}
+4/6 {
+    Friction based on angle:
+        "When the contact angle is between the advancing and receding cases, the contact line is considered to be pinned and hysteretic behaviour can be observed, namely contact angle hysteresis." - wikipedia
+        Guanhua Scheme totally works, and it includes static friction behaviour!
+    The nature of no-slip:
+        "A hydrophilic liquid, such as water, forms hydrogen bonds with a hydrophilic substrate. The strength and locality of the hydrogen bonding interactions prohibit slip of the liquid over the substrate." https://arxiv.org/abs/1710.08790
+}
+4/7 {
+    Discussion with Tiffany Huilin Li
+    Wall friciton is not infinite! No-slip is a good assumption because fluid-fluid viscousity is so mush weaker than wall-fluid friction. However, when there is a contact line, the wall friction's exact amount is important. 
+}
+4/24 {
+    Penalty method for multi phase fluid!!!
+        "Free" boundary condition. Analytical continuation of fluid u at the boundary 
+        Use signed distance function?
+            No. 
+}
+4/25 {
+    K.B. Kiradjiev with Ian Griffiths
+    https://people.maths.ox.ac.uk/griffit4/papers.shtml
+    incompressible fluid does not have locality
+}
+4/26 {
+    dimensionless problem: sensitive to N!
+        Elastic force is wrong! shouldn't divide dtheta lol
+}
+5/9 {
+    surface tension improved
+    Dynamic resampling
+    Can now slip
+    Problem: double force due to reflection?
+    next,
+    warp black dots
+    
+}
+6/24 {
+    Viscousity difference ignored. 
+    boundary points -> desity ratio
+    find papers that use IBM to do 2-phase flow
+    found! 
+}
+next {
+    remesh the density difference material points
+    Experiments: as N -> infin, does behavior -> normal? 
+    todo: Compute Reynold's number for demo_6
+    experiment: two droplets, one bigger (top) and one smaller (bottom).
+    other experiments to probe the validity of the multi-phase method?
+    air needle exp: turn off gravity & airflow. maybe remove the wall too, to see how the droplet as a whole responds to outside turbulence
+    todo: make vertical flow prescription quasi. 
+    AMR may solve delta function imperfection.
+}
