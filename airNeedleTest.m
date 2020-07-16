@@ -1,10 +1,3 @@
-% ib2D.m
-% This script is the main program.
-% Original Code by Charlie Peskin:
-% https://www.math.nyu.edu/faculty/peskin/ib_lecture_notes/index.html
-% Vectorized and commented by Tristan Goodwill,2019.4
-% Gravity, multi-phase, wall, surface tension by Daniel Chin
-%% Initialize simulation
 clc; clear all; close all;
 global dt Nb N h rho mu ip im a;
 global kp km dtheta K;
@@ -14,6 +7,9 @@ initialize
 init_a
 
 %% Run simulation
+ttt=1;
+tmax = .35;
+clockmax=ceil(tmax/dt);
 for clock=1:clockmax
   hold off
   %animation:
@@ -35,21 +31,20 @@ for clock=1:clockmax
   ff=vec_spread(ForceSurface(XX, kp, km, dtheta, K, WALL_STIFFNESS), XX, dtheta, Nb); % Force at midpoint
   [force_wall, X2] = ForceWall(XX2, WALL_STIFFNESS, PERFECT_WALL, u, XX, Nb, Nb2, NO_SLIP_FORCE, X2, SLIP_LENGTH_COEF, h, FRICTION_ADJUST);
   ff2 = vec_spread(force_wall, XX2, dtheta2, Nb2); % Force at midpoint
-  YY4 = Y4 + V4 * dt;
-  force4 = forcePib(YY4 - XX4, pIB_STIFF);
-  ff4 = vec_spread(force4, XX4, dtheta4, Nb4);
-  force4_g = force4;
-  force4_g(:, 2) = force4_g(:, 2) + MASS_PER_POINT * big_G;
-  V4 = V4 - force4_g * dt / MASS_PER_POINT;
-  Y4 = Y4 + V4 * dt;
-  total_ff = ff + ff2 + ff4;
+  if ttt == 1
+    YY4 = Y4 + V4 * dt;
+    force4 = forcePib(YY4 - XX4, pIB_STIFF);
+    ff4 = vec_spread(force4, XX4, dtheta4, Nb4);
+    force4_g = force4;
+    force4_g(:, 2) = force4_g(:, 2);
+    V4 = V4 - force4_g * dt / MASS_PER_POINT;
+    Y4 = Y4 + V4 * dt;
+    total_ff = ff + ff2 + ff4;
+  else
+    total_ff = ff + ff2;
+  end
   total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
   [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
-  % vertical flow
-  u (3:end-2, end  , 2) = VERTICAL_FLOW;
-  uu(3:end-2, end  , 2) = VERTICAL_FLOW;
-  u (3:end-2, end-1, 2) = VERTICAL_FLOW;
-  uu(3:end-2, end-1, 2) = VERTICAL_FLOW;
 
   X=X+dt*vec_interp(uu, XX, Nb); % full step using midpoint velocity
   X2=X2+dt*vec_interp(uu, X2, Nb2); % full step using midpoint velocity
@@ -75,9 +70,14 @@ for clock=1:clockmax
   saveFrame();
   % pause(1);
 
-  if clock == floor(1.5 / dt)
-    big_G = big_G * 1.3;
+  if clock == floor(.05 / dt)
+    for j = 18:36
+      for k = 70:75
+        u(j, k, 1) = -24;
+        u(N - j, k, 1) = 24;
+        ttt = 0;
+      end
+    end
   end
-
   % pause;
 end
