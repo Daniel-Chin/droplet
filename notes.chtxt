@@ -106,16 +106,17 @@ todo {
     found! 
 }
 7/16 {
-    
+    V air needle exp: turn off gravity & airflow. 
+    V remove the wall too, to see how the droplet as a whole responds to outside turbulence
+    remesh the density difference material points {
+        Difficult! 
+    }
+    V meet Guanhua
+    AMR may solve delta function imperfection.
 }
 next {
-    remesh the density difference material points
-    Experiments: as N -> infin, does behavior -> normal? 
     Compute Reynold's number for demo_6
     experiment: two droplets, one bigger (top) and one smaller (bottom).
-    air needle exp: turn off gravity & airflow. 
-    ++ remove the wall too, to see how the droplet as a whole responds to outside turbulence
     make vertical flow prescription quasi. 
-    AMR may solve delta function imperfection.
-    meet Guanhua
+    Experiments: as N -> infin, does behavior -> normal? 
 }
