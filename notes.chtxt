@@ -123,4 +123,6 @@ next {
 }
 todo {
     slip still looks at X(1, :)
+    also, like, make friction support multiple contact points. 
+    tell polarity with link direction. 
 }
