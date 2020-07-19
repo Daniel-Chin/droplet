@@ -119,4 +119,5 @@ next {
     Compute Reynold's number for demo_6
     experiment: two droplets, one bigger (top) and one smaller (bottom).
     Experiments: as N -> infin, does behavior -> normal? 
+    Two droplets collide. To test density difference
 }
