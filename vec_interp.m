@@ -9,8 +9,8 @@ r=s-i;
 w=vec_phi1(r(:,1)).*vec_phi2(r(:,2)); %Evaluate delta function
 w = permute(w, [1,3,2]); %Reogranize, this is quite fast
 for k = 1:Nb
-  i1=mod((i(k,1)-1):(i(k,1)+2),N)+1; % Find adjacent fluid cells
-  i2=mod((i(k,2)-1):(i(k,2)+2),N)+1;
+  i1=mod((i(k,1)-1) : (i(k,1)+2), N) + 1; % Find adjacent fluid cells
+  i2=mod((i(k,2)-1) : (i(k,2)+2), N) + 1;
   
   %Interpolate fluid velocity, this is the costly part (65% of the time for
   %N=100)
