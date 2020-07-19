@@ -2,14 +2,18 @@
 resample_threshold = 1.414 * dtheta;
 
 % take out
-holes = zeros(Nb, 1);
+holes = zeros(1, Nb);
 holes_i = 0;
 for j = Nb:-1:1
   if (links(1, j) ~= 1 && links(2, j) ~= 1) || ~any(wall_links(1, :) == j)
-    if norm(X(links(1, j), :) - X(links(2, j), :)) > resample_threshold
-      holes_i = holes_i + 1;
-      holes(holes_i) = j;
-      plot(X(j, 1), X(j, 2), 'ro');
+    if norm(X(links(1, j), :) - X(links(2, j), :)) < resample_threshold
+      if holes_i == 0 || holes(holes_i) ~= j + 1    % dont consecutively take out
+        holes_i = holes_i + 1;
+        holes(holes_i) = j;
+        plot(X(j, 1), X(j, 2), 'ro');
+        % disp("take out");
+        % schedule_next_frame_pause = true;
+      end
     end
   end
 end
@@ -45,6 +49,8 @@ for wall_link = wall_links
     fillLinksHole();
 
     plot(X(x_id, 1), X(x_id, 2), 'ro');
+    disp("shrink");
+    % schedule_next_frame_pause = true;
   elseif tip_x > dtheta / 2 % grow
     v = vec_interp(u, X(x_id, :), 1);
     Nb = Nb + 1;
@@ -57,6 +63,8 @@ for wall_link = wall_links
     wall_links(1, j) = Nb;
 
     plot(X(Nb, 1), X(Nb, 2), 'bo');
+    disp("grow");
+    schedule_next_frame_pause = true;
   end
 end
 
@@ -91,8 +99,6 @@ for j = 1 : Nb
       if norm(intersection - point) < resample_threshold * .5
         point = point .* .5 + intersection' .* .5;
       end
-      plot(point(1), point(2), 'bo');
-      % pause;
     end
     Nb = Nb + 1;
     X(Nb, :) = point;
@@ -101,6 +107,9 @@ for j = 1 : Nb
     links(2, Nb) = right_id;
     links(1, right_id) = Nb;
     links(2, left_id ) = Nb;
+    plot(point(1), point(2), 'bo');
+    % disp("put in");
+    % schedule_next_frame_pause = true;
   end
 end
 X = X(1:Nb, :);

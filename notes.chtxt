@@ -121,3 +121,6 @@ next {
     Experiments: as N -> infin, does behavior -> normal? 
     Two droplets collide. To test density difference
 }
+todo {
+    slip still looks at X(1, :)
+}

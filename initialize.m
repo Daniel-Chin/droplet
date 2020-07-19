@@ -8,8 +8,11 @@ h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
 im=[N,(1:(N-1))]; % Grid index shifted right
 
-Nb=ceil(pi*(L/4) / (h*.5)); % Number of IB points
-dtheta=pi*(L/4) / (Nb-1); % IB point spacing
+init_circle_r = L / 8;
+init_circle_x = 0;
+init_circle_y = L * 0.8;
+dtheta = h / 2; % IB point spacing
+Nb = ceil(pi * 2 * init_circle_r / 2 / dtheta);   % Number of IB points
 links = zeros(2, Nb);
 links(1, :) = [(2:Nb), 1]; % IB index shifted left
 links(2, :) = [1, (1:(Nb-1))]; % IB index shifted right
@@ -37,12 +40,8 @@ clockmax=ceil(tmax/dt);
 big_G = 6;
 
 %% Initialize boundary and velocity
-k=0:(Nb-1);
-theta = k' * dtheta;
-init_circle_x = 0;
-init_circle_y = L * 0.8;
-init_circle_r = L / 8;
-X = [init_circle_x, init_circle_y] + init_circle_r * [sin(theta*2), cos(theta*2)];
+theta = linspace(0, pi, Nb)';
+X = [init_circle_x, init_circle_y] + init_circle_r * [sin(theta), cos(theta)];
 
 k2=0:(Nb2-1);
 theta2 = k2'*dtheta2;
@@ -98,3 +97,5 @@ SLIP_LENGTH_COEF = h / SLIP_LENGTH;
 fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
   NO_SLIP_FORCE*SLIP_LENGTH_COEF / (dtheta2*WALL_STIFFNESS/2) ...
 );
+
+schedule_next_frame_pause = false;
