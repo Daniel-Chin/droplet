@@ -113,10 +113,10 @@ todo {
     }
     V meet Guanhua
     AMR may solve delta function imperfection.
+    V make vertical flow prescription quasi. 
 }
 next {
     Compute Reynold's number for demo_6
     experiment: two droplets, one bigger (top) and one smaller (bottom).
-    make vertical flow prescription quasi. 
     Experiments: as N -> infin, does behavior -> normal? 
 }

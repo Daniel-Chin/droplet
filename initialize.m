@@ -86,6 +86,7 @@ set(gcf,'double','on')
 MIRROR = ones(1, 1, 2);
 MIRROR(1, 1, 1) = -1;
 VERTICAL_FLOW = 1;
+VERTICAL_FLOW_ROW = VERTICAL_FLOW * tanh(linspace(0, 20, N/2 - 1));
 
 render_i = 0;
 

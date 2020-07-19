@@ -49,10 +49,14 @@ for clock=1:clockmax
   total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
   [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
   % vertical flow
-  u (3:end-2, end  , 2) = VERTICAL_FLOW;
-  uu(3:end-2, end  , 2) = VERTICAL_FLOW;
-  u (3:end-2, end-1, 2) = VERTICAL_FLOW;
-  uu(3:end-2, end-1, 2) = VERTICAL_FLOW;
+  u (2:N/2,          end  , 2) = VERTICAL_FLOW_ROW;
+  uu(2:N/2,          end  , 2) = VERTICAL_FLOW_ROW;
+  u (2:N/2,          end-1, 2) = VERTICAL_FLOW_ROW;
+  uu(2:N/2,          end-1, 2) = VERTICAL_FLOW_ROW;
+  u (end-1:-1:N/2+1, end  , 2) = VERTICAL_FLOW_ROW;
+  uu(end-1:-1:N/2+1, end  , 2) = VERTICAL_FLOW_ROW;
+  u (end-1:-1:N/2+1, end-1, 2) = VERTICAL_FLOW_ROW;
+  uu(end-1:-1:N/2+1, end-1, 2) = VERTICAL_FLOW_ROW;
 
   X=X+dt*vec_interp(uu, XX, Nb); % full step using midpoint velocity
   X2=X2+dt*vec_interp(uu, X2, Nb2); % full step using midpoint velocity
