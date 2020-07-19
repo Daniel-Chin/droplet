@@ -1,6 +1,4 @@
 % warpIndicators
-global X3;
-
 for j = 1 : Nb3
   if X3(j, 1) < 0
     X3(j, 1) = - X3(j, 1);
