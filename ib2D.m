@@ -32,7 +32,7 @@ for clock=1:clockmax
   XX2=X2+(dt/2)*vec_interp(u, X2, Nb2); % Euler step to midpoint
   XX3 = X3 + (dt/2) * vec_interp(u, X3, Nb3); % Euler step to midpoint
   XX4 = X4 + (dt/2) * vec_interp(u, X4, Nb4); % Euler step to midpoint
-  ff=vec_spread(ForceSurface(XX, kp, km, dtheta, K, WALL_STIFFNESS), XX, dtheta, Nb); % Force at midpoint
+  ff=vec_spread(ForceSurface(XX, links, dtheta, K, wall_links), XX, dtheta, Nb); % Force at midpoint
   [force_wall, X2] = ForceWall(XX2, WALL_STIFFNESS, PERFECT_WALL, u, XX, Nb, Nb2, NO_SLIP_FORCE, X2, SLIP_LENGTH_COEF, h, FRICTION_ADJUST);
   ff2 = vec_spread(force_wall, XX2, dtheta2, Nb2); % Force at midpoint
   YY4 = Y4 + V4 * dt;
@@ -62,7 +62,7 @@ for clock=1:clockmax
   X2=X2+dt*vec_interp(uu, X2, Nb2); % full step using midpoint velocity
   X3 = X3 + dt * vec_interp(uu, XX3, Nb3); % full step using midpoint velocity  
   X4 = X4 + dt * vec_interp(uu, XX4, Nb4); % full step using midpoint velocity  
-  [X, Nb, kp, km] = surfaceResample(X, Nb, dtheta, u);
+  surfaceResample();
   warpIndicators;
 
   % plot([0 0], [0 L], 'r');

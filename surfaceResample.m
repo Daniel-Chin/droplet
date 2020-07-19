@@ -1,63 +1,84 @@
-function [new_X, new_Nb, kp, km]=surfaceResample(X, Nb, dtheta, u)
-threshold = 1.414 * dtheta;
-new_X = zeros(size(X));
+% function [new_X, new_Nb, kp, km]=surfaceResample(X, Nb, dtheta, u)
+resample_threshold = 1.414 * dtheta;
 
 % take out
-started = false;
-j = 1;
-while j <= Nb
-  if started
-    if norm(new_X(new_Nb, :) - X(j, :)) > threshold
-      new_Nb = new_Nb + 1;
-      new_X(new_Nb, :) = X(j - 1, :);
-    else
-      plot(X(j - 1, 1), X(j - 1, 2), 'ro');
-    end
-  else
-    if X(j, 1) > - dtheta / 2
-      new_X(1, :) = X(j, :);
-      new_Nb = 1;
-      j = j + 1;
-      started = true;
+holes = zeros(Nb, 1);
+holes_i = 0;
+for j = Nb:-1:1
+  if (links(1, j) ~= 1 && links(2, j) ~= 1) || ~any(wall_links(1, :) == j)
+    if norm(X(links(1, j), :) - X(links(2, j), :)) > resample_threshold
+      holes_i = holes_i + 1;
+      holes(holes_i) = j;
+      plot(X(j, 1), X(j, 2), 'ro');
     end
   end
-  j = j + 1;
 end
-new_Nb = new_Nb + 1;
-new_X(new_Nb, :) = X(end, :);
-j = new_Nb;
-while new_X(j, 1) < - dtheta / 2
-  new_Nb = new_Nb - 1;
-  j = j - 1;
+if holes_i ~= 0
+  for hole = holes(1:holes_i)
+    % splice
+    hole_left  = links(1, hole);
+    hole_right = links(2, hole);
+    links(2, hole_left)  = hole_right;
+    links(1, hole_right) = hole_left;
+
+    % fill hole
+    holeToFill = hole;
+    fillLinksHole();
+  end
 end
 
-% grow head/tail
-if new_X(1, 1) > dtheta / 2
-  v = vec_interp(u, new_X(1, :), 1);
-  new_X(2:new_Nb+1, :) = new_X(1:new_Nb, :);
-  new_Nb = new_Nb + 1;
-  new_X(1, :) = new_X(2, :) - v ./ norm(v) * dtheta;
-end
-if new_X(new_Nb, 1) > dtheta / 2
-  v = vec_interp(u, new_X(new_Nb, :), 1);
-  v = v ./ norm(v);
-  v(1) = max(.1, v(1)); % safeguard
-  new_Nb = new_Nb + 1;
-  new_X(new_Nb, :) = new_X(new_Nb - 1, :) - v * dtheta;
-  % plot(new_X(new_Nb, 1), new_X(new_Nb, 2), 'bo');
+% shrink/grow head/tail
+j = 0;
+for wall_link = wall_links
+  j = j + 1;
+  x_id = wall_link(1);
+  direction = wall_link(2);
+  tip_x = X(x_id, 1);
+  if tip_x < - dtheta / 2 % shrink
+    % splice
+    new_x_id = links(direction, x_id);
+    links(3 - direction, new_x_id) = 1;
+    wall_links(1, j) = new_x_id;
+
+    % fill hole
+    holeToFill = x_id;
+    fillLinksHole();
+
+    plot(X(x_id, 1), X(x_id, 2), 'ro');
+  elseif tip_x > dtheta / 2 % grow
+    v = vec_interp(u, X(x_id, :), 1);
+    Nb = Nb + 1;
+    X(Nb, :) = X(x_id, :) - v ./ norm(v) * dtheta;
+
+    links(3 - direction, x_id) = Nb;
+    links(3 - direction, Nb) = 1;
+    links(    direction, Nb) = x_id;
+
+    wall_links(1, j) = Nb;
+
+    plot(X(Nb, 1), X(Nb, 2), 'bo');
+  end
 end
 
 % put in
-j = 1;
-while j <= new_Nb - 1
-  space = norm(new_X(j, :) - new_X(j + 1, :));
-  if space > threshold
-    b = new_X(j    , :);
-    c = new_X(j + 1, :);
+for j = 1 : Nb
+  left_id  = j;
+  right_id = links(2, j);
+  if right_id == 1 % && any(wall_links(1, :) == j)
+    if wall_links(2, wall_links(1, :) == j) == 1
+      continue;   % `right_id` is a placeholder "1"
+    end
+  end
+  b = X(left_id , :);
+  c = X(right_id, :);
+  space = norm(b - c);
+  if space > resample_threshold
     point = (b + c) ./ 2;
-    if j >= 2 && j <= new_Nb -2
-      a = new_X(j - 1, :);
-      d = new_X(j + 2, :);
+    leftleft_id   = links(1, left_id);
+    rightright_id = links(2, right_id);
+    if (leftleft_id ~= 1 && rightright_id ~= 1) || ~(any(wall_links(1, :) == left_id) || any(wall_links(1, :) == right_id))
+      a = X(leftleft_id   , :);
+      d = X(rightright_id , :);
       ab = b - a;
       dc = c - d;
       rhs1 = dot(a, [b(2), -b(1)]);
@@ -67,20 +88,19 @@ while j <= new_Nb - 1
       % display(point);
       % plot(intersection(1), intersection(2), 'rx');
       % plot(point(1), point(2), 'bx');
-      if norm(intersection - point) < threshold * .5
+      if norm(intersection - point) < resample_threshold * .5
         point = point .* .5 + intersection' .* .5;
       end
       plot(point(1), point(2), 'bo');
       % pause;
     end
-    new_X(j+2 : new_Nb+1, :) = new_X(j+1 : new_Nb, :);
-    new_Nb = new_Nb + 1;
-    new_X(j+1, :) = point;
-    j = j + 1;
-  end
-  j = j + 1;
-end
+    Nb = Nb + 1;
+    X(Nb, :) = point;
 
-new_X = new_X(1:new_Nb, :);
-kp=[(2:new_Nb),1]; % IB index shifted left
-km=[new_Nb,(1:(new_Nb-1))]; % IB index shifted right
+    links(1, Nb) = left_id;
+    links(2, Nb) = right_id;
+    links(1, right_id) = Nb;
+    links(2, left_id ) = Nb;
+  end
+end
+X = X(1:Nb, :);

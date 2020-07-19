@@ -8,14 +8,14 @@ h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
 im=[N,(1:(N-1))]; % Grid index shifted right
 
-% Nb=ceil(pi*(L/2)/(h/2)) % Number of IB points
-% dtheta=2*pi/Nb % IB point spacing
-% kp=[(2:Nb),1] % IB index shifted left
-% km=[Nb,(1:(Nb-1))] % IB index shifted right
 Nb=ceil(pi*(L/4) / (h*.5)); % Number of IB points
 dtheta=pi*(L/4) / (Nb-1); % IB point spacing
-kp=[(2:Nb),1]; % IB index shifted left
-km=[Nb,(1:(Nb-1))]; % IB index shifted right
+links = zeros(2, Nb);
+links(1, :) = [(2:Nb), 1]; % IB index shifted left
+links(2, :) = [1, (1:(Nb-1))]; % IB index shifted right
+wall_links = zeros(2, 2);  % special points that attach to the wall
+wall_links(:, 1) = [1;  1];
+wall_links(:, 2) = [Nb; 2];
 
 Nb2=ceil((L+1) / (h*.5)); % Number of IB points
 dtheta2=L / Nb2; % IB point spacing
