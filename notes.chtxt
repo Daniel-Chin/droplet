@@ -105,13 +105,17 @@ todo {
     find papers that use IBM to do 2-phase flow
     found! 
 }
+7/16 {
+    
+}
 next {
     remesh the density difference material points
     Experiments: as N -> infin, does behavior -> normal? 
-    todo: Compute Reynold's number for demo_6
+    Compute Reynold's number for demo_6
     experiment: two droplets, one bigger (top) and one smaller (bottom).
-    other experiments to probe the validity of the multi-phase method?
-    air needle exp: turn off gravity & airflow. maybe remove the wall too, to see how the droplet as a whole responds to outside turbulence
-    todo: make vertical flow prescription quasi. 
+    air needle exp: turn off gravity & airflow. 
+    ++ remove the wall too, to see how the droplet as a whole responds to outside turbulence
+    make vertical flow prescription quasi. 
     AMR may solve delta function imperfection.
+    meet Guanhua
 }

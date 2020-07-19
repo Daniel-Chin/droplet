@@ -27,6 +27,7 @@ Nb3 = Nb3x * Nb3y; % Number of IB points
 dtheta3 = h * Nb3_space; % IB point spacing
 
 K=0.3; % Surface tension coefficient
+FAKE_REPEL_K = .00001;
 WALL_STIFFNESS = 35;
 rho=.0013; % air density
 rho_heavy=1; % water density
