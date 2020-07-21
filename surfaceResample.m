@@ -32,41 +32,41 @@ if holes_i ~= 0
 end
 
 % shrink/grow head/tail
-j = 0;
-for wall_link = wall_links
-  j = j + 1;
-  x_id = wall_link(1);
-  direction = wall_link(2);
-  tip_x = X(x_id, 1);
-  if tip_x < - dtheta / 2 % shrink
-    % splice
-    new_x_id = links(direction, x_id);
-    links(3 - direction, new_x_id) = 1;
-    wall_links(1, j) = new_x_id;
+% j = 0;
+% for wall_link = wall_links
+%   j = j + 1;
+%   x_id = wall_link(1);
+%   direction = wall_link(2);
+%   tip_x = X(x_id, 1);
+%   if tip_x < - dtheta / 2 % shrink
+%     % splice
+%     new_x_id = links(direction, x_id);
+%     links(3 - direction, new_x_id) = 1;
+%     wall_links(1, j) = new_x_id;
 
-    % fill hole
-    holeToFill = x_id;
-    fillLinksHole();
+%     % fill hole
+%     holeToFill = x_id;
+%     fillLinksHole();
 
-    plot(X(x_id, 1), X(x_id, 2), 'ro');
-    disp("shrink");
-    % schedule_next_frame_pause = true;
-  elseif tip_x > dtheta / 2 % grow
-    v = vec_interp(u, X(x_id, :), 1);
-    Nb = Nb + 1;
-    X(Nb, :) = X(x_id, :) - v ./ norm(v) * dtheta;
+%     plot(X(x_id, 1), X(x_id, 2), 'ro');
+%     disp("shrink");
+%     % schedule_next_frame_pause = true;
+%   elseif tip_x > dtheta / 2 % grow
+%     v = vec_interp(u, X(x_id, :), 1);
+%     Nb = Nb + 1;
+%     X(Nb, :) = X(x_id, :) - v ./ norm(v) * dtheta;
 
-    links(3 - direction, x_id) = Nb;
-    links(3 - direction, Nb) = 1;
-    links(    direction, Nb) = x_id;
+%     links(3 - direction, x_id) = Nb;
+%     links(3 - direction, Nb) = 1;
+%     links(    direction, Nb) = x_id;
 
-    wall_links(1, j) = Nb;
+%     wall_links(1, j) = Nb;
 
-    plot(X(Nb, 1), X(Nb, 2), 'bo');
-    disp("grow");
-    schedule_next_frame_pause = true;
-  end
-end
+%     plot(X(Nb, 1), X(Nb, 2), 'bo');
+%     disp("grow");
+%     schedule_next_frame_pause = true;
+%   end
+% end
 
 % put in
 for j = 1 : Nb

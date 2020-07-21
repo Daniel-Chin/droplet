@@ -2,28 +2,18 @@
 %% Initialize Parameters and special indices
 
 dt=0.002; % Time step
-N=96; % Number of grid cells
+N=256; % Number of grid cells
 L=2.0; % Box size
 h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
 im=[N,(1:(N-1))]; % Grid index shifted right
 
-init_circle_r = L / 8;
-init_circle_x = 0;
-init_circle_y = L * 0.8;
-dtheta = h / 2; % IB point spacing
-Nb = ceil(pi * 2 * init_circle_r / 2 / dtheta);   % Number of IB points
-links = zeros(2, Nb);
-links(1, :) = [(2:Nb), 1]; % IB index shifted left
-links(2, :) = [1, (1:(Nb-1))]; % IB index shifted right
-wall_links = zeros(2, 2);  % special points that attach to the wall
-wall_links(:, 1) = [1;  1];
-wall_links(:, 2) = [Nb; 2];
+initX();
 
 Nb2=ceil((L+1) / (h*.5)); % Number of IB points
 dtheta2=L / Nb2; % IB point spacing
 
-Nb3_space = 2;
+Nb3_space = 8;
 Nb3x = floor((N/2 / Nb3_space));
 Nb3y = floor((N / Nb3_space));
 Nb3 = Nb3x * Nb3y; % Number of IB points
@@ -40,9 +30,6 @@ clockmax=ceil(tmax/dt);
 big_G = 6;
 
 %% Initialize boundary and velocity
-theta = linspace(0, pi, Nb)';
-X = [init_circle_x, init_circle_y] + init_circle_r * [sin(theta), cos(theta)];
-
 k2=0:(Nb2-1);
 theta2 = k2'*dtheta2;
 X2 = zeros(Nb2, 2);  % first column has fluid value and wall
