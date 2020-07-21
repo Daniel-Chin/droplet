@@ -120,6 +120,18 @@ next {
     experiment: two droplets, one bigger (top) and one smaller (bottom).
     Experiments: as N -> infin, does behavior -> normal? 
     Two droplets collide. To test density difference
+    
+    !!! wet surface or dry surface?
+    Guanhua: variable viscousity IBM by thomas fai, boyce griffith, yoichiro mori, charles peskin
+    Guanhua: monitor energy change due to surface resample {
+        adding points -> energy increases
+        remove points -> energy decreases
+        Because triangle two sides sum > last side. 
+        Or, add/remove points so that the curvature changes the least. 
+        Also, try just adding points in midpoint again. 
+    }
+    Guanhua: surface resample lower bound h/4, higher bound h. PLay around other settings. 
+    Guanhua: simulation unit cm g s!!!
 }
 todo {
     slip still looks at X(1, :)
