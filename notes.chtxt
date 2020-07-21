@@ -132,6 +132,7 @@ next {
     }
     Guanhua: surface resample lower bound h/4, higher bound h. PLay around other settings. 
     Guanhua: simulation unit cm g s!!!
+    Guanhua paper: IBM + surfactant
 }
 todo {
     slip still looks at X(1, :)
