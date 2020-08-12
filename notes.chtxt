@@ -115,27 +115,36 @@ todo {
     AMR may solve delta function imperfection.
     V make vertical flow prescription quasi. 
 }
-next {
-    Compute Reynold's number for demo_6
-    experiment: two droplets, one bigger (top) and one smaller (bottom).
-    Experiments: as N -> infin, does behavior -> normal? 
-    Two droplets collide. To test density difference
-    
-    !!! wet surface or dry surface?
+8/6 {
+    wet surface or dry surface?
+    Hydophobic or philic?
+        do General case
     Guanhua: variable viscousity IBM by thomas fai, boyce griffith, yoichiro mori, charles peskin
+        Puelz: not priority for now
     Guanhua: monitor energy change due to surface resample {
         adding points -> energy increases
         remove points -> energy decreases
         Because triangle two sides sum > last side. 
         Or, add/remove points so that the curvature changes the least. 
-        Also, try just adding points in midpoint again. 
+        Also, try just adding points in midpoint again. (remove arc guessing algo)
+        or, resample so that the energy does not change. make it a 1-parameter problem so it can be solved. 
     }
     Guanhua: surface resample lower bound h/4, higher bound h. PLay around other settings. 
     Guanhua: simulation unit cm g s!!!
-    Guanhua paper: IBM + surfactant
+    Guanhua paper: IBM + surfactant    
+    The chemical production scenario may need surfactant
+        not priority for now
 }
 todo {
     slip still looks at X(1, :)
     also, like, make friction support multiple contact points. 
     tell polarity with link direction. 
+}
+next {
+    Compute Reynold's number for demo_6
+    experiment: two droplets, one bigger (top) and one smaller (bottom).
+    Experiments: as N -> infin, does behavior -> normal? 
+    Two droplets collide. To test density difference
+
+    to merge: a special "local model" that overrides IBM rules
 }
