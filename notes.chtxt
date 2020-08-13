@@ -135,6 +135,9 @@ todo {
     The chemical production scenario may need surfactant
         not priority for now
 }
+8/12 {
+    Two droplets collide. To test density difference
+}
 todo {
     slip still looks at X(1, :)
     also, like, make friction support multiple contact points. 
@@ -144,7 +147,8 @@ next {
     Compute Reynold's number for demo_6
     experiment: two droplets, one bigger (top) and one smaller (bottom).
     Experiments: as N -> infin, does behavior -> normal? 
-    Two droplets collide. To test density difference
+    Test cases mentioned in the 2018 final report
+    Guanhua suggestions
 
     to merge: a special "local model" that overrides IBM rules
 }

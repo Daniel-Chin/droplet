@@ -20,9 +20,9 @@ for i = 1 : N / 2
   end
 end
 for i = 1 : Nb4
-  if norm(X4(i, :) - [init_circle_x, init_circle_y]) < init_circle_r
-    V4(i, 2) = -ASG;
-  end
+  % if norm(X4(i, :) - [init_circle_x, init_circle_y]) < init_circle_r
+  %   V4(i, 2) = -ASG;
+  % end
   if norm(X4(i, :) - [init_circle_x_2, init_circle_y_2]) < init_circle_r_2
     V4(i, 2) = ASG;
   end

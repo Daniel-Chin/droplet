@@ -2,7 +2,7 @@
 %% Initialize Parameters and special indices
 
 dt=0.002; % Time step
-N=256; % Number of grid cells
+N=96; % Number of grid cells
 L=2.0; % Box size
 h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
@@ -25,7 +25,7 @@ WALL_STIFFNESS = 35;
 rho=.0013; % air density
 rho_heavy=1; % water density
 mu=0.0001; % viscosity
-tmax=6; % Run until time
+tmax=1.5; % Run until time
 clockmax=ceil(tmax/dt);
 big_G = 6;
 
@@ -86,3 +86,8 @@ fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
 );
 
 schedule_next_frame_pause = false;
+
+RESAMPLE_AMEND = .5;
+resample_energy_offset = 0;
+resample_energy_offset_array = [];
+resample_energy_offset_array_size = 0;

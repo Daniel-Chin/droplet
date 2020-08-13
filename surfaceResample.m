@@ -25,6 +25,13 @@ if holes_i ~= 0
     links(2, hole_left)  = hole_right;
     links(1, hole_right) = hole_left;
 
+    % compute resample_energy_offset
+    resample_energy_offset = resample_energy_offset + ...
+      norm(X(hole_left, :) - X(hole_right, :)) - ( ...
+        norm(X(hole_left, :) - X(hole, :)) + ...
+        norm(X(hole, :) - X(hole_right, :)) ...
+      );
+
     % fill hole
     holeToFill = hole;
     fillLinksHole();
@@ -97,7 +104,8 @@ for j = 1 : Nb
       % plot(intersection(1), intersection(2), 'rx');
       % plot(point(1), point(2), 'bx');
       if norm(intersection - point) < resample_threshold * .5
-        point = point .* .5 + intersection' .* .5;
+        % This is almost never the case
+        point = point .* (1-RESAMPLE_AMEND) + intersection' .* RESAMPLE_AMEND;
       end
     end
     Nb = Nb + 1;
@@ -110,6 +118,10 @@ for j = 1 : Nb
     plot(point(1), point(2), 'bo');
     % disp("put in");
     % schedule_next_frame_pause = true;
+    resample_energy_offset = resample_energy_offset + ( ...
+      norm(X(left_id, :) - point) + ...
+      norm(point - X(right_id, :)) ...
+    ) - norm(X(left_id, :) - X(right_id, :));
   end
 end
 X = X(1:Nb, :);

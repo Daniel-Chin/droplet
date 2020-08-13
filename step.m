@@ -63,3 +63,6 @@ axis manual
 title(sprintf('t = %.3f, G = %.1f', clock * dt, big_G));
 drawnow
 saveFrame();
+
+% resample_energy_offset_array_size = resample_energy_offset_array_size+1;
+% resample_energy_offset_array(resample_energy_offset_array_size) = resample_energy_offset;

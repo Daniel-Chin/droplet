@@ -33,6 +33,7 @@ plot(X(:,1),X(:,2),'b.')
 caxis(valminmax)
 axis equal
 axis manual
+axis([0 1 0 2.2])
 title(sprintf('t = %.3f', clock * dt));
 drawnow
 saveFrame();
