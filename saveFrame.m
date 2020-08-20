@@ -1,6 +1,6 @@
 if save_render_i > 0
-  % saveas(gcf, sprintf('E:/IBM_Space/output/%d.png', render_i));
+  saveas(gcf, sprintf('E:/IBM_Space/output/%d.png', save_render_i));
 else
   pause(1);
 end
-render_i = render_i + 1;
+save_render_i = save_render_i + 1;
