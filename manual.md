@@ -1,4 +1,4 @@
-# Data Structure
+# Manual
 ## Links and Wall Links
 `links(direction, id) = id2`  
 Take a node `id`, go to `direction`, and the next node is `id2`.  
@@ -7,3 +7,7 @@ Take a node `id`, go to `direction`, and the next node is `id2`.
 `wall_id` is meaningless.  
 `id` is the node that connects to the wall.  
 `direction` is from wall to node.  
+
+direction == 1: Liquid on the right  
+direction == 2: Liquid on the left  
+(Polarity is conserved!!!)  
