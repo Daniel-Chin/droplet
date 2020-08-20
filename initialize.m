@@ -1,9 +1,9 @@
 %initialize.m
 %% Initialize Parameters and special indices
 
-dt=0.002; % Time step
+dt=0.000025; % Time step, second
 N=96; % Number of grid cells
-L=2.0; % Box size
+L=3.0; % Box size, cm
 h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
 im=[N,(1:(N-1))]; % Grid index shifted right
@@ -19,15 +19,18 @@ Nb3y = floor((N / Nb3_space));
 Nb3 = Nb3x * Nb3y; % Number of IB points
 dtheta3 = h * Nb3_space; % IB point spacing
 
-K=0.3; % Surface tension coefficient
-FAKE_REPEL_K = .00001;
-WALL_STIFFNESS = 35;
-rho=.0013; % air density
-rho_heavy=1; % water density
-mu=0.0001; % viscosity
-tmax=1.5; % Run until time
+K=7270; % Surface tension coefficient, N*10^-5
+% FAKE_REPEL_K = .00001;
+WALL_STIFFNESS = 10000;
+rho=.00013; % air density g/cm2
+rho_heavy=.5; % density g/cm2. water would be 0.1
+mu=0.001; % viscosity g/s. 2D water can be 0.00089
+tmax=1.5; % Run until time s
 clockmax=ceil(tmax/dt);
-big_G = 6;
+big_G = 980; % cm/s2
+dvorticity=1000;
+values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
+valminmax=[min(values),max(values)];  % for plotting vortocity
 
 %% Initialize boundary and velocity
 k2=0:(Nb2-1);
@@ -62,11 +65,6 @@ for j=0:(N-1)
   ygrid(:,j+1)=j*h;
 end
 
-% no initial u
-dvorticity=8.5;
-values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
-valminmax=[min(values),max(values)];
-
 set(gcf,'double','on')
 
 MIRROR = ones(1, 1, 2);
@@ -74,7 +72,7 @@ MIRROR(1, 1, 1) = -1;
 VERTICAL_FLOW = 1;
 VERTICAL_FLOW_ROW = VERTICAL_FLOW * tanh(linspace(0, 20, N/2 - 1));
 
-render_i = 0;
+save_render_i = 0;
 
 NO_SLIP_FORCE = .1;
 FRICTION_ADJUST = .1;
@@ -91,3 +89,7 @@ RESAMPLE_AMEND = .5;
 resample_energy_offset = 0;
 resample_energy_offset_array = [];
 resample_energy_offset_array_size = 0;
+
+FPS = 60;
+TIMESTEPS_PER_FRAME = round(1 / dt / FPS);
+render_phase = 0;
