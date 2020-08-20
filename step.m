@@ -1,16 +1,3 @@
-hold off
-%animation:
-vorticity=(u(ip,:,2)-u(im,:,2)-u(:,ip,1)+u(:,im,1))/(2*h);
-% dvorticity=(max(max(vorticity))-min(min(vorticity)))/5;
-% values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
-% if any(values)
-%   valminmax=[min(values),max(values)];
-% else
-%   valminmax = [-69 69];
-% end
-contour(xgrid,ygrid,vorticity(1:end/2, :),values);
-hold on
-
 XX=X+(dt/2)*vec_interp(u, X, Nb); % Euler step to midpoint
 XX2=X2+(dt/2)*vec_interp(u, X2, Nb2); % Euler step to midpoint
 XX3 = X3 + (dt/2) * vec_interp(u, X3, Nb3); % Euler step to midpoint
@@ -48,21 +35,7 @@ X4 = X4 + dt * vec_interp(uu, XX4, Nb4); % full step using midpoint velocity
 surfaceResample();
 warpIndicators;
 
-% plot([0 0], [0 L], 'r');
-plot([0 0], [0 L], 'r');
-plot([h h], [0 L], 'r');
-plot([h*2 h*2], [0 L], 'r');
-plot(X3(:,1),X3(:,2),'k.')
-plot(X4(:,1),X4(:,2),'g.')
-plot(X2(:,1),X2(:,2),'k.')
-plot(X(:,1),X(:,2),'b.')
-% axis([-L/100,L/2,0,L])
-caxis(valminmax)
-axis equal
-axis manual
-title(sprintf('t = %.3f, G = %.1f', clock * dt, big_G));
-drawnow
-saveFrame();
+render;
 
 % resample_energy_offset_array_size = resample_energy_offset_array_size+1;
 % resample_energy_offset_array(resample_energy_offset_array_size) = resample_energy_offset;

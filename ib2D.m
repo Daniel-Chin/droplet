@@ -15,6 +15,7 @@ init_a
 
 %% Run simulation
 clock = 0;
+render();
 while clock <= clockmax
   clock = clock + 1;
   step();

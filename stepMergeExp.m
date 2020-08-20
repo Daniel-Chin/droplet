@@ -27,13 +27,4 @@ X4 = X4 + dt * vec_interp(uu, XX4, Nb4); % full step using midpoint velocity
 surfaceResample();
 warpIndicators;
 
-plot(X3(:,1),X3(:,2),'k.')
-plot(X4(:,1),X4(:,2),'g.')
-plot(X(:,1),X(:,2),'b.')
-caxis(valminmax)
-axis equal
-axis manual
-axis([0 1 0 2.2])
-title(sprintf('t = %.3f', clock * dt));
-drawnow
-saveFrame();
+render;
