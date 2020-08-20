@@ -142,8 +142,7 @@ todo {
     slip still looks at X(1, :)
     also, like, make friction support multiple contact points. 
     tell polarity with link direction. 
-}
-next {
+
     Compute Reynold's number for demo_6
     experiment: two droplets, one bigger (top) and one smaller (bottom).
     Experiments: as N -> infin, does behavior -> normal? 
@@ -151,4 +150,7 @@ next {
     Guanhua suggestions
 
     to merge: a special "local model" that overrides IBM rules
+}
+next {
+    2D constants are different from 3D constants! Many physical equivalances don't exist. 
 }

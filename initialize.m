@@ -1,7 +1,7 @@
 %initialize.m
 %% Initialize Parameters and special indices
 
-dt=0.000025; % Time step, second
+dt=0.0002; % Time step, second
 N=96; % Number of grid cells
 L=3.0; % Box size, cm
 h=L/N; % Grid spacing
@@ -19,16 +19,16 @@ Nb3y = floor((N / Nb3_space));
 Nb3 = Nb3x * Nb3y; % Number of IB points
 dtheta3 = h * Nb3_space; % IB point spacing
 
-K=7270; % Surface tension coefficient, N*10^-5
+K=100; % Surface tension coefficient, N*10^-5
 % FAKE_REPEL_K = .00001;
-WALL_STIFFNESS = 10000;
+WALL_STIFFNESS = 600;
 rho=.00013; % air density g/cm2
 rho_heavy=.5; % density g/cm2. water would be 0.1
 mu=0.001; % viscosity g/s. 2D water can be 0.00089
 tmax=1.5; % Run until time s
 clockmax=ceil(tmax/dt);
 big_G = 980; % cm/s2
-dvorticity=1000;
+dvorticity=100;
 values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
 valminmax=[min(values),max(values)];  % for plotting vortocity
 
@@ -90,6 +90,7 @@ resample_energy_offset = 0;
 resample_energy_offset_array = [];
 resample_energy_offset_array_size = 0;
 
-FPS = 60;
+FPS = 1000;
 TIMESTEPS_PER_FRAME = round(1 / dt / FPS);
+display(TIMESTEPS_PER_FRAME);
 render_phase = 0;

@@ -1,5 +1,5 @@
 if save_render_i > 0
-  saveas(gcf, sprintf('E:/IBM_Space/output/%d.png', save_render_i));
+  % saveas(gcf, sprintf('E:/IBM_Space/output/%d.png', save_render_i));
 else
   pause(1);
 end
