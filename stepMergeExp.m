@@ -1,7 +1,5 @@
-hold off
-vorticity=(u(ip,:,2)-u(im,:,2)-u(:,ip,1)+u(:,im,1))/(2*h);
-contour(xgrid,ygrid,vorticity(1:end/2, :),values);
-hold on
+plot(0);
+hold on;
 
 XX=X+(dt/2)*vec_interp(u, X, Nb); % Euler step to midpoint
 XX3 = X3 + (dt/2) * vec_interp(u, X3, Nb3); % Euler step to midpoint
@@ -21,7 +19,6 @@ total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
 [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
 
 X=X+dt*vec_interp(uu, XX, Nb); % full step using midpoint velocity
-X2=X2+dt*vec_interp(uu, X2, Nb2); % full step using midpoint velocity
 X3 = X3 + dt * vec_interp(uu, XX3, Nb3); % full step using midpoint velocity  
 X4 = X4 + dt * vec_interp(uu, XX4, Nb4); % full step using midpoint velocity  
 surfaceResample();

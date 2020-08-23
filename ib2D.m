@@ -22,9 +22,9 @@ while clock <= clockmax
 
   % pause(1);
 
-  if clock == floor(1.5 / dt)
-    big_G = big_G * 1.3;
-  end
+  % if clock == floor(.1 / dt)
+  %   big_G = big_G * 1.5;
+  % end
 
   % if clock > 515
   %   pause;

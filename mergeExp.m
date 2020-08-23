@@ -6,7 +6,7 @@ global big_G;
 initialize
 init_a
 
-ASG = 5;
+ASG = 15;
 for i = 1 : N / 2
   for j = 1 : N
     if norm([i-init_circle_x / h, j-init_circle_y / h]) < init_circle_r / h
@@ -20,9 +20,9 @@ for i = 1 : N / 2
   end
 end
 for i = 1 : Nb4
-  % if norm(X4(i, :) - [init_circle_x, init_circle_y]) < init_circle_r
-  %   V4(i, 2) = -ASG;
-  % end
+  if norm(X4(i, :) - [init_circle_x, init_circle_y]) < init_circle_r
+    V4(i, 2) = -ASG;
+  end
   if norm(X4(i, :) - [init_circle_x_2, init_circle_y_2]) < init_circle_r_2
     V4(i, 2) = ASG;
   end
@@ -33,15 +33,16 @@ end
 tmax=1; % Run until time
 clockmax=ceil(tmax/dt);
 clock = 0;
+render();
 while clock <= clockmax
   clock = clock + 1;
   stepMergeExp();
 
   % pause(1);
 
-  % if clock > 515
-  %   pause;
-  % end
+  if clock == 420
+    return;
+  end
 
   if schedule_next_frame_pause
     pause;
