@@ -19,16 +19,20 @@ Nb3y = floor((N / Nb3_space));
 Nb3 = Nb3x * Nb3y; % Number of IB points
 dtheta3 = h * Nb3_space; % IB point spacing
 
-K=100; % Surface tension coefficient, N*10^-5
+K=20; % Surface tension coefficient, N*10^-5
 % FAKE_REPEL_K = .00001;
 WALL_STIFFNESS = 600;
 rho=.00013; % air density g/cm2
-rho_heavy=.5; % density g/cm2. water would be 0.1
-mu=0.001; % viscosity g/s. 2D water can be 0.00089
-tmax=1.5; % Run until time s
+rho_heavy=.1; % density g/cm2
+mu=0.0002; % viscosity g/s. 2D water can be 0.00089
+tmax=4; % Run until time s
 clockmax=ceil(tmax/dt);
 big_G = 980; % cm/s2
-dvorticity=100;
+NO_SLIP_FORCE = 14;
+FRICTION_ADJUST = 1;
+SLIP_LENGTH = 6 * h;
+SLIP_LENGTH_COEF = h / SLIP_LENGTH;
+dvorticity = 50;
 values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
 valminmax=[min(values),max(values)];  % for plotting vortocity
 
@@ -74,11 +78,6 @@ VERTICAL_FLOW_ROW = VERTICAL_FLOW * tanh(linspace(0, 20, N/2 - 1));
 
 save_render_i = 0;
 
-NO_SLIP_FORCE = .1;
-FRICTION_ADJUST = .1;
-SLIP_LENGTH = .04;
-SLIP_LENGTH_COEF = h / SLIP_LENGTH;
-
 fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
   NO_SLIP_FORCE*SLIP_LENGTH_COEF / (dtheta2*WALL_STIFFNESS/2) ...
 );
@@ -90,7 +89,7 @@ resample_energy_offset = 0;
 resample_energy_offset_array = [];
 resample_energy_offset_array_size = 0;
 
-FPS = 1000;
+FPS = 60 * 40;
 TIMESTEPS_PER_FRAME = round(1 / dt / FPS);
 display(TIMESTEPS_PER_FRAME);
 render_phase = 0;
