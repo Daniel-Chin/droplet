@@ -40,7 +40,7 @@ for id0 = 1 : Nb
     end
 
     relative_velocity = surface_velocity(id1, :) - surface_velocity(id0, :);
-    if dot(relative_velocity, (p0 - p1)) <= 0
+    if dot(relative_velocity, (pid0 - pid1)) <= 0
       % not approaching
       continue;
     end
