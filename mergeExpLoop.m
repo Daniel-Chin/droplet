@@ -17,9 +17,9 @@ while clock <= clockmax
   %   links(2, lu) = ld;
   % end
 
-  if clock > 369
-    pause(1);
-  end
+  % if clock > 369
+  %   pause(1);
+  % end
   if schedule_next_frame_pause
     pause;
   end
