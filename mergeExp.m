@@ -5,7 +5,7 @@ global WALL_STIFFNESS PERFECT_WALL NO_SLIP_FORCE SLIP_LENGTH_COEF;
 global big_G;
 initialize();
 init_a();
-initX();
+initX_merge();
 initInertia();
 
 ASG = 15;
