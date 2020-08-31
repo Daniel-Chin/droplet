@@ -8,8 +8,6 @@ h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
 im=[N,(1:(N-1))]; % Grid index shifted right
 
-initX();
-
 Nb2=ceil((L+1) / (h*.5)); % Number of IB points
 dtheta2=L / Nb2; % IB point spacing
 
@@ -51,8 +49,6 @@ for j=1:Nb3y
 end
 X3 = reshape(X3(:, 1:Nb3x, :), Nb3, 2);
 
-initInertia;
-
 u=zeros(N,N,2);
 
 %% Initialize animation
@@ -89,7 +85,7 @@ resample_energy_offset = 0;
 resample_energy_offset_array = [];
 resample_energy_offset_array_size = 0;
 
-FPS = 60 * 40;
+FPS = 60 * 80;
 TIMESTEPS_PER_FRAME = round(1 / dt / FPS);
 display(TIMESTEPS_PER_FRAME);
 render_phase = 0;

@@ -3,8 +3,10 @@ global dt Nb N h rho mu ip im a;
 global kp km dtheta K;
 global WALL_STIFFNESS PERFECT_WALL NO_SLIP_FORCE SLIP_LENGTH_COEF;
 global big_G;
-initialize
-init_a
+initialize();
+init_a();
+initX();
+initInertia();
 
 ASG = 15;
 for i = 1 : N / 2
@@ -39,11 +41,23 @@ while clock <= clockmax
   stepMergeExp();
 
   % pause(1);
-
+  if clock == 410
+    disp("!!!");
+  end
   if clock == 420
-    return;
+    lu = 90;
+    ru = links(2, lu);
+    ld = 23;
+    rd = links(1, ld);
+    links(1, ru) = rd;
+    links(2, rd) = ru;
+    links(1, ld) = lu;
+    links(2, lu) = ld;
   end
 
+  if clock > 410
+    pause(.1);
+  end
   if schedule_next_frame_pause
     pause;
   end
