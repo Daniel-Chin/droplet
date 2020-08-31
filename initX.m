@@ -35,6 +35,7 @@ links(1, 1:circle_1_n_points) = [(2:circle_1_n_points), 1];
 links(2, 1:circle_1_n_points) = [circle_1_n_points, (1:(circle_1_n_points-1))];
 links(1, circle_1_n_points+1:Nb) = [(circle_1_n_points+2:Nb), circle_1_n_points+1];
 links(2, circle_1_n_points+1:Nb) = [Nb, (circle_1_n_points+1:Nb-1)];
+% 1 clockwise, 2 counter-clockwise
 
 wall_links = zeros(2, 0);  % special points that attach to the wall
 
