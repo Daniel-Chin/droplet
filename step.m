@@ -31,11 +31,14 @@ uu(end-1:-1:N/2+1, end  , 2) = VERTICAL_FLOW_ROW;
 u (end-1:-1:N/2+1, end-1, 2) = VERTICAL_FLOW_ROW;
 uu(end-1:-1:N/2+1, end-1, 2) = VERTICAL_FLOW_ROW;
 
-X=X+dt*vec_interp(uu, XX, Nb); % full step using midpoint velocity
-X2=X2+dt*vec_interp(uu, X2, Nb2); % full step using midpoint velocity
-X3 = X3 + dt * vec_interp(uu, XX3, Nb3); % full step using midpoint velocity  
-X4 = X4 + dt * vec_interp(uu, XX4, Nb4); % full step using midpoint velocity  
+% full step using midpoint velocity
+surface_velocity = vec_interp(uu, XX, Nb);
+X = X + dt * surface_velocity; 
+X2 = X2 + dt * vec_interp(uu, X2, Nb2); % cannot be XX2 because forceWall alters X2
+X3 = X3 + dt * vec_interp(uu, XX3, Nb3);
+X4 = X4 + dt * vec_interp(uu, XX4, Nb4);
 surfaceResample();
+surfaceSplice();
 warpIndicators;
 
 render;

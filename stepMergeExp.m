@@ -18,10 +18,12 @@ total_ff = ff + ff4;
 total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
 [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
 
-X=X+dt*vec_interp(uu, XX, Nb); % full step using midpoint velocity
+surface_velocity = vec_interp(uu, XX, Nb);
+X = X + dt * surface_velocity; 
 X3 = X3 + dt * vec_interp(uu, XX3, Nb3); % full step using midpoint velocity  
 X4 = X4 + dt * vec_interp(uu, XX4, Nb4); % full step using midpoint velocity  
 surfaceResample();
+surfaceSplice();
 warpIndicators;
 
 render;

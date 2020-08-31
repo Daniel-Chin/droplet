@@ -146,7 +146,7 @@ todo {
     Guanhua suggestions
     pIB_STIFF = 1; % change so that max|X−Y| <= h/10
 
-    to merge: a special "local model" that overrides IBM rules
+    six droplets merge
 }
 next {
     2D constants are different from 3D constants! Many physical equivalances don't exist. 
