@@ -90,11 +90,6 @@ TIMESTEPS_PER_FRAME = round(1 / dt / FPS);
 display(TIMESTEPS_PER_FRAME);
 render_phase = 0;
 
-WATCH_DISTANCE = h * 3;
-WATCH_CONSERVATIVE = 2;
-watch_list = [];
-watch_list_len = 0;
-watch_cooldown = 0;
 N_PAST_EXTREME_VELOCITY = 5;
 past_extreme_velocity = zeros(1, N_PAST_EXTREME_VELOCITY);
 past_extreme_velocity_cursor = 1;
