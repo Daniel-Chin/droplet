@@ -1,23 +1,22 @@
-startid = 2;
+startid = 1;
 
-id = links(2, startid);
-points = [];
-points_i = 0;
-up = 0;
-down = inf;
-out_id = -1;
-while id ~= startid
-  points_i = points_i + 1;
-  points(points_i, :) = X(id, :);
-  y = X(id, 2);
-  if y < down
-    down = y;
-    out_id = id;
+id = links(1, startid);
+stage = 0;
+% x == 0.6
+while id ~= 59
+  x = X(id, 1);
+  if stage == 0
+    if x > .6
+      stage = 1;
+      display(id);
+    end
+  elseif stage == 1
+    if x < .6
+      stage = 2;
+      display(id);
+      break;
+    end
   end
-  if y > up
-    up = y;
-  end
-  id = links(2, id);
+  id = links(1, id);
 end
-plot(points(:,1),points(:,2),'ko');
-disp(out_id);
+% plot(points(:,1),points(:,2),'ko');
