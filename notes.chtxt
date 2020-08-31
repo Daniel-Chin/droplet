@@ -139,15 +139,12 @@ todo {
     Two droplets collide. To test density difference
 }
 todo {
-    slip still looks at X(1, :)
-    also, like, make friction support multiple contact points. 
-    tell polarity with link direction. 
-
     Compute Reynold's number for demo_6
     experiment: two droplets, one bigger (top) and one smaller (bottom).
     Experiments: as N -> infin, does behavior -> normal? 
     Test cases mentioned in the 2018 final report
     Guanhua suggestions
+    pIB_STIFF = 1; % change so that max|X−Y| <= h/10
 
     to merge: a special "local model" that overrides IBM rules
 }
