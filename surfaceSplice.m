@@ -94,7 +94,7 @@ if WALL_EXISTS
     j_jj1 = j;
     j_jj2 = j;
     not_ok = 0;
-    for jj = 1 : 3
+    for jj = 1 : 5
       j_jj1 = links(1, j_jj1);
       j_jj2 = links(2, j_jj2);
       if doesLinkWall(j_jj1, links, wall_links) || doesLinkWall(j_jj2, links, wall_links)
