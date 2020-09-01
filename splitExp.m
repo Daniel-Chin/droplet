@@ -24,16 +24,16 @@ while clock <= clockmax
   % if clock == 2335
   %   return;
   % end
-  if clock == 2335
-    lu = 179;
-    ru = links(2, lu);
-    ld = 93;
-    rd = links(1, ld);
-    links(1, ru) = rd;
-    links(2, rd) = ru;
-    links(1, ld) = lu;
-    links(2, lu) = ld;
-  end
+  % if clock == 2335
+  %   lu = 179;
+  %   ru = links(2, lu);
+  %   ld = 93;
+  %   rd = links(1, ld);
+  %   links(1, ru) = rd;
+  %   links(2, rd) = ru;
+  %   links(1, ld) = lu;
+  %   links(2, lu) = ld;
+  % end
 
   % if clock > 410
   %   pause(.1);
