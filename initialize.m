@@ -20,6 +20,7 @@ dtheta3 = h * Nb3_space; % IB point spacing
 K=20; % Surface tension coefficient, N*10^-5
 % FAKE_REPEL_K = .00001;
 WALL_STIFFNESS = 600;
+WALL_LINKER_TO_WALL_STIFF = 200;
 rho=.00013; % air density g/cm2
 rho_heavy=.1; % density g/cm2
 mu=0.0002; % viscosity g/s. 2D water can be 0.00089
