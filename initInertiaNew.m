@@ -20,6 +20,7 @@ for i = 0 : dtheta4 : L
     end
   end
 end
+X4 = X4(1:Nb4, :);
 
 Y4 = X4;
 V4 = zeros(Nb4, 2);
