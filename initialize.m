@@ -95,6 +95,6 @@ past_extreme_velocity = zeros(1, N_PAST_EXTREME_VELOCITY);
 past_extreme_velocity_cursor = 1;
 
 SPLICE_THRESHOLD = h;
-SPLICE_WALL_THRESHOLD = h;
+SPLICE_WALL_THRESHOLD = h * 2;
 
 WALL_EXISTS = 1;

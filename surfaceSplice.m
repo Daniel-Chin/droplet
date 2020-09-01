@@ -1,3 +1,5 @@
+% This script treats points assymetrically. Should be good enough
+
 past_extreme_velocity(past_extreme_velocity_cursor) = max(vecnorm(surface_velocity'));
 past_extreme_velocity_cursor = past_extreme_velocity_cursor + 1;
 if past_extreme_velocity_cursor > N_PAST_EXTREME_VELOCITY
@@ -51,9 +53,9 @@ for id0 = 1 : Nb
     for j = 1 : 3
       id0_j1 = links(1, id0_j1);
       id0_j2 = links(2, id0_j2);
-      if id0_j1 == id1 || id0_j2 == id1
+      if id0_j1 == id1 || id0_j2 == id1 || doesLinkWall(id0_j1, links, wall_links) || doesLinkWall(id0_j2, links, wall_links)
         not_ok = 1;
-        return;
+        break;
       end
     end
     if not_ok
@@ -71,4 +73,88 @@ for id0 = 1 : Nb
 
     return; % One splice at a step
   end
+end
+if WALL_EXISTS
+  % attach / wall split
+  for j = 1 : Nb
+    p = X(j, :);
+
+    if p(1) > SPLICE_WALL_THRESHOLD
+      continue;
+    end
+
+    if doesLinkWall(j, links, wall_links)
+      continue;
+    end
+
+    if surface_velocity(j, 1) >= 0
+      continue;
+    end
+
+    j_jj1 = j;
+    j_jj2 = j;
+    not_ok = 0;
+    for jj = 1 : 3
+      j_jj1 = links(1, j_jj1);
+      j_jj2 = links(2, j_jj2);
+      if doesLinkWall(j_jj1, links, wall_links) || doesLinkWall(j_jj2, links, wall_links)
+        not_ok = 1;
+        break;
+      end
+    end
+    if not_ok
+      continue;
+    end
+    
+    j_1 = links(1, j);
+
+    wall_links_len = size(wall_links, 2);
+    wall_links(:, wall_links_len + 1) = [j_1, 1];
+    wall_links(:, wall_links_len + 2) = [j, 2];
+    clear wall_links_len; % avoid confusion. (Not a usable global var)
+
+    links(1, j) = 1;
+    links(2, j_1) = 1;
+    
+    disp("attach / wall split");
+    return;
+  end
+
+  % detach / wall merge
+  wall_links_len = size(wall_links, 2);
+  for j = 1 : wall_links_len
+    for k = 1 : j-1
+      id0 = wall_links(1, j);
+      id1 = wall_links(1, k);
+      p0 = X(id0, :);
+      p1 = X(id1, :);
+      displacement = p0(2) - p1(2);
+
+      if abs(displacement) > SPLICE_THRESHOLD
+        continue;
+      end
+
+      relative_velocity = surface_velocity(id1, 2) - surface_velocity(id0, 2);
+      if relative_velocity * displacement < 0
+        % not approaching
+        continue;
+      end
+
+      j_direction = wall_links(2, j);
+      k_direction = wall_links(2, k);
+      if j_direction + k_direction ~= 3
+        error('2 interfaces of the same orientation are joining!');
+      end
+      wall_links_pop_ids = [j, k];
+      popWallLinks();
+      clear wall_links_len;
+
+      links(3 - j_direction, id0) = id1;
+      links(3 - k_direction, id1) = id0;
+
+      disp("detach / wall merge");
+      return;
+    end
+  end
+  clear wall_links_len; % avoid confusion. (Not a usable global var)
 end
