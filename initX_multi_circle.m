@@ -1,12 +1,4 @@
 % Six droplets merging
-n_init_droplets = 6;
-init_circle_rad = ones(n_init_droplets, 1) * L * .06;
-init_circle_pos = zeros(n_init_droplets, 2);
-
-for j = 1 : n_init_droplets
-  theta = 2 * pi / n_init_droplets * j;
-  init_circle_pos(j, :) = [L/4, L/2] + L * .16 * [cos(theta), sin(theta)];
-end
 
 dtheta = h / 2; % IB point spacing
 circle_n_points = ceil(pi * 2 * init_circle_rad / dtheta);
