@@ -4,6 +4,7 @@ global kp km dtheta K;
 global WALL_STIFFNESS PERFECT_WALL NO_SLIP_FORCE SLIP_LENGTH_COEF;
 initialize();
 init_a();
+WALL_EXISTS = 1;
 
 n_init_droplets = 1;
 init_circle_rad = ones(n_init_droplets, 1) * L * .1;
