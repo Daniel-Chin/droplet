@@ -38,6 +38,7 @@ X2 = X2 + dt * vec_interp(uu, X2, Nb2); % cannot be XX2 because forceWall alters
 X3 = X3 + dt * vec_interp(uu, XX3, Nb3);
 X4 = X4 + dt * vec_interp(uu, XX4, Nb4);
 surfaceResample();
+surface_velocity = vec_interp(uu, X, Nb);
 surfaceSplice();
 warpIndicators;
 

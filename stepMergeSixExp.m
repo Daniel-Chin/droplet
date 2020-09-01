@@ -32,6 +32,7 @@ X = X + dt * surface_velocity;
 X3 = X3 + dt * vec_interp(uu, XX3, Nb3); % full step using midpoint velocity  
 X4 = X4 + dt * vec_interp(uu, XX4, Nb4); % full step using midpoint velocity  
 surfaceResample();
+surface_velocity = vec_interp(uu, X, Nb);
 surfaceSplice();
 warpIndicators;
 
