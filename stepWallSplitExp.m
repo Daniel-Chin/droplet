@@ -11,7 +11,13 @@ ff2 = vec_spread(force_wall, XX2, dtheta2, Nb2); % Force at midpoint
 YY4 = Y4 + V4 * dt;
 force4 = forcePib(YY4 - XX4, pIB_STIFF);
 force4_g = force4;
-force4_g(:, 1) = force4_g(:, 1) - MASS_PER_POINT * big_G;
+for j = 1 : Nb4
+  g = MASS_PER_POINT * big_G;
+  if YY4(j, 2) > L / 2
+    g = - g;
+  end
+  force4_g(j, 2) = force4_g(j, 2) + g;
+end
 ff4 = vec_spread( ...
   force4, ...
   XX4, dtheta4, Nb4 ...
@@ -20,9 +26,6 @@ V4 = V4 - force4_g * dt / MASS_PER_POINT;
 Y4 = Y4 + V4 * dt;
 total_ff = ff + ff2 + ff4;
 total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
-if any(isnan(total_ff), 'all')
-  error('NAN detected');
-end
 [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
 
 surface_velocity = vec_interp(uu, XX, Nb);

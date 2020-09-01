@@ -6,6 +6,11 @@ if past_extreme_velocity_cursor > N_PAST_EXTREME_VELOCITY
   past_extreme_velocity_cursor = 1;
 end
 
+if splice_reject_remains > 0
+  splice_reject_remains = splice_reject_remains - 1;
+  return;
+end
+
 for id0 = 1 : Nb
   for id1 = 1 : j - 1
     pid0 = X(id0, :);
@@ -69,8 +74,9 @@ for id0 = 1 : Nb
     links(2, id1) = id0;
     links(1, id1_2) = id0_1;
     links(2, id0_1) = id1_2;
+    
     disp("SPLICE");
-
+    splice_reject_remains = SPLICE_REJECT_N_STEPS;
     return; % One splice at a step
   end
 end
@@ -90,11 +96,11 @@ if WALL_EXISTS
     if surface_velocity(j, 1) >= 0
       continue;
     end
-
+    
     j_jj1 = j;
     j_jj2 = j;
     not_ok = 0;
-    for jj = 1 : 5
+    for jj = 1 : 13
       j_jj1 = links(1, j_jj1);
       j_jj2 = links(2, j_jj2);
       if doesLinkWall(j_jj1, links, wall_links) || doesLinkWall(j_jj2, links, wall_links)
@@ -107,6 +113,9 @@ if WALL_EXISTS
     end
     
     j_1 = links(1, j);
+    % if j_1 == 73
+    %   pause;
+    % end
 
     wall_links_len = size(wall_links, 2);
     wall_links(:, wall_links_len + 1) = [j_1, 1];
@@ -117,6 +126,7 @@ if WALL_EXISTS
     links(2, j_1) = 1;
     
     disp("attach / wall split");
+    splice_reject_remains = SPLICE_REJECT_N_STEPS;
     return;
   end
 
@@ -130,7 +140,7 @@ if WALL_EXISTS
       p1 = X(id1, :);
       displacement = p0(2) - p1(2);
 
-      if abs(displacement) > SPLICE_THRESHOLD
+      if abs(displacement) > SPLICE_WALL_THRESHOLD
         continue;
       end
 
@@ -139,7 +149,7 @@ if WALL_EXISTS
         % not approaching
         continue;
       end
-
+    
       j_direction = wall_links(2, j);
       k_direction = wall_links(2, k);
       if j_direction + k_direction ~= 3
@@ -149,10 +159,18 @@ if WALL_EXISTS
       popWallLinks();
       clear wall_links_len;
 
-      links(3 - j_direction, id0) = id1;
-      links(3 - k_direction, id1) = id0;
+      id0_next = links(j_direction, id0);
+      id1_next = links(k_direction, id1);
+      links(3 - j_direction, id0_next) = id1_next;
+      links(3 - k_direction, id1_next) = id0_next;
+      holeToFill = id0;
+      fillLinksHole();
+      holeToFill = id1;
+      fillLinksHole();
+      X = X(1:Nb, :);
 
       disp("detach / wall merge");
+      splice_reject_remains = SPLICE_REJECT_N_STEPS;
       return;
     end
   end

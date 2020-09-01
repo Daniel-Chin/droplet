@@ -86,7 +86,8 @@ resample_energy_offset = 0;
 resample_energy_offset_array = [];
 resample_energy_offset_array_size = 0;
 
-FPS = 60 * 20;
+FPS = 60 * 80;
+% FPS = 60 * 10;
 TIMESTEPS_PER_FRAME = round(1 / dt / FPS);
 display(TIMESTEPS_PER_FRAME);
 render_phase = 0;
@@ -97,5 +98,7 @@ past_extreme_velocity_cursor = 1;
 
 SPLICE_THRESHOLD = h;
 SPLICE_WALL_THRESHOLD = h * 2;
+SPLICE_REJECT_N_STEPS = 2;
+splice_reject_remains = 0;
 
 WALL_EXISTS = 1;
