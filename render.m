@@ -12,7 +12,20 @@ if render_phase <= 0
   plot(X3(:,1),X3(:,2),'k.')
   plot(X4(:,1),X4(:,2),'g.')
   plot(X2(:,1),X2(:,2),'k.')
-  plot(X(:,1),X(:,2),'b.')
+  % plot(X(:,1),X(:,2),'b.')
+  for j = 1 : Nb
+    if doesLinkWall(j, links, wall_links)
+      continue;
+    end
+    k = links(1, j);
+    if k > j
+      plot([X(j, 1), X(k, 1)], [X(j, 2), X(k, 2)], 'b', 'LineWidth', 1);
+    end
+    k = links(2, j);
+    if k > j
+      plot([X(j, 1), X(k, 1)], [X(j, 2), X(k, 2)], 'b', 'LineWidth', 1);
+    end
+  end
   % axis([-L/100,L/2,0,L])
   caxis(valminmax)
   axis equal
