@@ -19,11 +19,11 @@ if render_phase <= 0
     end
     k = links(1, j);
     if k > j
-      plot([X(j, 1), X(k, 1)], [X(j, 2), X(k, 2)], 'b', 'LineWidth', 1);
+      plot([X(j, 1), X(k, 1)], [X(j, 2), X(k, 2)], 'b', 'LineWidth', 2);
     end
     k = links(2, j);
     if k > j
-      plot([X(j, 1), X(k, 1)], [X(j, 2), X(k, 2)], 'b', 'LineWidth', 1);
+      plot([X(j, 1), X(k, 1)], [X(j, 2), X(k, 2)], 'b', 'LineWidth', 2);
     end
   end
   % axis([-L/100,L/2,0,L])
