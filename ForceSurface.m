@@ -10,5 +10,5 @@ F = K * (displace1 ./ vecnorm(displace1) + displace2 ./ vecnorm(displace2))';
 for wlink = wall_links
   displace = X(links(wlink(2), wlink(1)), :) - X(wlink(1), :);
   F(wlink(1), 2) = displace(2) ./ vecnorm(displace') * K;
-  F(wlink(1), 1) = 0;
+  F(wlink(1), 1) = 0; % do we pull it towards the wall? that is a question.
 end
