@@ -9,6 +9,12 @@ ff=vec_spread(ForceSurface(XX, links, dtheta, K, wall_links, Nb, WALL_LINKER_TO_
 [force_wall, X2] = ForceWall(XX2, WALL_STIFFNESS, PERFECT_WALL, u, XX, Nb, Nb2, NO_SLIP_FORCE, X2, SLIP_LENGTH_COEF, h, FRICTION_ADJUST, wall_links, links, SLIP_LENGTH);
 ff2 = vec_spread(force_wall, XX2, dtheta2, Nb2); % Force at midpoint
 YY4 = Y4 + V4 * dt;
+max_X_minus_Y = max(vecnorm((YY4 - XX4)'));
+if max_X_minus_Y > h/10
+  display(max_X_minus_Y);
+  display(h);
+  warning('MAX|X - Y| exceeds h/10!');
+end
 force4 = forcePib(YY4 - XX4, pIB_STIFF);
 force4_g = force4;
 force4_g(:, 2) = force4_g(:, 2) + MASS_PER_POINT * big_G;

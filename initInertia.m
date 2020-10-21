@@ -1,7 +1,5 @@
 % Using pIB to simulate water-air density difference
 
-pIB_STIFF = 1; % change so that max|X−Y| <= h/10
-
 dtheta4 = h / 2;
 estimated_area = (init_circle_r / dtheta4) ^ 2 * pi / 2 + (init_circle_r_2 / dtheta4) ^ 2 * pi / 2;
 % estimated_area = (init_circle_r / dtheta4) ^ 2 * pi / 2;

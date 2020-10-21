@@ -22,3 +22,5 @@ VERTICAL_FLOW = 1;
 RESAMPLE_AMEND = .5;
 
 WALL_EXISTS = 1;
+
+pIB_STIFF = 1; % change so that max|X−Y| <= h/10
