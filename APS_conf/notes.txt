@@ -1,0 +1,23 @@
+Probably an async video presentation
+
+ABSTRACT
+ In this work, we use the penalty Immersed Boundary Method (pIBM) to simulate the movement of liquid droplets hanging on a vertical wall. We propose a 2D numerical method based on pIBM to tackle the moving contact line problem. Note that the vertical wall is hydrophilic and does not allow slip in most cases, however, in reality we do observe droplets advance on hydrophilic surfaces. We use Lagrangian markers to represent the droplet interface and compute surface tension. The forcing scheme is designed to unify both the surface tension and the unbalanced Young's forces at the contact point into one general equation. We also employ a dynamic re-sampling technique to ensure the uniform distribution of Lagrangian markers.
+
+contact line problem and the dynamic sliding regime
+stepwise interface re-sampling
+Boundary splicing
+
+    2D benchmark. 
+        1. Verify the numerical method. 
+        2. borrow 2D constants.
+        Maybe ask Peskin or Guanhua. Maybe the multiphase level-set paper authors. 
+    Experiments: as N -> infin, does behavior -> normal? 
+    Test cases mentioned in the 2018 final report
+    Plot the time-volume graph for the non-wall merge exps. 
+    Contrast with the steady state
+
+Time profiling: computational efficiency
+
+Hybrid paper. 
+We have novel methods. 
+Vary parameters. Do experiments with our method! 

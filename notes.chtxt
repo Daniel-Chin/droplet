@@ -39,19 +39,10 @@
         try tweaking gravity and tension constant and see if simulation makes sense
     }
 }
-todo {
-    Surface tension wrong
-        Energy = boundary length * surface tension constant
-        small force / resample
-    Peskin student project: lubrication
-    Testing: {
-        is timestep small enough?
-        try tweaking gravity and tension constant and see if simulation makes sense
-    }
-}
 4/4 {
     real life droplet equilibrium has long tail. Why?
     Surface tension: same as simple case spring with res length = 0?
+        no
     vertical flow: smooth funciton (tanh)
         eq 43 in tissue engineering paper: example of using tanh
     Wall is not relatively stable to flow?
@@ -103,7 +94,7 @@ todo {
     Viscousity difference ignored. 
     boundary points -> desity ratio
     find papers that use IBM to do 2-phase flow
-    found! 
+        found! 
 }
 7/16 {
     V air needle exp: turn off gravity & airflow. 
@@ -138,16 +129,24 @@ todo {
 8/12 {
     Two droplets collide. To test density difference
 }
-todo {
+9/3 {
+    2D constants are different from 3D constants! Many physical equivalances don't exist. 
+    Where to find references for discretization equations?
+        Peskin's paper
+}
+2do {
     Compute Reynold's number for demo_6
     experiment: two droplets, one bigger (top) and one smaller (bottom).
     Experiments: as N -> infin, does behavior -> normal? 
     Test cases mentioned in the 2018 final report
     Guanhua suggestions
     pIB_STIFF = 1; % change so that max|X−Y| <= h/10
+    2D benchmark. 
+        1. Verify the numerical method. 
+        2. borrow 2D constants.
+        Maybe ask Peskin or Guanhua. Maybe the multiphase level-set paper authors. 
 
-    six droplets merge
-}
-next {
-    2D constants are different from 3D constants! Many physical equivalances don't exist. 
+    meeting time
+    APS talk: work from abstract
+    Plot the time-volume graph for the non-wall merge exps. 
 }
