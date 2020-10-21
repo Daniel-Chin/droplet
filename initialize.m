@@ -1,9 +1,6 @@
 %initialize.m
 %% Initialize Parameters and special indices
 
-dt=0.0002; % Time step, second
-N=96; % Number of grid cells
-L=3.0; % Box size, cm
 h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
 im=[N,(1:(N-1))]; % Grid index shifted right
@@ -17,20 +14,6 @@ Nb3y = floor((N / Nb3_space));
 Nb3 = Nb3x * Nb3y; % Number of IB points
 dtheta3 = h * Nb3_space; % IB point spacing
 
-K=20; % Surface tension coefficient, N*10^-5
-% FAKE_REPEL_K = .00001;
-WALL_STIFFNESS = 600;
-WALL_LINKER_TO_WALL_STIFF = 200;
-rho=.00013; % air density g/cm2
-rho_heavy=.1; % density g/cm2
-mu=0.0002; % viscosity g/s. 2D water can be 0.00089
-tmax=4; % Run until time s
-clockmax=ceil(tmax/dt);
-big_G = 980; % cm/s2
-NO_SLIP_FORCE = 14;
-FRICTION_ADJUST = 1;
-SLIP_LENGTH = 6 * h;
-SLIP_LENGTH_COEF = h / SLIP_LENGTH;
 dvorticity = 50;
 values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
 valminmax=[min(values),max(values)];  % for plotting vortocity
@@ -70,7 +53,6 @@ set(gcf,'double','on')
 
 MIRROR = ones(1, 1, 2);
 MIRROR(1, 1, 1) = -1;
-VERTICAL_FLOW = 1;
 VERTICAL_FLOW_ROW = VERTICAL_FLOW * tanh(linspace(0, 20, N/2 - 1));
 
 save_render_i = 0;
@@ -81,7 +63,6 @@ fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
 
 schedule_next_frame_pause = false;
 
-RESAMPLE_AMEND = .5;
 resample_energy_offset = 0;
 resample_energy_offset_array = [];
 resample_energy_offset_array_size = 0;
@@ -100,5 +81,3 @@ SPLICE_THRESHOLD = h;
 SPLICE_WALL_THRESHOLD = h * 2;
 SPLICE_REJECT_N_STEPS = 2;
 splice_reject_remains = 0;
-
-WALL_EXISTS = 1;

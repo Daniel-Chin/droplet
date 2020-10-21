@@ -4,7 +4,7 @@ function F=ForceSurface(X, links, dtheta, K, wall_links, Nb, WALL_LINKER_TO_WALL
 % surface tension
 displace1 = (X(links(1, 1:Nb),:) - X)';
 displace2 = (X(links(2, 1:Nb),:) - X)';
-F = K * (displace1 ./ vecnorm(displace1) + displace2 ./ vecnorm(displace2))';
+F = K / dtheta * (displace1 ./ vecnorm(displace1) + displace2 ./ vecnorm(displace2))';
 F(isnan(F)) = 0;
 
 % contact point force
