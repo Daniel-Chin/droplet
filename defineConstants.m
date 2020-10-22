@@ -25,4 +25,4 @@ WALL_EXISTS = 1;
 
 pIB_STIFF = 1; % change so that max|X−Y| <= h/10
 
-Nb3_space = 8;  % spacing of visual indicators
+Nb3_space = round(N / 16);  % spacing of visual indicators
