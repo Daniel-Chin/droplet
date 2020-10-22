@@ -1,4 +1,4 @@
-% Benchmark: falling droplet
+% spactial resolution convergence test: vanilla NS solver
 L=2.0; % Box size, cm
 
 % N=64; % Number of grid cells
