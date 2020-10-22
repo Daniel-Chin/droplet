@@ -12,3 +12,9 @@ convergence_space_3:
     2D point matrix force spreading. 
     From left to right: N = 64, 96, 128
     Result: DOES NOT converge.
+
+convergence_space_4:
+    IBM force spreading from tension surface. 
+    It's like 1D point array force spreading. 
+    From left to right: N = 64, 128, 196
+    Result: DOES NOT converge.
