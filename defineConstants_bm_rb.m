@@ -47,3 +47,5 @@ VERTICAL_FLOW = 0;
 RESAMPLE_AMEND = .5;
 
 WALL_EXISTS = 1;
+
+Nb3_space = 8;  % spacing of visual indicators

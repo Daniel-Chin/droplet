@@ -8,13 +8,12 @@ im=[N,(1:(N-1))]; % Grid index shifted right
 Nb2=ceil(L / (h*.5)); % Number of IB points
 dtheta2=L / Nb2; % IB point spacing
 
-Nb3_space = 8;
 Nb3x = floor((N/2 / Nb3_space));
 Nb3y = floor((N / Nb3_space));
 Nb3 = Nb3x * Nb3y; % Number of IB points
 dtheta3 = h * Nb3_space; % IB point spacing
 
-dvorticity = 50;
+dvorticity = .5;
 values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
 valminmax=[min(values),max(values)];  % for plotting vortocity
 

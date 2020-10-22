@@ -1,7 +1,5 @@
 % Using pIB to simulate water-air density difference
 
-pIB_STIFF = 1; % change so that max|X−Y| <= h/10
-
 dtheta4 = h / 2;
 estimated_area = 0;
 for k = 1 : n_init_droplets
