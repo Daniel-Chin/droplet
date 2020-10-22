@@ -7,3 +7,8 @@ convergence_space_2:
     Vanilla NS solver. no IBM. Add external force. 
     From left to right: N = 64, 128, 196
     Result: converge.
+
+convergence_space_3:
+    2D point matrix force spreading. 
+    From left to right: N = 64, 96, 128
+    Result: DOES NOT converge.
