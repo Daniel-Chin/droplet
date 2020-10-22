@@ -1,0 +1,9 @@
+convergence_space_1:
+    Vanilla NS solver. no IBM. 
+    From left to right: N = 64, 128, 196
+    Result: converge.
+
+convergence_space_2:
+    Vanilla NS solver. no IBM. Add external force. 
+    From left to right: N = 64, 128, 196
+    Result: converge.
