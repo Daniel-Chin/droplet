@@ -12,9 +12,10 @@ for i = dtheta4/2 : dtheta4 : L / 2
   end
 end
 
-Y4 = X4;
-V4 = zeros(Nb4, 2);
 MASS_PER_POINT = (rho_heavy - rho) * dtheta4 ^ 2;
+Y4 = X4;
+Y4 = X4 + [0, - MASS_PER_POINT * big_G / pIB_STIFF];
+V4 = zeros(Nb4, 2);
 
 dtheta5 = h / 2;
 X5 = zeros(10, 2);
