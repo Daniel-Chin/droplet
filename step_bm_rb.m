@@ -15,7 +15,6 @@ if max_wall_penalty > h*.3
   disp(max_wall_penalty / (h*.3));
 end
 ff2 = vec_spread_new(force_wall, XX2, Nb2); % Force at midpoint
-YY4 = Y4;
 YY4 = Y4 + V4 * dt;
 [max_X_minus_Y, t] = max(vecnorm((YY4 - XX4)'));
 if max_X_minus_Y > h/10
