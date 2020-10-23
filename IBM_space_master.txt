@@ -18,3 +18,15 @@ convergence_space_4:
     It's like 1D point array force spreading. 
     From left to right: N = 64, 128, 196
     Result: DOES NOT converge.
+
+convergence_space_5:
+    1D point ring force spreading. 
+    From left to right: N = 64, 128, 196
+    Result: DOES NOT converge.
+
+convergence_space_6:
+    IBM force spreading from tension surface. 
+    Instead of spreading with dtheta, spread with 0.01.
+    From left to right: N = 64, 128, 196
+    Result: Converge!!!!
+    Comment: How???
