@@ -134,6 +134,10 @@
     Where to find references for discretization equations?
         Peskin's paper
 }
+10/23 {
+    density penalty method causes gravity lag at the very beginning. 
+        in benchmark rising bubble, lag is 0.12s. 
+}
 2do {
     Compute Reynold's number for demo_6
     experiment: two droplets, one bigger (top) and one smaller (bottom).
