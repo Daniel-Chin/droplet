@@ -13,7 +13,6 @@ for i = dtheta4/2 : dtheta4 : L / 2
 end
 
 MASS_PER_POINT = (rho_heavy - rho) * dtheta4 ^ 2;
-Y4 = X4;
 Y4 = X4 + [0, - MASS_PER_POINT * big_G / pIB_STIFF];
 V4 = zeros(Nb4, 2);
 
