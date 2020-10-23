@@ -10,6 +10,7 @@ global dt Nb N h rho mu ip im a;
 global kp km dtheta K;
 global WALL_STIFFNESS PERFECT_WALL NO_SLIP_FORCE SLIP_LENGTH_COEF;
 global big_G;
+clearBackup;
 defineConstants();
 initialize();
 init_a();
@@ -35,5 +36,8 @@ while clock < clockmax
 
   if schedule_next_frame_pause
     pause;
+  end
+  if mod(clock, 20) == 0
+    save(sprintf('E:/IBM_space/backup/%d.mat', clock));
   end
 end
