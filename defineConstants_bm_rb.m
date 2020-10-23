@@ -15,24 +15,22 @@ N=128; % Number of grid cells
 % pIB_STIFF = 5000; % change so that max|X−Y| <= h/10
 
 % test case 1
-dt=0.003; % Time step, second
-% dt=0.006; % Time step, second
-K=24.5; % Surface tension coefficient, N*10^-5
-WALL_STIFFNESS = 3000;
-rho = 100; % air density g/cm2
-% rho = 100 / 10; % air density g/cm2
-mu = 10; % viscosity g/s. 
-big_G = .98; % cm/s2
-pIB_STIFF = 200; % change so that max|X−Y| <= h/10
+% dt=0.005; % Time step, second
+% K=24.5; % Surface tension coefficient, N*10^-5
+% WALL_STIFFNESS = 8000;
+% rho = 100; % air density g/cm2
+% mu = 10; % viscosity g/s. 
+% big_G = .98; % cm/s2
+% pIB_STIFF = 200; % change so that max|X−Y| <= h/10
 
 % test case 2
-% dt=0.002; % Time step, second
-% K=24.5 * 1; % Surface tension coefficient, N*10^-5
-% WALL_STIFFNESS = 3000;
-% rho = 1 / 10; % air density g/cm2
-% mu = 10 / 10 / (10^.5); % viscosity g/s.
-% big_G = .98 * 10; % cm/s2
-% pIB_STIFF = 400; % change so that max|X−Y| <= h/10
+dt=0.0004; % Time step, second
+K=1.96; % Surface tension coefficient, N*10^-5
+WALL_STIFFNESS = 7000;
+rho = 1; % air density g/cm2
+mu = 10; % viscosity g/s. 
+big_G = .98; % cm/s2
+pIB_STIFF = 120; % change so that max|X−Y| <= h/10
 
 % FAKE_REPEL_K = .00001;
 WALL_LINKER_TO_WALL_STIFF = 0;
