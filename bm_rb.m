@@ -9,7 +9,7 @@ initialize();
 Nb2=ceil(L / (h*.5) / 2); % Number of IB points
 dtheta2=L / 2 / Nb2; % IB point spacing
 k2=0:(Nb2-1);
-theta2 = k2'*dtheta2;
+theta2 = (k2' + .5) * dtheta2;
 X2 = zeros(Nb2, 2);
 X2(:, 1) = theta2;
 X2(:, 2) = L;
@@ -25,7 +25,7 @@ clock = 0;
 CM_his = [];
 initial_peri = calcPerimeter(X, Nb, links);
 circularity_his = [];
-render();
+render_bm_rb();
 while clock <= clockmax
   clock = clock + 1;
   step_bm_rb();
