@@ -25,7 +25,9 @@ ff4 = vec_spread_new( ...
 V4 = V4 - force4_g * dt / MASS_PER_POINT;
 Y4 = Y4 + V4 * dt;
 total_ff = ff + ff2 + ff4;
-total_ff = total_ff + total_ff(end:-1:1, :, :) .* MIRROR;
+mirrored = total_ff .* MIRROR;
+total_ff(1, :, :) = total_ff(1, :, :) + mirrored(1, :, :);
+total_ff(2:end, :, :) = total_ff(2:end, :, :) + mirrored(end:-1:2, :, :);
 [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
 % vertical flow
 u (2:N/2,          end  , 2) = VERTICAL_FLOW_ROW;
