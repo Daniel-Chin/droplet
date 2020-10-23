@@ -38,6 +38,10 @@ while clock < clockmax
     pause;
   end
   if mod(clock, 20) == 0
-    save(sprintf('E:/IBM_space/backup/%d.mat', clock));
+    try
+      save(sprintf('E:/IBM_space/backup/%d.mat', clock));
+    catch ME
+      0;
+    end
   end
 end
