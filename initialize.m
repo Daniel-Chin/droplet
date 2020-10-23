@@ -66,11 +66,7 @@ resample_energy_offset = 0;
 resample_energy_offset_array = [];
 resample_energy_offset_array_size = 0;
 
-FPS = 60 * 80;
-% FPS = 60 * 10;
-TIMESTEPS_PER_FRAME = round(1 / dt / FPS / 2) * 2 + 1;
-display(TIMESTEPS_PER_FRAME);
-render_phase = 0;
+setFrameRate;
 
 N_PAST_EXTREME_VELOCITY = 5;
 past_extreme_velocity = zeros(1, N_PAST_EXTREME_VELOCITY);
