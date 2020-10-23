@@ -27,7 +27,7 @@ CM_his = [];
 initial_peri = calcPerimeter(X, Nb, links);
 circularity_his = [];
 render_bm_rb();
-while clock <= clockmax
+while clock < clockmax
   clock = clock + 1;
   step_bm_rb();
 
