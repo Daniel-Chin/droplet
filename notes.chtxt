@@ -139,7 +139,6 @@
         in benchmark rising bubble, lag is 0.12s. 
 }
 2do {
-    Compute Reynold's number for demo_6
     experiment: two droplets, one bigger (top) and one smaller (bottom).
     Experiments: as N -> infin, does behavior -> normal? 
     Test cases mentioned in the 2018 final report
