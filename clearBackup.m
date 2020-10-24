@@ -1,5 +1,6 @@
 try
-  filePattern = fullfile('E:/IBM_space/backup', '*.mat'); % Change to whatever pattern you need.
+  myFolder = 'E:/IBM_space/backup';
+  filePattern = fullfile(myFolder, '*.mat'); % Change to whatever pattern you need.
   theFiles = dir(filePattern);
   for k = 1 : length(theFiles)
     baseFileName = theFiles(k).name;
@@ -8,5 +9,5 @@ try
     delete(fullFileName);
   end
 catch ME
-  disp('No E:');
+  disp('No E:/');
 end
