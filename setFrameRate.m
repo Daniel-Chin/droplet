@@ -1,5 +1,6 @@
 % FPS = 60 * 80;
-FPS = 60 * .5;
-TIMESTEPS_PER_FRAME = round(1 / dt / FPS / 2) * 2 + 1;
-display(TIMESTEPS_PER_FRAME);
+FPS = 60 * 1;
+SPF = 1 / FPS;
+approx_timesteps_per_frame = round(1 / dt / FPS / 2) * 2 + 1;
+display(approx_timesteps_per_frame);
 render_phase = 0;

@@ -1,6 +1,6 @@
-render_phase = render_phase - 1;
-if render_phase <= 0
-  render_phase = TIMESTEPS_PER_FRAME;
+render_phase = render_phase + dt;
+if render_phase >= SPF
+  render_phase = render_phase - SPF;
 
   hold on;
   vorticity=(u(ip,:,2)-u(im,:,2)-u(:,ip,1)+u(:,im,1))/(2*h);
