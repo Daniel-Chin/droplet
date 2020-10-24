@@ -8,8 +8,6 @@ stepwise interface re-sampling
 Boundary splicing
 
     2D benchmark. 
-        1. Verify the numerical method. 
-        2. borrow 2D constants.
         Maybe ask Peskin or Guanhua. Maybe the multiphase level-set paper authors. 
     Experiments: as N -> infin, does behavior -> normal? 
     Test cases mentioned in the 2018 final report
