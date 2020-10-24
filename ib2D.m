@@ -37,7 +37,7 @@ while clock < clockmax
   if schedule_next_frame_pause
     pause;
   end
-  if mod(clock, 20) == 0
+  if mod(clock, 40) == 0
     try
       save(sprintf('E:/IBM_space/backup/%d.mat', clock));
     catch ME
