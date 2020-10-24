@@ -78,3 +78,5 @@ SPLICE_REJECT_N_STEPS = 2;
 splice_reject_remains = 0;
 
 OUTPUT_PATH = 'E:/IBM_Space/output/%d.png';
+
+clockmax = ceil(tmax/dt);

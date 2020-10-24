@@ -10,7 +10,6 @@ rho = .1; % air density g/cm2
 rho_heavy = 1; % density g/cm2
 mu = .002; % viscosity g/s. 2D water can be 0.00089
 tmax = 4; % Run until time s
-clockmax = ceil(tmax/dt);
 big_G = 980; % cm/s2
 NO_SLIP_FORCE = 0;
 FRICTION_ADJUST = 1;
