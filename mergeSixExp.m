@@ -8,6 +8,7 @@ clearBackup;
 defineConstants();
 % rho_heavy = 2; % density g/cm2
 initialize();
+OUTPUT_PATH = 'E:/IBM_Space/output/%d.png';
 Nb3x = floor((N / Nb3_space));
 Nb3y = floor((N / Nb3_space));
 Nb3 = Nb3x * Nb3y; % Number of IB points
