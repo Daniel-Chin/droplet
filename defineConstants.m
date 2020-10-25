@@ -13,8 +13,7 @@ tmax = 4; % Run until time s
 big_G = 980; % cm/s2
 NO_SLIP_FORCE = 0;
 FRICTION_ADJUST = 1;
-SLIP_LENGTH = 6 * h;
-SLIP_LENGTH_COEF = h / SLIP_LENGTH;
+SLIP_LENGTH_UNITS = 6;
 
 pIB_STIFF = 2; % change so that max|X−Y| <= h/10
 
