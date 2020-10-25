@@ -1,5 +1,5 @@
 % one droplet on wall
-init_circle_r = .35;
+init_circle_r = .25;
 % init_circle_r = .42;
 % init_circle_r = .5;
 init_circle_x = 0;

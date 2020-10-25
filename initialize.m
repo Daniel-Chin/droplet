@@ -13,7 +13,7 @@ Nb3y = floor((N / Nb3_space));
 Nb3 = Nb3x * Nb3y; % Number of IB points
 dtheta3 = h * Nb3_space; % IB point spacing
 
-dvorticity = .5;
+dvorticity = 100;
 values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
 valminmax=[min(values),max(values)];  % for plotting vortocity
 

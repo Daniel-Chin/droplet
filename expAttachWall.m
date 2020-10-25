@@ -19,7 +19,7 @@ initInertiaNew();
 big_G = -400;
 
 %% Run simulation
-tmax=1; % Run until time
+tmax = 2; % Run until time
 clockmax=ceil(tmax/dt);
 clock = 0;
 render();

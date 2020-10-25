@@ -14,7 +14,7 @@ clearBackup;
 defineConstants();
 initialize();
 init_a();
-initX();
+initX_ori();
 initInertia();
 
 %% Run simulation
@@ -37,7 +37,7 @@ while clock < clockmax
   if schedule_next_frame_pause
     pause;
   end
-  if mod(clock, 40) == 0
+  if mod(clock, 200) == 0
     try
       save(sprintf('E:/IBM_space/backup/%d.mat', clock));
     catch ME
