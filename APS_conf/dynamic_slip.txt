@@ -1,0 +1,5 @@
+numerical imperfections:
+    the "sum of active forces" is represented by fluid motion intention. 
+
+limitations:
+    receding not explored
