@@ -82,4 +82,4 @@ OUTPUT_PATH = 'E:/IBM_Space/output/%d.png';
 clockmax = ceil(tmax/dt);
 
 SLIP_LENGTH = SLIP_LENGTH_UNITS * h;
-SLIP_LENGTH_COEF = h / SLIP_LENGTH;
+SLIP_LENGTH_COEF = 1 / SLIP_LENGTH_UNITS;
