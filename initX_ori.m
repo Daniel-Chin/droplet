@@ -1,7 +1,8 @@
 % one droplet on wall
+% init_circle_r = .15;
+% init_circle_r = .2;
 init_circle_r = .25;
-% init_circle_r = .42;
-% init_circle_r = .5;
+% init_circle_r = .4;
 init_circle_x = 0;
 init_circle_y = L * 0.8;
 dtheta = h / 2; % IB point spacing

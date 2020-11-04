@@ -30,3 +30,6 @@ convergence_space_6:
     From left to right: N = 64, 128, 196
     Result: Converge!!!!
     Comment: How???
+
+robust:
+    N = 96, 128

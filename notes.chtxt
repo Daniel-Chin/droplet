@@ -148,15 +148,19 @@
 11/4 {
     wall_investigation
         wall does not converge too well. 
+    Other papers also use the rising bubble benchmark
+    benchmark with constant viscousity
+    level set NS solver paper refs
 }
 2do {
     experiment: two droplets, one bigger (top) and one smaller (bottom).
     Experiments: as N -> infin, does behavior -> normal? 
         two droplets merging. circularity, polarity, and off-center distance
-    Test cases mentioned in the 2018 final report
-        flow, gravity, and circularity response to size
+    Static equilibrium contrast
+    dt convergence
     Plot the time-volume graph for the non-wall merge exps.     
     plot resample energy offset
+    flow, gravity, and circularity response to size: real-life motivation
     
     APS talk: work from abstract
     
