@@ -12,6 +12,7 @@ for k = wall_links
   tangent_vector = X(next2, :) - X(id, :);
   contact_angle = pi/2 + atan(tangent_vector(2) / tangent_vector(1));
   static_limit = friction(contact_angle, contact_line_vertical_v, direction, NO_SLIP_FORCE, FRICTION_ADJUST) * SLIP_LENGTH_COEF;
+  % static_limit
   entered_slip_region = false;
   for j=1:Nb2
     if abs(XX2(j, 2) - X(id, 2)) <= SLIP_LENGTH / 2
