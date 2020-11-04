@@ -138,17 +138,22 @@
     density penalty method causes gravity lag at the very beginning. 
         in benchmark rising bubble, lag is 0.12s. 
 }
+10/28 {
+    Guanhua meeting
+    rising bubble:
+        calc CM: using boundary to calculate area integral
+    Test if sum of tension is 0 for closed structure
+    see if force changes with number of points
+}
 2do {
     experiment: two droplets, one bigger (top) and one smaller (bottom).
     Experiments: as N -> infin, does behavior -> normal? 
+        two droplets merging. circularity, polarity, and off-center distance
     Test cases mentioned in the 2018 final report
-    Guanhua suggestions
-    2D benchmark. 
-        1. Verify the numerical method. 
-        2. borrow 2D constants.
-        Maybe ask Peskin or Guanhua. Maybe the multiphase level-set paper authors. 
-
-    meeting time
+        flow, gravity, and circularity response to size
+    Plot the time-volume graph for the non-wall merge exps.     
+    
     APS talk: work from abstract
-    Plot the time-volume graph for the non-wall merge exps. 
+    
+    where to upload videos?
 }
