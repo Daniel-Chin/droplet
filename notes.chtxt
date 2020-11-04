@@ -145,6 +145,10 @@
     Test if sum of tension is 0 for closed structure
     see if force changes with number of points
 }
+11/4 {
+    wall_investigation
+        wall does not converge too well. 
+}
 2do {
     experiment: two droplets, one bigger (top) and one smaller (bottom).
     Experiments: as N -> infin, does behavior -> normal? 
