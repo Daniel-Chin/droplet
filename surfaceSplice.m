@@ -100,7 +100,7 @@ if WALL_EXISTS
     j_jj1 = j;
     j_jj2 = j;
     not_ok = 0;
-    for jj = 1 : 13
+    for jj = 1 : 15
       j_jj1 = links(1, j_jj1);
       j_jj2 = links(2, j_jj2);
       if doesLinkWall(j_jj1, links, wall_links) || doesLinkWall(j_jj2, links, wall_links)
@@ -113,9 +113,6 @@ if WALL_EXISTS
     end
     
     j_1 = links(1, j);
-    % if j_1 == 73
-    %   pause;
-    % end
 
     wall_links_len = size(wall_links, 2);
     wall_links(:, wall_links_len + 1) = [j_1, 1];
