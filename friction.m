@@ -1,6 +1,6 @@
 function f=friction(angle, v, direction, NO_SLIP_FORCE, FRICTION_ADJUST)
 % v: contact line speed
-advance_or_recede = xor(direction == 1, v < 0);
+advance_or_recede = xor(direction == 2, v < 0);
 if advance_or_recede
   if angle > 1.117
     if angle > 2
