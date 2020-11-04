@@ -163,10 +163,9 @@ if WALL_EXISTS
       id1_next = links(k_direction, id1);
       links(3 - j_direction, id0_next) = id1_next;
       links(3 - k_direction, id1_next) = id0_next;
-      holeToFill = id0;
-      fillLinksHole();
-      holeToFill = id1;
-      fillLinksHole();
+      for holeToFill = sort([id0, id1], 'd')
+        fillLinksHole();  % descending order so that we don't fill an out-of-bound hole
+      end
       X = X(1:Nb, :);
 
       disp("detach / wall merge");
