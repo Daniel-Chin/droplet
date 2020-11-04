@@ -56,10 +56,6 @@ VERTICAL_FLOW_ROW = VERTICAL_FLOW * tanh(linspace(0, 20, N/2 - 1));
 
 save_render_i = 0;
 
-fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
-  NO_SLIP_FORCE*SLIP_LENGTH_COEF / (dtheta2*WALL_STIFFNESS/2) ...
-);
-
 schedule_next_frame_pause = false;
 
 resample_energy_offset = 0;
@@ -83,3 +79,7 @@ clockmax = ceil(tmax/dt);
 
 SLIP_LENGTH = SLIP_LENGTH_UNITS * h;
 SLIP_LENGTH_COEF = 1 / SLIP_LENGTH_UNITS;
+
+fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
+  NO_SLIP_FORCE*SLIP_LENGTH_COEF / (dtheta2*WALL_STIFFNESS/2) ...
+);
