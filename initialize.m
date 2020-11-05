@@ -8,6 +8,7 @@ im=[N,(1:(N-1))]; % Grid index shifted right
 Nb2=ceil(L / (h*WALL_SPACING)); % Number of IB points
 dtheta2=L / Nb2; % IB point spacing
 
+Nb3_space = round(N / 16);  % spacing of visual indicators
 Nb3x = floor((N/2 / Nb3_space));
 Nb3y = floor((N / Nb3_space));
 Nb3 = Nb3x * Nb3y; % Number of IB points
