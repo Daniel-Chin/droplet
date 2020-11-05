@@ -9,7 +9,6 @@ ff=vec_spread_new(ForceSurface(XX, links, dtheta, K, wall_links, Nb, WALL_LINKER
 [force_wall, X2] = ForceWall(XX2, WALL_STIFFNESS, PERFECT_WALL, u, XX, Nb, Nb2, NO_SLIP_FORCE, X2, SLIP_LENGTH_COEF, h, FRICTION_ADJUST, wall_links, links, SLIP_LENGTH);
 max_wall_penalty = max(vecnorm((PERFECT_WALL - XX2)'));
 if max_wall_penalty > h*.3
-  warning('warn');
   disp('Wall penalty exceeds h*.3!');
   disp(max_wall_penalty / (h*.3));
 end
@@ -17,7 +16,6 @@ ff2 = vec_spread_new(force_wall, X2, Nb2); % Force at midpoint
 YY4 = Y4 + V4 * dt;
 [max_X_minus_Y, t] = max(vecnorm((YY4 - XX4)'));
 if max_X_minus_Y > h/10
-  warning('warn');
   disp('MAX|X - Y| exceeds h/10!');
   disp(YY4(t, :) - XX4(t, :));
   % display(max_X_minus_Y);
