@@ -33,3 +33,10 @@ convergence_space_6:
 
 robust:
     N = 96, 128
+
+droplet_wall_3x3:
+    N = 96, 128, 192
+    dt, pib_stiff:
+        0.0001, 1000
+        0.00005, 2000
+        0.00002, 5000
