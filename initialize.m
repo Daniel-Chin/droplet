@@ -52,7 +52,8 @@ set(gcf,'double','on')
 
 MIRROR = ones(1, 1, 2);
 MIRROR(1, 1, 1) = -1;
-VERTICAL_FLOW_ROW = VERTICAL_FLOW * tanh(linspace(0, 20, N/2 - 1));
+VERTICAL_FLOW_OFFSET = 4;
+VERTICAL_FLOW_ROW = VERTICAL_FLOW * tanh(linspace(0, 4, N/2 - VERTICAL_FLOW_OFFSET + 1));
 
 save_render_i = 0;
 

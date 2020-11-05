@@ -38,14 +38,14 @@ total_ff(1, :, :) = total_ff(1, :, :) + mirrored(1, :, :);
 total_ff(2:end, :, :) = total_ff(2:end, :, :) + mirrored(end:-1:2, :, :);
 [u,uu]=fluid(u,total_ff); % Step Fluid Velocity
 % vertical flow
-u (2:N/2,          end  , 2) = VERTICAL_FLOW_ROW;
-uu(2:N/2,          end  , 2) = VERTICAL_FLOW_ROW;
-u (2:N/2,          end-1, 2) = VERTICAL_FLOW_ROW;
-uu(2:N/2,          end-1, 2) = VERTICAL_FLOW_ROW;
-u (end-1:-1:N/2+1, end  , 2) = VERTICAL_FLOW_ROW;
-uu(end-1:-1:N/2+1, end  , 2) = VERTICAL_FLOW_ROW;
-u (end-1:-1:N/2+1, end-1, 2) = VERTICAL_FLOW_ROW;
-uu(end-1:-1:N/2+1, end-1, 2) = VERTICAL_FLOW_ROW;
+uu(1+VERTICAL_FLOW_OFFSET:N/2+1,        end  , 2) = VERTICAL_FLOW_ROW;
+u (1+VERTICAL_FLOW_OFFSET:N/2+1,        end  , 2) = VERTICAL_FLOW_ROW;
+u (1+VERTICAL_FLOW_OFFSET:N/2+1,        end-1, 2) = VERTICAL_FLOW_ROW;
+uu(1+VERTICAL_FLOW_OFFSET:N/2+1,        end-1, 2) = VERTICAL_FLOW_ROW;
+u (end+1-VERTICAL_FLOW_OFFSET:-1:N/2+1, end  , 2) = VERTICAL_FLOW_ROW;
+uu(end+1-VERTICAL_FLOW_OFFSET:-1:N/2+1, end  , 2) = VERTICAL_FLOW_ROW;
+u (end+1-VERTICAL_FLOW_OFFSET:-1:N/2+1, end-1, 2) = VERTICAL_FLOW_ROW;
+uu(end+1-VERTICAL_FLOW_OFFSET:-1:N/2+1, end-1, 2) = VERTICAL_FLOW_ROW;
 
 % full step using midpoint velocity
 surface_velocity = vec_interp(uu, XX, Nb);
