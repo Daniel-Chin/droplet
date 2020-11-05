@@ -5,7 +5,7 @@ h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
 im=[N,(1:(N-1))]; % Grid index shifted right
 
-Nb2=ceil(L / (h*.5)); % Number of IB points
+Nb2=ceil(L / (h*WALL_SPACING)); % Number of IB points
 dtheta2=L / Nb2; % IB point spacing
 
 Nb3x = floor((N/2 / Nb3_space));
