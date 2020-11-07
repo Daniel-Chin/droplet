@@ -154,15 +154,13 @@
 }
 2do {
     experiment: two droplets, one bigger (top) and one smaller (bottom).
-    Experiments: as N -> infin, does behavior -> normal? 
-        two droplets merging. circularity, polarity, and off-center distance
-    Static equilibrium contrast
     dt convergence
     Plot the time-volume graph for the non-wall merge exps.     
     plot resample energy offset
+    resampling demo
+    
+    Experiments: as N -> infin, does behavior -> normal? 
+        two droplets merging. circularity, polarity, and off-center distance
+    Static equilibrium contrast
     flow, gravity, and circularity response to size: real-life motivation
-    
-    APS talk: work from abstract
-    
-    where to upload videos?
 }
