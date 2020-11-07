@@ -14,8 +14,12 @@ clearBackup;
 defineConstants();
 initialize();
 init_a();
-initX_ori();
-initInertia();
+n_init_droplets = 1;
+init_circle_rad = [.25];
+init_circle_pos = zeros(1, 2);
+init_circle_pos(1, :) = [0, L * 0.8];
+initX_multi_half_circles();
+initInertiaNew();
 
 %% Run simulation
 clock = 0;
