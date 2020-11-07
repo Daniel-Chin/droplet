@@ -75,7 +75,7 @@ for id0 = 1 : Nb
     links(1, id1_2) = id0_1;
     links(2, id0_1) = id1_2;
     
-    disp("SPLICE");
+    fprintf("SPLICE t = %f\n", clock * dt);
     splice_reject_remains = SPLICE_REJECT_N_STEPS;
     return; % One splice at a step
   end
@@ -122,7 +122,7 @@ if WALL_EXISTS
     links(1, j) = 1;
     links(2, j_1) = 1;
     
-    disp("attach / wall split");
+    fprintf("attach / wall split. t = %f\n", clock * dt);
     splice_reject_remains = SPLICE_REJECT_N_STEPS;
     return;
   end
@@ -165,7 +165,8 @@ if WALL_EXISTS
       end
       X = X(1:Nb, :);
 
-      disp("detach / wall merge");
+      fprintf("detach / wall merge. t = %f\n", clock * dt);
+      
       splice_reject_remains = SPLICE_REJECT_N_STEPS;
       return;
     end
