@@ -8,7 +8,6 @@ ff=vec_spread_new(ForceSurface(XX, links, dtheta, K, wall_links, Nb, WALL_LINKER
 YY4 = Y4 + V4 * dt / 2;
 [max_X_minus_Y, t] = max(vecnorm((YY4(1:20,:) - XX4(1:20,:))'));
 if max_X_minus_Y > h/10
-  warning('warn');
   disp('MAX|X - Y| exceeds h/10!');
   disp(YY4(t, :) - XX4(t, :));
   % display(max_X_minus_Y);
@@ -47,3 +46,6 @@ surfaceSplice();
 warpIndicators;
 
 render_wide;
+
+resample_energy_offset_array_size = resample_energy_offset_array_size+1;
+resample_energy_offset_array(resample_energy_offset_array_size) = resample_energy_offset;

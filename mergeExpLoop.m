@@ -1,6 +1,9 @@
 while clock <= clockmax
   clock = clock + 1;
   stepMergeExp();
+  calcArea();
+  area_his_i = area_his_i + 1;
+  area_his(area_his_i) = droplet_area;
 
   % pause(1);
   if clock == 410

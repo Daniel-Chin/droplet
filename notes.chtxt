@@ -152,15 +152,18 @@
     benchmark with constant viscousity
     level set NS solver paper refs
 }
+11/7 {
+    Droplets shrink over time. I never noticed this. 
+}
 2do {
     experiment: two droplets, one bigger (top) and one smaller (bottom).
-    dt convergence
     Plot the time-volume graph for the non-wall merge exps.     
     plot resample energy offset
     resampling demo
     
-    Experiments: as N -> infin, does behavior -> normal? 
-        two droplets merging. circularity, polarity, and off-center distance
+    two droplets merging. circularity, polarity, and off-center distance
+        N convergence
+        dt convergence
     Static equilibrium contrast
     flow, gravity, and circularity response to size: real-life motivation
 }

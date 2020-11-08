@@ -6,6 +6,10 @@ global big_G;
 clearBackup;
 
 defineConstants();
+dt = 0.0001; % Time step, second
+N = 96; % Number of grid cells
+pIB_STIFF = 1000;
+
 % rho_heavy = 2; % density g/cm2
 initialize();
 OUTPUT_PATH = 'E:/IBM_Space/output/%d.png';
@@ -49,11 +53,13 @@ end
 
 initX_multi_circle();
 initInertiaNew();
-big_G = .5;
+big_G = 900;
 
 %% Run simulation
-tmax = 3.5; % Run until time
+tmax = .1; % Run until time
 clockmax=ceil(tmax/dt);
 clock = 0;
 render_wide();
+area_his = [];
+area_his_i = 0;
 mergeSixExpLoop;
