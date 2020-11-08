@@ -87,3 +87,4 @@ fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
 );
 
 RENDER_DEBUG = 1;
+RENDER_INTERFACE_LINK = 1;
