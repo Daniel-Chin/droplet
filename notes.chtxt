@@ -154,6 +154,10 @@
 }
 11/7 {
     Droplets shrink over time. I never noticed this. 
+        Leaking is easier aligned with x or y. 
+        diagonal leaking is harder. 
+        increasing spatial resolution has limited effect. 
+        Maybe decrease dtheta for the interface?
 }
 2do {
     time-volume for static
