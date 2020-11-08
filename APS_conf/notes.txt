@@ -28,3 +28,6 @@ Time profiling: computational efficiency
 Hybrid paper. 
 We have novel methods. 
 Vary parameters. Do experiments with our method! 
+
+future works:
+    resampling keeps sharp edges
