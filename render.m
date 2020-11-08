@@ -32,10 +32,10 @@ if render_phase >= SPF
   axis equal
   axis manual
   if RENDER_DEBUG ~= 1
-    axis([-h,L/2,0,L])
+    axis([-h, L/2, 0, L]);
   end
   title(sprintf('t = %.3f, G = %.1f', clock * dt, big_G));
-  drawnow
+  drawnow;
   saveFrame();
   hold off
 end
