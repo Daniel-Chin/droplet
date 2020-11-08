@@ -156,9 +156,7 @@
     Droplets shrink over time. I never noticed this. 
 }
 2do {
-    experiment: two droplets, one bigger (top) and one smaller (bottom).
-    Plot the time-volume graph for the non-wall merge exps.     
-    plot resample energy offset
+    time-volume for static
     resampling demo
     
     two droplets merging. circularity, polarity, and off-center distance
