@@ -5,7 +5,7 @@ We propose and test three techniques on top of the penalty immersed boundary met
 Let's dive in. 
 Each interface marker is pulled by its two neighbors at constant magnitude. 
 This simulates the surface tension force. Here is a brief explanation why. Force is the gradient of energy. The 2D tension energy is proportional to the interface length. View that as the sum of all line segments connecting neighboring markers. An attractive force with constant magnitude is precisely the gradient of the length of one line segment. Apply that to all line segments and this is what we get. 
-Notice that the total force on one marker is always normal to the interface. 
+Note that the total force on one marker is always normal to the interface. 
 
 The same logic also simulates the unbalanced Young’s force at a contact point. 
 At the wall, there is one interface marker that only has one neighbor. The total force on this marker becomes tangent to the interface. 
@@ -13,7 +13,7 @@ However, the horizontal component of this force is balanced by the no-flux force
 Its vertical component turns out to equal the Young’s force. 
 
 Notice that the sum of the tension force on all markers is exactly the sum of Young’s force on the two markers, just inverted in direction. 
-We can view tension force and Young’s force as a pair of action-reaction forces this way. 
+this way, We can view tension force and Young’s force as a pair of action-reaction forces. 
 
 At the contact point, 
 Young’s force is tangent to the wall. 
@@ -25,7 +25,7 @@ Therefore, at the exact contact point, tension force is negligible compared to Y
 
 Now, view the no-slip boundary condition as a friction force, provided by the wall, exerted onto the fluid. 
 No-slip simply means that this friction force is a reactive force, always balancing the sum of active forces at this location in the vertical direction. 
-The only active force at the wall is Young’s force. Therefore, the wall friction, if no-slip, equals the Young’s force inverted in direction. 
+The only active force at the wall is Young’s force. Therefore, the wall friction, if no-slip, equals the Young’s force, just inverted in direction. 
 
 Interested viewers may pause here and take a look at this slide, but the video will now move on...
 
@@ -38,13 +38,12 @@ This phenomenon is the well-known contact line paradox. Why is the wall sometime
 A 2018 molecular simulation study has partially revealed the microscopic model for water-hydrophilic surface interaction. 
 
 The dynamic slipping scheme basically explains how we simulate a slip-with-friction wall. 
-
 The friction responds to movement velocity and contact angle. The method requires a function, mu of theta, 
 
 that computes the friction coefficient given the contact angle. 
-Our implementation of this function is based on a regression of measured results yielded in the 2018 molecular simulation study. 
+Our implementation of this function is based on a regression of measured results yielded from the 2018 molecular simulation study. 
 
-The resulting macroscopic behaviors is largely analogous to static friction and sliding friction. 
+The resulting macroscopic behaviors are largely analogous to static friction and sliding friction. 
 
 How do we implement this in the simulation?
 It is well known that a no-slip wall can be simulated as an array of markers using the penalty method. 
@@ -52,8 +51,8 @@ To simulate a dynamic slipping wall, we use what we call the incur-redeem-dismis
 
 Let's first look at the baseline penalty method for no-slip. 
 Represent the wall with an array of markers. The markers follow the fluid flow. 
-As they move away from their initial location, penalty is incurred. 
-Aplly a penalty force to bring them back. 
+As a marker moves away from its initial location, penalty is incurred. 
+Apply a penalty force to bring it back. 
 The penalty will never be fully redeemed until the marker returns to its correct location. 
 This guarantees no-flux and no-slip.
 
@@ -61,16 +60,16 @@ Now we introduce another way penalty can decrease: dismissal. No fluid flow is i
 The amount of penalty dismissed, multiplied by friction force, gives the work done, in other words, heat dissipation. 
 
 𝐾_𝑤𝑎𝑙𝑙 is the stiffness of the wall markers. 𝑓_𝑙𝑖𝑚𝑖𝑡/𝐾_𝑤𝑎𝑙𝑙  is thus the maximum penalty that static friction can hold. 
-Whenever the vertical penalty exceeds the limit , dismiss an amount of penalty to bring it to the limit.
+Whenever the vertical penalty exceeds the limit, dismiss an amount of penalty to bring it back to the limit.
 The horizontal penalty is never dismissed, so no-flux is preserved. 
 
 Let's look at some demos. 
 
-Here spactial resolution is progressively refined going from left to right, while timestep is progressively refined from top to bottom. 
+Here, from left to right, spatial resolution is progressively refined. from top to bottom, timestep is progressively refined. 
 
-This is the final dropelt shape. 
+This is the final droplet shape. 
 
-This new method solves the contact line paradox but introduces volume errors. Whenever penalty is dismissed, we do it on the vertical component of the discrete representation of the wall. When the horizontal tension is not vertically uniform, the teleportation will not be parallel to the wall, creating volume errors. 
+This new method solves the contact line paradox but introduces some volume errors. Whenever penalty is dismissed, we do it on the vertical component of the discrete representation of the wall. When the horizontal tension is not vertically uniform, the teleportation will not be parallel to the wall, creating volume errors. 
 
 Next, let's look at the second technique - Step-wise Interface Resampling.
 
@@ -79,12 +78,12 @@ No tangential component means that fluid flow can disrupt the distribution of in
 
 Therefore, every timestep we check for distribution anomolies, adding markers to wide gaps and removing markers from tight spaces. 
 
-On the left is what happens if we do not resample the interface. On the right, we use blue circles to denote addition, and red circles to denote removal, of interface markers. 
+On the left is what happens if we do not resample the interface. On the right, we use blue circles to visualize addition, and red circles to visualize removal, of interface markers. 
 
-This resampling technique is, however, very difficult to implement in 3D, where the point array becomes a surface mesh. 
+This resampling technique, however, is very difficult to implement in 3D, where the point array becomes a surface mesh. 
 We also encounter area conservation problems. 
 
-Here the droplet gradually shrinks with time even when nothing is happening. 
+Here the droplet gradually shrinks even when nothing is happening. 
 
 Fortunately, refining spatial resolution significantly curbs this error. 
 
@@ -98,18 +97,19 @@ And three pairs of scenarios whose implementations are exactly the same. They ar
 
 Let's see some demos. Again, from left to right we have the spatial resolution progressively refined. 
 
-How did we implement this? We store the interface markers in circular double linked lists. The linking direction preserves the polarity information: if you follow the links in the positive direction, the liquid will always be on the right. 
-When the distance between two interfaces is smaller than a threshold AND the two interfaces are approaching, splice them. 
-The following couple of timesteps become a no-splice window. This rule makes splicing events more atomic, so that we don't have multiple splicing events competing to accomplish the same macroscopic event. 
-Computation-wise, a naive code would check every pair of markers at every timestep. This is O(N^2). Our optimization is to check every pair of markers only once in a while and mark anything close together as suspects. At each timesteps we only check the suspect markers. 
+How did we implement this? We store the interface markers in circular double linked lists. The linking direction preserves the polarity information: if you follow the links in the positive direction, the liquid will always be on your right. 
+When the distance between two interfaces is smaller than a threshold and the two interfaces are approaching, splice them. 
+The following couple of timesteps become a no-splice window. This rule makes splicing events more atomic, so that we don't have multiple splicing events competing to accomplish the same macroscopic effect. 
+Computation-wise, a naive algorithm would check every pair of markers at every timestep. This is O(N^2). We check every pair of markers only once in a while and mark anything close together as suspects. At each timestep we only check the suspect markers. 
 
 Here we show the droplet area against time. The merging event happens around t=0.025
+
 Here is the same plot but for the six dropelts run. Refining spatial resolution can somehow mitigate the energy error from resampling. 
 
-Next we test our method against a benchmark where an air bubble rises up in a column of water. 
+Next we test our overall method against a benchmark where an air bubble rises up in a column of water. 
 
-Here is the center of mass and circularity index against time. The black smooth curve shows our results that already converge with regard to timestep and spatial resolution. The error is likely due to the fact that our method does not support variable viscousity. 
+Here is the center of mass and circularity index against time. The black smooth curve shows our results that already converge with regard to timestep and spatial resolution. The inaccuracy is still significant. This is potentially because our method does not support variable viscousity. 
 
 This is the terminal droplet shape, compared against the benchmark. 
 
-In conclusion, we propose three techniques as extensions to the Immersed Boundary Method: dynamic slipping, frame-wise interface resampling, and interface splicing. The most note-worthy limitations include the lack of variable viscousity, the lack of adaptive mesh refinement, Questionable volume conservation, and Density markers becoming progressively less uniform. 
+In conclusion, we propose three techniques as extensions to the Immersed Boundary Method: dynamic slipping, frame-wise interface resampling, and interface splicing. The most note-worthy limitations include the lack of variable viscousity, the lack of adaptive mesh refinement, Questionable volume conservation, and Density markers becoming progressively less uniform as time goes by. 
