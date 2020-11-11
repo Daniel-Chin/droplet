@@ -31,3 +31,5 @@ Vary parameters. Do experiments with our method!
 
 future works:
     resampling keeps sharp edges
+
+10 min video + 2 min Q&A

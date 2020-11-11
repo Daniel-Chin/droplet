@@ -160,12 +160,11 @@
         Maybe decrease dtheta for the interface?
 }
 2do {
-    time-volume for static
-    resampling demo
-    
     two droplets merging. circularity, polarity, and off-center distance
         N convergence
         dt convergence
     Static equilibrium contrast
     flow, gravity, and circularity response to size: real-life motivation
+    
+    energy dissipation plot from friction
 }
