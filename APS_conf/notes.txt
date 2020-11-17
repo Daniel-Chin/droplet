@@ -33,3 +33,45 @@ future works:
     resampling keeps sharp edges
 
 10 min video + 2 min Q&A
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Even for vanilla IBM, there can be volume area error
+(constant density IBM)
+cut lack of area conservation <- people know
+change "teleport" -> "shift" "displace"
+section context improvement, many details should be condense, or viewers disoriented
+# slides /= 2
+"penalty no-slip" -> "tethered markers"
+opening: The equations we solve. Context for out external force, then comes into the topic
+remove area conservation
+state "we are doing constant viscosity in place"
+ref for the benchmark
+first page - 15 sec
+Baylor College of Medicine logo
+arrow: dt and N refinement
+Period to end bullets and stuff
+ddl: tuesday
