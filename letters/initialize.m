@@ -5,9 +5,6 @@ h=L/N; % Grid spacing
 ip=[(2:N),1]; % Grid index shifted left
 im=[N,(1:(N-1))]; % Grid index shifted right
 
-Nb2=ceil(L / (h*WALL_SPACING)); % Number of IB points
-dtheta2=L / Nb2; % IB point spacing
-
 Nb3_space = round(N / 16);  % spacing of visual indicators
 Nb3x = floor((N / Nb3_space));
 Nb3y = floor((N / Nb3_space));
@@ -17,13 +14,6 @@ dtheta3 = h * Nb3_space; % IB point spacing
 dvorticity = 40;
 values= (-10*dvorticity):dvorticity:(10*dvorticity); % Get vorticity contours
 valminmax=[min(values),max(values)];  % for plotting vortocity
-
-%% Initialize boundary and velocity
-k2=0:(Nb2-1);
-theta2 = k2'*dtheta2;
-X2 = zeros(Nb2, 2);  % first column has fluid value and wall
-X2(:, 2) = theta2;
-PERFECT_WALL = X2;
 
 X3 = zeros(Nb3y, Nb3y, 2);
 theta3 = (1:Nb3y) * dtheta3;
@@ -51,8 +41,6 @@ set(gcf,'double','on')
 
 MIRROR = ones(1, 1, 2);
 MIRROR(1, 1, 1) = -1;
-VERTICAL_FLOW_OFFSET = 4;
-VERTICAL_FLOW_ROW = VERTICAL_FLOW * tanh(linspace(0, 4, N/2 - VERTICAL_FLOW_OFFSET + 1));
 
 save_render_i = 0;
 
@@ -81,9 +69,20 @@ clockmax = ceil(tmax/dt);
 SLIP_LENGTH = SLIP_LENGTH_UNITS * h;
 SLIP_LENGTH_COEF = 1 / SLIP_LENGTH_UNITS;
 
+% RENDER_DEBUG = 0;
+RENDER_DEBUG = 1;
+RENDER_INTERFACE_LINK = 1;
+
+NAILS_DIST = NAILS(2, 1) - NAILS(1, 1);
+Nb2 = ceil(NAILS_DIST / (h*WALL_SPACING)); % Number of IB points
+dtheta2 = NAILS_DIST / Nb2; % IB point spacing
+theta2 = linspace(0, NAILS_DIST, Nb2);
+X2 = zeros(Nb2, 2);
+X2(:, 1) = theta2 + NAILS(1, 1);
+X2(:, 2) = NAILS(1, 2);
+kp=[(2:Nb2),1]; % IB index shifted left
+km=[Nb2,(1:(Nb2-1))]; % IB index shifted right
+
 fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
   NO_SLIP_FORCE*SLIP_LENGTH_COEF / (dtheta2*WALL_STIFFNESS/2) ...
 );
-
-RENDER_DEBUG = 1;
-RENDER_INTERFACE_LINK = 1;

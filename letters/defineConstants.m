@@ -1,4 +1,4 @@
-dt = 0.001; % Time step, second
+dt = 0.0005; % Time step, second
 N = 96; 
 % N = 128;
 % N = 192;
@@ -9,19 +9,19 @@ K = 50; % Surface tension coefficient, N*10^-5
 rho = .1; % air density g/cm2
 rho_heavy = 1; % density g/cm2
 mu = .01; % viscosity g/s. 2D water can be 0.00089
-tmax = .15; % Run until time s
+tmax = 1; % Run until time s
 big_G = 980; % cm/s2
 NO_SLIP_FORCE = 25;
 FRICTION_ADJUST = 30;
 WALL_SPACING = .5;
 SLIP_LENGTH_UNITS = 3 / WALL_SPACING;
 
-WALL_STIFFNESS = 5000;
-WALL_LINKER_TO_WALL_STIFF = 5000;
-pIB_STIFF = 2500; % change so that max|X−Y| <= h/10
-
-VERTICAL_FLOW = 30;
+WALL_STIFFNESS = 4500;
+WALL_LINKER_TO_WALL_STIFF = 3000;
+pIB_STIFF = 10000; % change so that max|X−Y| <= h/10
 
 RESAMPLE_AMEND = .5;
 
 WALL_EXISTS = 0;
+
+NAILS = [.2, .4; .8, .4] * L;

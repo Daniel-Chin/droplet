@@ -106,6 +106,7 @@ for j = 1 : Nb
       if norm(intersection - point) < resample_threshold * .5
         % This is almost never the case
         point = point .* (1-RESAMPLE_AMEND) + intersection' .* RESAMPLE_AMEND;
+        disp("Resample amend");
       end
     end
     Nb = Nb + 1;

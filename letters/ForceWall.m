@@ -1,8 +1,10 @@
-function [F, new_X2]=ForceWall(XX2, K, PERFECT_WALL, u, X, Nb, Nb2, NO_SLIP_FORCE, X2, SLIP_LENGTH_COEF, h, FRICTION_ADJUST, wall_links, links, SLIP_LENGTH)
+function [F, new_X2]=ForceWall(XX2, WALL_STIFFNESS, u, X, Nb, Nb2, NO_SLIP_FORCE, X2, SLIP_LENGTH_COEF, h, FRICTION_ADJUST, wall_links, links, SLIP_LENGTH, kp, km, dtheta2)
 % penalty
-F=K*(PERFECT_WALL - XX2);
+F = WALL_STIFFNESS * (XX2(kp,:) + XX2(km,:) - 2*XX2) / dtheta2;
+F(1, :) = 0;
+F(end, :) = 0;
 new_X2 = X2;
-
+return;
 point_velocity = vec_interp(u, X, Nb);
 for k = wall_links
   id = k(1);
@@ -22,8 +24,7 @@ for k = wall_links
         % fprintf('Slip! y=%.1f, level=%.2f \n', X2(j, 2), intention / the_limit);
         plot(X2(j, 1), X2(j, 2), 'ko');
         F(j, 2) = static_limit;
-        % assert((XX2(j, 2) - (PERFECT_WALL(j, 2) - static_limit / K))/the_limit < 0);
-        new_X2(j, 2) = PERFECT_WALL(j, 2) - static_limit / K;
+        new_X2(j, 2) = PERFECT_WALL(j, 2) - static_limit / WALL_STIFFNESS;
       end    
     else
       if entered_slip_region
