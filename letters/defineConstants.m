@@ -1,8 +1,8 @@
-dt = 0.0001; % Time step, second
+dt = 0.001; % Time step, second
 N = 96; 
 % N = 128;
 % N = 192;
-L = 2.0; % Box size, cm
+L = 10.0; % Box size, cm
 
 K = 50; % Surface tension coefficient, N*10^-5
 % FAKE_REPEL_K = .00001;
@@ -18,10 +18,10 @@ SLIP_LENGTH_UNITS = 3 / WALL_SPACING;
 
 WALL_STIFFNESS = 5000;
 WALL_LINKER_TO_WALL_STIFF = 5000;
-pIB_STIFF = 1000; % change so that max|X−Y| <= h/10
+pIB_STIFF = 2500; % change so that max|X−Y| <= h/10
 
 VERTICAL_FLOW = 30;
 
 RESAMPLE_AMEND = .5;
 
-WALL_EXISTS = 1;
+WALL_EXISTS = 0;

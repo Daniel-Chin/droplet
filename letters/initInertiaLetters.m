@@ -1,4 +1,4 @@
-dtheta4 = h / 2;
+dtheta4 = h * .9;
 
 UNIFORM_X4 = zeros(1, 2);
 UNIFORM_X4_SIZE = 0;

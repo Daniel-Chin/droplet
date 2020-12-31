@@ -16,5 +16,6 @@ clear XA;
 clear XB;
 clear ZEROS_UNIFORM_X4;
 clear vorticity;
+clear u;
 
 save 'env';
