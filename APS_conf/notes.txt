@@ -29,10 +29,14 @@ Hybrid paper.
 We have novel methods. 
 Vary parameters. Do experiments with our method! 
 
+more benchmark
+    see Puelz email 
+        (1:1 viscosity benchmark)
+        refs
+
 future works:
     resampling keeps sharp edges
 
-10 min video + 2 min Q&A
 
 
 

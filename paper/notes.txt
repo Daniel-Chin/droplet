@@ -1,0 +1,20 @@
+Introduction 
+    (literature context. make reader understand what we do in the big picture)
+    problem formulation
+    what has been done so far
+    what we do that hasn't been done so far
+
+Method
+Results
+Conclusion
+Limitations:
+    resampling keeps sharp edges
+
+proposed methods:
+    contact line problem and the dynamic sliding regime
+    stepwise interface re-sampling
+    Boundary splicing
+
+Hybrid paper. 
+We have novel methods. 
+Vary parameters. Do experiments with our method! 

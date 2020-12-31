@@ -159,11 +159,27 @@
         increasing spatial resolution has limited effect. 
         Maybe decrease dtheta for the interface?
 }
+12/24 {
+    "passive" benchmarking? We design a good test case, run it, and record the results
+        Pejman: great
+    https://mie.njit.edu/14th-northeast-complex-fluids-and-soft-matter-ncs14-workshop#tab-0
+}
 2do {
+    lit review! go go go
+    pouch color indicates tension + polyshape
     two droplets merging. circularity, polarity, and off-center distance
         N convergence
         dt convergence
-    Static equilibrium contrast
+    Contrast with the steady equilibrium state
     flow, gravity, and circularity response to size: real-life motivation
     energy dissipation plot from friction
+    Time profiling: computational efficiency
+    more benchmark
+        see assessment paper
+            (1:1 viscosity benchmark)
+            refs
+            ! 3D cases
+        "passive" benchmarking
+    Test cases mentioned in the 2018 final report
+    https://mie.njit.edu/14th-northeast-complex-fluids-and-soft-matter-ncs14-workshop#tab-0
 }
