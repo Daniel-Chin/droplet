@@ -22,7 +22,6 @@ initX_multi_half_circles();
 initInertiaNew();
 
 %% Run simulation
-clock = 0;
 render();
 while clock < clockmax
   clock = clock + 1;
