@@ -73,9 +73,9 @@ for id0 = 1 : Nb
   end
 end
 if WALL_EXISTS
-  nearest_interface = zeros(1, Nb2);
+  nearest_interface = zeros(Nb2, 1);
   for k = 1 : Nb2
-    [nul, nearest_id] = min(vecnorm((X - X2(k, :))'));
+    [~, nearest_id] = min(vecnorm((X - X2(k, :))'));
     nearest_interface(k) = nearest_id;
   end
   wall_velocity = vec_interp(uu, X2, Nb2);
@@ -124,7 +124,7 @@ if WALL_EXISTS
   end
   
   if num_candidates ~= 0
-    [nul, candidates_i] = min(candidates(:, 3));
+    [~, candidates_i] = min(candidates(:, 3));
     k = candidates(candidates_i, 1);
     j = candidates(candidates_i, 2);
     
@@ -166,8 +166,10 @@ if WALL_EXISTS
       j_direction = wall_links(2, j);
       k_direction = wall_links(2, k);
       if j_direction + k_direction ~= 3
-        error('2 interfaces of the same orientation are joining!');
+        % error('2 interfaces of the same orientation are joining!');
+        continue;
       end
+      
       wall_links_pop_ids = [j, k];
       popWallLinks();
       clear wall_links_len;
