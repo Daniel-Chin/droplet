@@ -37,7 +37,7 @@ if render_phase >= SPF
   axis manual
   axis([0, L, 0, L])
   % axis([3, 4.5, 1, 2.5])
-  title(sprintf('t = %.3f, G = %.1f', clock * dt, big_G));
+  title(sprintf('t = %.3f', clock * dt));
   drawnow
   saveFrame();
   hold off
