@@ -6,13 +6,22 @@ holes = zeros(1, Nb);
 holes_i = 0;
 for j = Nb:-1:1
   if (links(1, j) ~= 1 && links(2, j) ~= 1) || ~any(wall_links(1, :) == j)
-    if norm(X(links(1, j), :) - X(links(2, j), :)) < resample_threshold
+    p_1 = X(links(1, j), :);
+    p_2 = X(links(2, j), :);
+    if norm(p_1 - p_2) < resample_threshold
       if holes_i == 0 || holes(holes_i) ~= j + 1    % dont consecutively take out
-        holes_i = holes_i + 1;
-        holes(holes_i) = j;
-        plot(X(j, 1), X(j, 2), 'ro');
-        % disp("take out");
-        % schedule_next_frame_pause = true;
+        p = X(j, :);
+        displace_1 = p_1 - p;
+        displace_2 = p_2 - p;
+        dot_prod = dot(displace_1, displace_2) / norm(displace_1) / norm(displace_2);
+        % sharpness control
+        if isnan(dot_prod) || dot_prod > -.9
+          holes_i = holes_i + 1;
+          holes(holes_i) = j;
+          plot(X(j, 1), X(j, 2), 'ro');
+          % disp("take out");
+          % schedule_next_frame_pause = true;
+        end
       end
     end
   end
