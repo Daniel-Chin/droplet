@@ -14,6 +14,7 @@ proposed methods:
     contact line problem and the dynamic sliding regime
     stepwise interface re-sampling
     Boundary splicing
+    surface tension
 
 Hybrid paper. 
 We have novel methods. 
