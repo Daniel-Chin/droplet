@@ -86,3 +86,6 @@ km=[Nb2,(1:(Nb2-1))]; % IB index shifted right
 fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
   NO_SLIP_FORCE*SLIP_LENGTH_COEF / (dtheta2*WALL_STIFFNESS/2) ...
 );
+
+% nearest_interface_got = 0;
+% we cannot easily cache `nearest_interface` because linked list id unstable.

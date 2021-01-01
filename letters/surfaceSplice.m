@@ -1,11 +1,3 @@
-% This script treats points assymetrically. Should be good enough
-
-past_extreme_velocity(past_extreme_velocity_cursor) = max(vecnorm(surface_velocity'));
-past_extreme_velocity_cursor = past_extreme_velocity_cursor + 1;
-if past_extreme_velocity_cursor > N_PAST_EXTREME_VELOCITY
-  past_extreme_velocity_cursor = 1;
-end
-
 if splice_reject_remains > 0
   splice_reject_remains = splice_reject_remains - 1;
   return;
@@ -81,22 +73,37 @@ for id0 = 1 : Nb
   end
 end
 if WALL_EXISTS
-  % attach / wall split
-  for j = 1 : Nb
-    p = X(j, :);
+  nearest_interface = zeros(1, Nb2);
+  for k = 1 : Nb2
+    [nul, nearest_id] = min(vecnorm((X - X2(k, :))'));
+    nearest_interface(k) = nearest_id;
+  end
+  wall_velocity = vec_interp(uu, X2, Nb2);
 
-    if p(1) > SPLICE_WALL_THRESHOLD
-      continue;
-    end
+  % attach / wall split
+  candidates = zeros(0, 3);
+  num_candidates = 0;
+  for k = 1 : Nb2
+    j = nearest_interface(k);
+    p = X(j, :);
+    wall_p = X2(k, :);
+    displacement = wall_p - p;
 
     if doesLinkWall(j, links, wall_links)
       continue;
     end
 
-    if surface_velocity(j, 1) >= 0
+    distance_to_wall = norm(displacement);
+    if distance_to_wall > SPLICE_WALL_THRESHOLD
       continue;
     end
-    
+
+    relative_velocity = surface_velocity(j, :) - wall_velocity(k, :);
+    if dot(relative_velocity, displacement) < 0
+      % not approaching
+      continue;
+    end
+
     j_jj1 = j;
     j_jj2 = j;
     not_ok = 0;
@@ -111,6 +118,15 @@ if WALL_EXISTS
     if not_ok
       continue;
     end
+
+    num_candidates = num_candidates + 1;
+    candidates(num_candidates, :) = [k, j, distance_to_wall];
+  end
+  
+  if num_candidates ~= 0
+    [nul, candidates_i] = min(candidates(:, 3));
+    k = candidates(candidates_i, 1);
+    j = candidates(candidates_i, 2);
     
     j_1 = links(1, j);
 
@@ -135,14 +151,14 @@ if WALL_EXISTS
       id1 = wall_links(1, k);
       p0 = X(id0, :);
       p1 = X(id1, :);
-      displacement = p0(2) - p1(2);
+      displacement = p0 - p1;
 
-      if abs(displacement) > SPLICE_WALL_THRESHOLD
+      if norm(displacement) > SPLICE_WALL_THRESHOLD
         continue;
       end
 
-      relative_velocity = surface_velocity(id1, 2) - surface_velocity(id0, 2);
-      if relative_velocity * displacement < 0
+      relative_velocity = surface_velocity(id1, :) - surface_velocity(id0, :);
+      if dot(relative_velocity, displacement) < 0
         % not approaching
         continue;
       end

@@ -11,8 +11,8 @@ rho_heavy = 1; % density g/cm2
 mu = .01; % viscosity g/s. 2D water can be 0.00089
 tmax = 1; % Run until time s
 big_G = 980; % cm/s2
-NO_SLIP_FORCE = 25;
-FRICTION_ADJUST = 30;
+NO_SLIP_FORCE = 40;
+FRICTION_ADJUST = 0;
 WALL_SPACING = .5;
 SLIP_LENGTH_UNITS = 3 / WALL_SPACING;
 
@@ -21,6 +21,6 @@ pIB_STIFF = 10000; % change so that max|X−Y| <= h/10
 
 RESAMPLE_AMEND = .5;
 
-WALL_EXISTS = 0;
+WALL_EXISTS = 1;
 
 NAILS = [.2, .4; .8, .4] * L;

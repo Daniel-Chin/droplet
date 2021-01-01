@@ -24,6 +24,6 @@ while 1
   tmpF = WALL_STIFFNESS * (new_X2(kp, :) + new_X2(km, :) - 2*new_X2) / dtheta2;
   plot(new_X2(slip_mask, 1), new_X2(slip_mask, 2), 'ko');
 end
-if slip_iter > 2
-  fprintf("slip iter %d \n", slip_iter);
+if slip_iter >= 10
+  fprintf("large slip_iter, %d \n", slip_iter);
 end
