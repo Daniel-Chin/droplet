@@ -37,7 +37,7 @@ for j=0:(N-1)
   ygrid(:,j+1)=j*h;
 end
 
-set(gcf,'double','on')
+% set(gcf,'double','on')
 
 MIRROR = ones(1, 1, 2);
 MIRROR(1, 1, 1) = -1;
