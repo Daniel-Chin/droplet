@@ -11,6 +11,7 @@ initialize();
 
 %% Run simulation
 render();
+render();
 while clock < clockmax
   clock = clock + 1;
   step();

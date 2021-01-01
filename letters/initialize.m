@@ -57,7 +57,7 @@ past_extreme_velocity = zeros(1, N_PAST_EXTREME_VELOCITY);
 past_extreme_velocity_cursor = 1;
 
 SPLICE_THRESHOLD = h;
-SPLICE_WALL_THRESHOLD = h * 2.3;
+SPLICE_WALL_THRESHOLD = h * 1.4;
 SPLICE_REJECT_N_STEPS = 2;
 splice_reject_remains = 0;
 
@@ -69,8 +69,8 @@ clockmax = ceil(tmax/dt);
 SLIP_LENGTH = SLIP_LENGTH_UNITS * h;
 SLIP_LENGTH_COEF = 1 / SLIP_LENGTH_UNITS;
 
-% RENDER_DEBUG = 0;
-RENDER_DEBUG = 1;
+RENDER_DEBUG = 0;
+% RENDER_DEBUG = 1;
 RENDER_INTERFACE_LINK = 1;
 
 NAILS_DIST = NAILS(2, 1) - NAILS(1, 1);
@@ -82,10 +82,6 @@ X2(:, 1) = theta2 + NAILS(1, 1);
 X2(:, 2) = NAILS(1, 2);
 kp=[(2:Nb2),1]; % IB index shifted left
 km=[Nb2,(1:(Nb2-1))]; % IB index shifted right
-
-fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
-  NO_SLIP_FORCE*SLIP_LENGTH_COEF / (dtheta2*WALL_STIFFNESS/2) ...
-);
 
 % nearest_interface_got = 0;
 % we cannot easily cache `nearest_interface` because linked list id unstable.

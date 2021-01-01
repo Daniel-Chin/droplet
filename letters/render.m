@@ -12,10 +12,10 @@ if render_phase >= SPF
     plot(X3(:,1),X3(:,2),'k.')
   end
   if RENDER_DEBUG == 1
-    plot(X4(:,1),X4(:,2),'g.')
-  else
     plot(Y4(:,1),Y4(:,2),'g.')
-    plot(X4(:,1),X4(:,2),'b.')
+    plot(X4(:,1),X4(:,2),'c.')
+  else
+    plot(X4(:,1),X4(:,2),'c.')
   end
   plot(X2(:,1),X2(:,2),'k.')
   % plot(X(:,1),X(:,2),'b.')

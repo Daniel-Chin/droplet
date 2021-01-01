@@ -164,6 +164,9 @@
         Pejman: great
     https://mie.njit.edu/14th-northeast-complex-fluids-and-soft-matter-ncs14-workshop#tab-0
 }
+2021/1/1 {
+    resample: sharpness control
+}
 2do {
     lit review! go go go
     pouch color indicates tension + polyshape
@@ -182,4 +185,7 @@
         "passive" benchmarking
     Test cases mentioned in the 2018 final report
     https://mie.njit.edu/14th-northeast-complex-fluids-and-soft-matter-ncs14-workshop#tab-0
+}
+now {
+    test no_slip_f
 }
