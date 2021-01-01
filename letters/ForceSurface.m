@@ -1,4 +1,4 @@
-function F=ForceSurface(X, links, dtheta, K, wall_links, Nb, WALL_LINKER_TO_WALL_STIFF)
+function F=ForceSurface(X, links, dtheta, K, wall_links, Nb)
 % surface tension & Contact point force
 
 % surface tension
@@ -9,8 +9,6 @@ F(isnan(F)) = 0;
 
 % contact point force
 for wlink = wall_links
-  displace = X(links(wlink(2), wlink(1)), :) - X(wlink(1), :);
-  position = X(wlink(1), :);
-  F(wlink(1), 2) = displace(2) ./ vecnorm(displace') * K;
-  F(wlink(1), 1) = - position(1) * WALL_LINKER_TO_WALL_STIFF;
+  displace = (X(links(wlink(2), wlink(1)), :) - X(wlink(1), :))';
+  F(wlink(1), :) = K * displace ./ vecnorm(displace);
 end
