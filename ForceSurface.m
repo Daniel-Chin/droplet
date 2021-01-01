@@ -9,8 +9,8 @@ F(isnan(F)) = 0;
 
 % contact point force
 for wlink = wall_links
-  displace = X(links(wlink(2), wlink(1)), :) - X(wlink(1), :);
   position = X(wlink(1), :);
+  displace = X(links(wlink(2), wlink(1)), :) - position;
   F(wlink(1), 2) = displace(2) ./ vecnorm(displace') * K;
   F(wlink(1), 1) = - position(1) * WALL_LINKER_TO_WALL_STIFF;
 end
