@@ -30,3 +30,5 @@ end
 Y4 = X4;
 V4 = zeros(Nb4, 2);
 MASS_PER_POINT = (rho_heavy - rho) * dtheta4 ^ 2;
+
+pIB_STIFF = pIB_STIFF_per_mass * dtheta4 ^ 2;
