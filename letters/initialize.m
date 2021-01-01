@@ -89,3 +89,5 @@ fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
 
 % nearest_interface_got = 0;
 % we cannot easily cache `nearest_interface` because linked list id unstable.
+
+pIB_STIFF = pIB_STIFF_per_mass * dtheta4 ^ 2;

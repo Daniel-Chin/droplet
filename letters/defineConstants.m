@@ -16,8 +16,9 @@ FRICTION_ADJUST = 0;
 WALL_SPACING = .5;
 SLIP_LENGTH_UNITS = 3 / WALL_SPACING;
 
-WALL_STIFFNESS = 4500;
-pIB_STIFF = 10000; % change so that max|X−Y| <= h/10
+WALL_STIFFNESS = 4200;
+WALL_LINK_STIFF = 1000;
+pIB_STIFF_per_mass = 200000; % change so that max|X−Y| <= h/10
 
 RESAMPLE_AMEND = .5;
 
