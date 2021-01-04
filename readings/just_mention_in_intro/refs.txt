@@ -1,0 +1,23 @@
+// here are some more refs that I did not download the full text of
+
+@article{muradoglu2010front,
+  title={A front-tracking method for computational modeling of impact and spreading of viscous droplets on solid walls},
+  author={Muradoglu, Metin and Tasoglu, Savas},
+  journal={Computers \& Fluids},
+  volume={39},
+  number={4},
+  pages={615--625},
+  year={2010},
+  publisher={Elsevier}
+}
+
+@article{manservisi2009variational,
+  title={A variational approach to the contact angle dynamics of spreading droplets},
+  author={Manservisi, S and Scardovelli, R},
+  journal={Computers \& fluids},
+  volume={38},
+  number={2},
+  pages={406--424},
+  year={2009},
+  publisher={Elsevier}
+}

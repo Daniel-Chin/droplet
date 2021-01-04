@@ -1,0 +1,29 @@
+// here are some more refs that I did not download the full text of
+
+// surface resampling
+@article{lai2008immersed,
+  title={An immersed boundary method for interfacial flows with insoluble surfactant},
+  author={Lai, Ming-Chih and Tseng, Yu-Hau and Huang, Huaxiong},
+  journal={Journal of Computational Physics},
+  volume={227},
+  number={15},
+  pages={7279--7293},
+  year={2008},
+  publisher={Elsevier}
+}
+
+// artificial tangential velocity for uniform markers
+@article{hou1994removing,
+  title={Removing the stiffness from interfacial flows with surface tension},
+  author={Hou, Thomas Y and Lowengrub, John S and Shelley, Michael J},
+  journal={Journal of Computational Physics},
+  volume={114},
+  number={2},
+  pages={312--338},
+  year={1994},
+  publisher={Elsevier}
+}
+
+// and
+Numerical simulation of moving contact lines with surfactant by immersed boundary method
+(pdf i have)
