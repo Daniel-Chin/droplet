@@ -168,7 +168,6 @@
     resample: sharpness control
 }
 2do {
-    lit review! go go go
     pouch color indicates tension + polyshape
     two droplets merging. circularity, polarity, and off-center distance
         N convergence
@@ -183,9 +182,16 @@
             refs
             ! 3D cases
         "passive" benchmarking
-    Test cases mentioned in the 2018 final report
-    https://mie.njit.edu/14th-northeast-complex-fluids-and-soft-matter-ncs14-workshop#tab-0
+        Test cases mentioned in the 2018 final report
+        test cases mentioned in Numerical Models of Surface Tension. Stephane Popinet. 
+            Laplace’s Equilibrium and Spurious Currents
+                Failure -> "These numerical artifacts result from inconsistent modeling of the surface tension terms and the associated pressure jump". ("A FRONT-TRACKING ALGORITHM FOR ACCURATE REPRESENTATION OF SURFACE TENSION")
+            // Capillary Oscillations
+        Yi Sui. Numerical Simulations of Flows with Moving Contact Lines.
+            // Droplet Spreading and Impact
 }
-now {
-    test no_slip_f
+next {
+    the final report:
+        we will compare the static case.
+        should we also compare the rise-up vs fall-down condition?
 }

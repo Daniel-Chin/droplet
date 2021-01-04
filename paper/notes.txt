@@ -7,8 +7,7 @@ Introduction
 Method
 Results
 Conclusion
-Limitations:
-    resampling keeps sharp edges
+Limitations
 
 proposed methods:
     contact line problem and the dynamic sliding regime
@@ -16,6 +15,4 @@ proposed methods:
     Boundary splicing
     surface tension
 
-Hybrid paper. 
-We have novel methods. 
-Vary parameters. Do experiments with our method! 
+two-way coupling
