@@ -1,6 +1,3 @@
-"The mirroring IB method [14, 16] resolves these problems [spurious flow...] by ensuring zero mass flux over the IB instead of employing a pressure boundary condition"
-    in Comparison Between Different Immersed Boundary Conditions for Simulation of Complex Fluid Flows
-
 MCL model: exogenous vs endogenous.
     A diffuse-interface immersed-boundary method for two-dimensional simulation of flows with moving contact lines on curved substrates
     "The characteristic MCL model not only allows the contact lines to move on the curved boundaries, but makes the gas–liquid interface to intersect the solid object at an angle in consistence with the prescribed contact angle, even with the variation of surface tangent at the solid substrate"
@@ -8,6 +5,8 @@ MCL model: exogenous vs endogenous.
     The contact-line position is determined by specifying either the velocity of the markers on the solid wall (Manservisi & Scardovelli 2009) or the apparent contact angle (Muradoglu & Tasoglu 2010).
     A variational approach to the contact angle dynamics of spreading droplets.
     A front-tracking method for computational modeling of impact and spreading of viscous droplets on solid walls. 
+    
+    endogenous *dynamic* contact angle
 
 Tension model:
     Most: compute curvature. 

@@ -24,6 +24,6 @@
   publisher={Elsevier}
 }
 
-// and
+// and also resampling: 
 Numerical simulation of moving contact lines with surfactant by immersed boundary method
 (pdf i have)
