@@ -1,0 +1,2 @@
+font: verdana 144
+Line width: 12
