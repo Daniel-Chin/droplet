@@ -11,8 +11,8 @@ Limitations
 
 proposed methods:
     contact line problem and the dynamic sliding regime
+    surface tension
     stepwise interface re-sampling
     Boundary splicing
-    surface tension
 
 two-way coupling
