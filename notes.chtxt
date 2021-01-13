@@ -167,6 +167,14 @@
 2021/1/1 {
     resample: sharpness control
 }
+1/4 {
+    the final report:
+        we will compare the static case.
+        should we also compare the rise-up vs fall-down condition?
+        how to ref?
+            no
+        year = 2018
+}
 2do {
     pouch color indicates tension + polyshape
     two droplets merging. circularity, polarity, and off-center distance
@@ -191,7 +199,5 @@
             // Droplet Spreading and Impact
 }
 next {
-    the final report:
-        we will compare the static case.
-        should we also compare the rise-up vs fall-down condition?
+    hydrophilic is just high slip
 }
