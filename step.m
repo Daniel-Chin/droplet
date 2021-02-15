@@ -59,6 +59,7 @@ surface_velocity = vec_interp(uu, X, Nb);
 surfaceSplice();
 warpIndicators;
 
+saveRecord;
 render;
 
 % resample_energy_offset_array_size = resample_energy_offset_array_size+1;
