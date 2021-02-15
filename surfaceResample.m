@@ -18,7 +18,7 @@ for j = Nb:-1:1
         if isnan(dot_prod) || dot_prod > -.9
           holes_i = holes_i + 1;
           holes(holes_i) = j;
-          plot(X(j, 1), X(j, 2), 'ro');
+          % plot(X(j, 1), X(j, 2), 'ro');
           % disp("take out");
           % schedule_next_frame_pause = true;
         end
@@ -124,7 +124,7 @@ for j = 1 : Nb
     links(2, Nb) = right_id;
     links(1, right_id) = Nb;
     links(2, left_id ) = Nb;
-    plot(point(1), point(2), 'bo');
+    % plot(point(1), point(2), 'bo');
     % disp("put in");
     % schedule_next_frame_pause = true;
     resample_energy_offset = resample_energy_offset + ( ...

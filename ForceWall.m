@@ -20,7 +20,7 @@ for k = wall_links
       intention = F(j, 2);
       if intention / static_limit > 1
         % fprintf('Slip! y=%.1f, level=%.2f \n', X2(j, 2), intention / the_limit);
-        plot(X2(j, 1), X2(j, 2), 'ko');
+        % plot(X2(j, 1), X2(j, 2), 'ko');
         F(j, 2) = static_limit;
         % assert((XX2(j, 2) - (PERFECT_WALL(j, 2) - static_limit / K))/the_limit < 0);
         new_X2(j, 2) = PERFECT_WALL(j, 2) - static_limit / K;
