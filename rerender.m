@@ -1,5 +1,6 @@
 % render video from records. 
 
+RENDER_DEBUG = 0;
 save_render_i = 0;
 while 1
   load(sprintf(RECORD_PATH, save_render_i));
