@@ -5,7 +5,7 @@ if render_phase >= SPF
   hold on;
   if RENDER_DEBUG == 1
     vorticity=(u(ip,:,2)-u(im,:,2)-u(:,ip,1)+u(:,im,1))/(2*h);
-    contour(xgrid,ygrid,vorticity,values);
+    contour(xgrid,ygrid,vorticity(1:N/2, :),values);
     plot([0 0], [0 L], 'r');
     plot([h h], [0 L], 'r');
     plot([h*2 h*2], [0 L], 'r');
