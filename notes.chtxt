@@ -176,6 +176,14 @@
         year = 2018
     hydrophilic is just high slip
 }
+1/18 {
+    share the questions
+        speaker console
+    prune all redundant info in graphs
+    bigger graph of 3.1.1
+    smaller margin for figures that need to be bigger
+    how to remove air markers and vorticity: rerun
+}
 2do {
     pouch color indicates tension + polyshape
     two droplets merging. circularity, polarity, and off-center distance
@@ -201,12 +209,8 @@
 }
 next {
     2D benchmark, 1:1 viscousity. ref. 
-    prune all redundant info in graphs
-    bigger graph of 3.1.1
-    caption: should be readable without depending on the main text
     .03 -> 0.03
-    smaller margin for figures that need to be bigger
-    how to remove air markers and vitorcity: rerun
-    share the questions
-        speaker console
+    gridlines on sliding exp
+    bigger axis numbers, x= ~10
+    caption: should be readable without depending on the main text
 }
