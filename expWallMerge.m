@@ -3,6 +3,10 @@ global dt Nb N h rho mu ip im a;
 global kp km dtheta K;
 global WALL_STIFFNESS PERFECT_WALL NO_SLIP_FORCE SLIP_LENGTH_COEF;
 defineConstants();
+K = 100; % Surface tension coefficient, N*10^-5
+NO_SLIP_FORCE = 4;
+FRICTION_ADJUST = 30;
+L = 3;
 initialize();
 init_a();
 
