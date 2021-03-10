@@ -184,13 +184,21 @@
     smaller margin for figures that need to be bigger
     how to remove air markers and vorticity: rerun
 }
+2/25 {
+    Looked for 2D, 1:1 viscousity benchmark in refs of: 
+        Hysing, S. R., Turek, S., Kuzmin, D., Parolini, N., Burman, E., Ganesan, S., & Tobiska, L. (2009). Quantitative benchmark computations of two‐dimensional bubble dynamics. International Journal for Numerical Methods in Fluids, 60(11), 1259-1288.
+        (this is the paper behind:)
+        Turek S, Becker C, Kilian S, Moller M, Buijssen S, et al. 2008. ¨ Bubble benchmark. Featflow Softw. http://www.featflow.de/en/benchmarks/cfdbenchmarking/bubble.html
+    2009 benchmark
+        two classes of problems, one with bm, one without
+        dam break: MCL? 3d, surface tension plays a small role
+        Citers of this paper
+    overleaf clear cache
+}
 2do {
-    pouch color indicates tension + polyshape
     two droplets merging. circularity, polarity, and off-center distance
         N convergence
         dt convergence
-    Contrast with the steady equilibrium state
-    flow, gravity, and circularity response to size: real-life motivation
     energy dissipation plot from friction
     Time profiling: computational efficiency
     more benchmark
@@ -206,11 +214,16 @@
             // Capillary Oscillations
         Yi Sui. Numerical Simulations of Flows with Moving Contact Lines.
             // Droplet Spreading and Impact
-}
-next {
-    2D benchmark, 1:1 viscousity. ref. 
     .03 -> 0.03
     gridlines on sliding exp
     bigger axis numbers, x= ~10
     caption: should be readable without depending on the main text
+}
+next {
+    Kim, Peskin: look both ways for references
+    papers
+        Spizzichino, A., Goldring, S., & Feldman, Y. (2019). The immersed boundary method: application to two-phase immiscible flows. Commun. Comput. Phys, 25, 107-134.
+        Simulating the dynamics of inextensible vesicles by the penalty immersed boundary method
+        IMMERSED BOUNDARY METHOD FOR VARIABLE VISCOSITY AND VARIABLE DENSITY PROBLEMS USING FAST CONSTANT-COEFFICIENT LINEAR SOLVERS I: NUMERICAL METHOD AND RESULTS
+    contact authors of Hysing 2009
 }
