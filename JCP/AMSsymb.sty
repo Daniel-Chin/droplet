@@ -1,0 +1,379 @@
+\documentclass{jfm}
+
+\usepackage{graphicx,color}
+\usepackage[section]{placeins}
+\usepackage{float}
+\usepackage{graphicx,subfigure}
+\usepackage{epstopdf, epsfig}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{todonotes}
+\usepackage{hyperref}
+\usepackage{verbatim}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{prop}{Proposition}
+\newtheorem{assume}{Assumption}
+\newtheorem{notation}{Notation}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newcommand\nc{\newcommand}
+\nc\qu{\quad}
+\nc\tends{\rightarrow}
+\nc\dint{\int\!\int}
+\newcommand{\vect}[1]{\mbox{\boldmath $#1$}}
+\nc{\degree}{\mbox{\footnotesize{o}}}
+
+\newcommand{\bes} {\begin{eqnarray*}}
+\newcommand{\ees} {\end{eqnarray*}}
+\newcommand{\dd} \partial
+
+\newcommand{\non} \nonumber
+\newcommand{\ie}{{\it i.e.}\ }
+%\newcommand{\eg}{{\it e.g.}\ }
+%\newcommand{\etal}{{\it et al.} \ }
+\newcommand{\ru}{R_{\rm u}}
+\newcommand{\rb}{R_{\rm b}}
+\newcommand{\qup}{Q_{\rm u,pore}}
+\newcommand{\qbp}{Q_{\rm b,pore}}
+
+\newcommand{\ra}{\rightarrow}
+
+\nc\cA{{\cal{A}}}
+\nc\cB{{\cal{B}}}
+\nc\cZ{{\cal{Z}}}
+\nc\cX{{\cal{X}}}
+\nc\cS{{\cal{S}}}
+\nc\cR{{\cal{R}}}
+\nc\cW{{\cal W}}
+\nc\cU{{\cal U}}
+\nc\cP{{\cal P}}
+\nc\cF{{\cal{F}}}
+\nc\cG{{\cal{G}}}
+\nc\bz{\bar{z}}
+\nc\bZ{\bar{Z}}
+\nc\baz{\bar{\zeta}}
+\nc\bw{\bar{w}}
+\nc\bW{\bar{W}}
+\nc\bX{\bar{X}}
+\nc\bet{\bar{\eta}}
+\nc\bp{\bar{\phi}}
+\nc\bP{\bar{\Phi}}
+\nc\bc{\bar{\chi}}
+\nc\baf{\bar{f}}
+\nc\baF{\bar{F}}
+\nc\ov{\overline}
+\nc\oW{\ov{W}}
+
+\nc\hA{\hat{A}}
+\nc\hB{\hat{B}}
+\nc\ho{\hat{O}}
+\nc\hG{\hat{\Gamma}}
+\nc\hS{\hat{S}}
+\nc\hO{\hat{\Omega}}
+\nc\bO{\ov{\Omega}}
+\nc\gham{\hat{\gamma}}
+\nc\gcam{\check{\gamma}}
+\nc\z{\zeta}
+\nc\s{\sigma}
+\nc\ep{\epsilon}
+\nc\up{\upsilon}
+\nc\lam{\lambda}
+\nc\sig{\sigma}
+\nc\om{\omega}
+\nc\kap{\kappa}
+\nc\gam{\gamma}
+\nc\pa{\partial}
+\nc\dom{\pa\Omega}
+\nc\domt{\pa\tilde{\Omega}}
+\nc\doh{\pa\hat{\Omega}}
+\nc\pad[2]{\frac{\pa #1}{\pa #2}}
+\nc\padd[2]{\frac{\pa^2 #1}{\pa {#2}^2}}
+\nc\pard[3]{\frac{\pa^2 #1}{\pa {#2}\pa {#3}}}
+\nc\nd[2]{\frac{d #1}{d #2}}
+\nc\ndd[2]{\frac{d^2 #1}{d {#2}^2}}
+\nc\ds{\displaystyle}
+\nc\del{\nabla}
+\nc\lap{\nabla^2}
+\nc\ud{|\z|\leq 1}
+
+\nc\capil{\mbox{Ca}}
+
+\nc\pt{\tilde{a}}
+\nc\ft{\tilde{f}}
+\nc\vt{\tilde{v}}
+\nc\wt{\tilde{w}}
+\nc\nt{\tilde{\nu}}
+\nc\xit{\tilde{\xi}}
+\nc\xt{\tilde{x}}
+\nc\etat{\tilde{\eta}}
+\nc\nht{\tilde{\hat{\eta}}}
+\nc\Taut{T}
+\nc\zt{\tilde{\z}}
+\nc\nut{\tilde{\nu}}
+
+\nc\At{\tilde{\cA}}
+\nc\qt{\tilde{B}}
+\nc\Ct{\tilde{C}}
+\nc\dt{\tilde{D}}
+\nc\Dt{\tilde{\cU}}
+\nc\Et{\tilde{L}}
+\nc\Ft{\tilde{F}}
+\nc\Ht{\tilde{H}}
+\nc\Kt{\tilde{K}}
+\nc\Lt{\tilde{K}}
+\nc\Mt{\tilde{M}}
+\nc\Nt{\tilde{N}}
+\nc\Pt{\tilde{\Phi}}
+\nc\Qt{\tilde{Q}}
+\nc\Rt{\tilde{R}}
+\nc\St{\tilde{\cS}}
+\nc\Wt{\tilde{W}}
+\nc\cWt{\tilde{\cW}}
+\nc\Xt{\tilde{X}}
+
+\nc\vs{\varsigma}
+\nc\vp{\varpi}
+\nc\ve{\varepsilon}
+\nc\vepa{\ve_{\parallel}}
+\nc\vepe{\ve_{\perp}}
+
+%\nc\captionsize{\footnotesize}
+
+\newcommand{\pejman}[1]{\todo[inline,color=green!40]{Pejman: #1}}
+\newcommand{\binan}[1]{\todo[inline,color=yellow!40]{Binan: #1}}
+\newcommand{\linda}[1]{\todo[inline,color=red!40]{Linda: #1}}
+\newcommand{\lou}[1]{\todo[inline,color=blue!40]{Lou: #1}}
+\shorttitle{Membrane filters}
+\shortauthor{P. Sanaei et al.}
+
+\title{Stochastic Modelling of Fouling in Membrane Filters with Complex Pore Morphology}
+\author{B. Gu\aff{2}\corresp{\email{bg263@njit.edu}}, P. Sanaei\aff{1}, L. Kondic\aff{2}, L.J. Cummings\aff{2}}
+\affiliation{
+\aff{1}
+Courant Institute of Mathematical Sciences, New York University, New York, NY\\ 10012-1110, USA
+\aff{2}
+Department of Mathematical Sciences, New Jersey Institute of Technology, Newark, NJ 07102-1982, USA
+}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+
+
+
+
+\end{abstract}
+
+\section{Introduction}
+
+
+\section {Mathematical Modeling\label{darcymodel}}
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+\section{Scaling \& nondimensionalization\label{sec:scaling}}
+
+
+
+
+\section{Results}\label{sec:results}
+
+ 
+\subsection*{Acknowledgements} 
+
+
+ 
+\begin{thebibliography}{99}
+
+\bibitem[Apel(2001)]{Apel2001}
+{\sc Apel, P.}
+Track etching technique in membrane technology.
+{\it Radiation Measurements.} {\bf 34.1}, 559-566 (2001).
+
+\bibitem[Bolton {\it et al.}(2006a)]{bolton2006a}
+{\sc Bolton, G., LaCasse, D., Kuriyel, R.}
+Combined models of membrane fouling: Development and application to microfiltration 
+and ultrafiltration of biological fluids.
+{\it J. Membrane Sci.} {\bf 277}, 75-84 (2006).
+
+\bibitem[Bolton {\it et al.}(2006b)]{bolton2006b}
+{\sc Bolton, G.R., Boesch, A.W., D., Lazzara, M.J.}
+The effect of flow rate on membrane capacity: Development and application of
+adsorptive membrane fouling models.
+{\it J. Membrane Sci.} {\bf 279}, 625-634 (2006).
+
+\bibitem[Brown {\it et al.}(2009)]{brown2}
+{\sc Brown, A.I., Levison, P., Titchener-Hooker, N.J., Lye, G.J.}
+Membrane pleating effects in $0.2\mu$m rated microfiltration cartridges.
+{\it J. Membrane Sci.} {\bf 341}, 76-83 (2009).
+
+\bibitem[Dalwadi {\it et al.}(2015)]{Dalwadi2015}
+{\sc Dalwadi, M.P., Griffiths, I.M., Bruna, M.}
+Understanding how porosity gradients can make a better filter using homogenization theory.
+{\it Proc. R. Soc. A.} {\bf 471}, 2182 (2015).
+
+\bibitem[Daniel {\it et al.}(2011)]{daniel}
+{\sc Daniel, R.C., Billing, J.M., Russell, R.L., Shimskey, R.W., Smith, H.D., Peterson, R.A.}
+Integrated pore blockage-cake filtration model for crossflow filtration.
+{\it Chem. Eng. Res. Des.} {\bf 89}, 1094-1103 (2011).
+
+\bibitem[Giglia \& Straeffer(2012)]{giglia2012}
+{\sc Giglia, S., Straeffer, G.}
+Combined mechanism fouling model and method for optimization of series
+microfiltration performance.
+{\it J. Membrane Sci.} {\bf 417}, 144-153 (2012).
+
+\bibitem[Griffiths {\it et al.}(2014)]{Griffiths}
+{\sc Griffiths, I. M., Kumar, A., Stewart, P. S.}
+A combined network model for membrane fouling.
+{\it J. Coll. Int. Sci.} {\bf 432}, 10-18 (2014).
+
+\bibitem[Griffiths {\it et al.}(2016)]{Griffiths2016}
+{\sc Griffiths, I.M., Kumar, A., Stewart, P.S.}
+Designing asymmetric multilayered membrane filters with improved performance.
+{\it J. Membrane Sci.} {\bf 511}, 108-118 (2016).
+
+\bibitem[Ho \& Zydney(1999)]{ho1999}
+{\sc Ho, Chia-Chi, Zydney, A.L.}
+Effect of membrane morphology on the initial rate of protein fouling during microfiltration.
+{\it J. Membrane Sci.} {\bf 155}, 261-275 (1999).
+
+\bibitem[Ho \& Zydney(2000)]{ho2000}
+{\sc Ho, Chia-Chi, Zydney, A.L.}
+A combined pore blockage and cake filtration model for protein fouling during microfiltration.
+{\it J. Membrane Sci.} {\bf 232}, 389-399 (2000).
+
+\bibitem[Hwang {\it et al.}(2007)]{Hwang2007}
+{\sc Hwang, K.J., Liao, Ch.Y., Tung, K.L.}
+Analysis of particle fouling during microfiltration by use of blocking models.
+{\it J. Membrane Sci.} {\bf 287}, 287-293 (2007).
+
+\bibitem[Iritani(2013)]{iritani}
+{\sc Iritani, E.}
+A review on modeling of pore-blocking behaviors of membranes during pressurized membrane filtration.
+{\it Drying Tech.} {\bf 31.2}, 146-162 (2013).
+
+\bibitem[Jackson {\it et al.}(2014)]{jackson}
+{\sc Jackson, N.B., Bakhshayeshi, M., Zydney, A.L., Mehta, A., van Reis, R., Kuriyel, R.}
+Internal virus polarization model for virus retention by the Ultipor VF grade DV20 membrane.
+{\it Biotechnol. Prog.} {\bf 30.4}, 856-863 (2014).
+
+\bibitem[Kanani {\it et al.}(2010)]{Zydney2010}
+{\sc Kanani, D.M., Fissell, W.H., Roy, S., Dubnisheva, A., Fleischman, A., Zydney, A.L.}
+Permeability--selectivity analysis for ultrafiltration: effect of pore geometry.
+{\it J. Membrane Sci.} {\bf 349}, 405-410 (2010).
+
+\bibitem[Kumar(2014)]{AKPC}
+{\sc Kumar, A.} {\it Private Communication} (2014).
+
+%\bibitem{kumar2}
+%{\sc Kumar, A., Martin, J., Kuriyel, R.}
+%Scale-up of sterilizing-grade membrane filters from discs to pleated cartridges: Effects of operating parameters and solution properties.
+%{\it PDA J. Pharm. Sci. Tech.} {\bf 69.1}, 74-87 (2015).
+
+\bibitem[Mehta \& Zydney(2005)]{Mehta-Zydney2005}
+{\sc Mehta, A., Zydney, A.L.}
+Permeability and selectivity analysis for ultrafiltration membranes.
+{\it J. Membrane Sci.} {\bf 249}, 245-249 (2005).
+
+\bibitem[Mehta \& Zydney(2006)]{Mehta-Zydney2006}
+{\sc Mehta, A., Zydney, A.L.}
+Effect of membrane charge on flow and protein transport during ultrafiltration.
+{\it Biotechnol. Progr.} {\bf 22.2}, 484-492 (2006).
+
+\bibitem[Meng {\it et al.}(2009)]{meng}
+{\sc Meng, F., Chae, S.-R., Drews, A., Kraume, M., Shin, H.S., Yang, F.}
+Recent advances in membrane bioreactors (MBRs): Membrane fouling and membrane material.
+{\it Water Research} {\bf 43}, 1489-1512 (2009).
+
+\bibitem[Mochizuki \& Zydney(1993)]{Mochizuki-Zydney1993}
+{\sc Mochizuki, S., Zydney, A.L.}
+Theoretical analysis of pore size distribution effects on membrane transport.
+{\it J. Membrane Sci.} {\bf 82}, 211-217 (1993).
+
+\bibitem[Polyakov {\it et al.}(1995)]{Polyakov1995}
+{\sc Polyakov, S.V., Maksimov, E.D., Polyakov, V.S.}
+One-dimensional micro filtration model.
+{\it Theor. Found. Chem. Eng.} {\bf 29.4}, 329-332 (1995).
+
+%\bibitem{Polyakov1998}
+%{\sc Polyakov, V.S.}
+%Design of micro filters operating under depth filtration conditions.
+%{\it Theor. Found. Chem. Eng.} {\bf 32.1}, 18-22 (1998).
+
+\bibitem[Polyakov(2008)]{Yuriy}
+{\sc Polyakov, Y.S.}
+Depth filtration approach to the theory of standard blocking: Prediction of membrane permeation rate and selectivity.
+{\it J. Membrane Sci.} {\bf 322}, 81-90 (2008).
+
+\bibitem[Polyakov \& Zydney(2013)]{Yuriy-Zydneyb}
+{\sc Polyakov, Y.S., Zydney, A.L.}
+Ultrafiltration membrane performance: Effects of pore blockage/constriction.
+{\it J. Membrane Sci.} {\bf 434}, 106-120 (2013).
+
+\bibitem[Pujar \& Zydney(1997)]{Pujar-Zydney1997}
+{\sc Pujar, N.S., Zydney, A.L.}
+Charge regulation and electrostatic interactions for a spherical particle in a cylindrical pore.
+{\it J. Colloid Interface Sci.} {\bf 192}, 338-349 (1997).
+
+\bibitem[Roy(2016)]{Roy2016}
+{\sc Roy, S.,}
+Innovative use of Membrane Technology in Mitigation of GHG Emission and Energy Generation.
+{\it Procedia Environmental Sciences.} {\bf 35}, 474-482 (2016).
+
+\bibitem[Sanaei {\it et al.}(2016)]{Sanaei2016}
+{\sc Sanaei, P., Richardson, G.W., Witelski, T., Cummings, L.J.,}
+Flow and Fouling in a Pleated Membrane Filter.
+{\it J. Fluid Mechanics.} {\bf 795}, 36-59 (2016).
+
+\bibitem[Sanaei {\it et al.}(2017)]{Sanaei2017}
+{\sc Sanaei, P., Cummings, L.J.,}
+Flow and fouling in membrane filters: Effects of membrane morphology.
+{\it published at J. Fluid Mechanics.} (2017)
+
+%\bibitem[Sanaei {\it et al.}(2017)]{Sanaei2017cake}
+%{\sc Sanaei, P., Cummings, L.J.,}
+%Optimum Permeability Profile and Fouling in Membrane Filters.
+%{\it Preprint.}
+
+\bibitem[Skilhagen {\it et al.}(2008)]{Skilhagen2008}
+{\sc Skilhagen, S.E., Dugstad, J. E., Aaberg, R.J.,}
+Osmotic power--power production based on the osmotic pressure difference between waters with varying salt gradients..
+{\it Desalination.} {\bf 220(1-3)}, 476-482 (2008).
+
+\bibitem[Van der Sman {\it et al.}(2012)]{sman2012}
+{\sc Van der Sman, R.G.M., Vollebregt, H.M., Mepschen, A., Noordman, T.R.}
+Review of hypotheses for fouling during beer clarification using membranes.
+{\it J. Membrane Sci.} {\bf 396}, 22-31 (2012).
+
+\bibitem[Zeman \& Zydney(1996)]{L.J.Zeman1996}
+{\sc Zeman, L.J., Zydney, A.L.}
+Microfiltration and Ultrafiltration:Principles and Applications.
+{\it Marcel Dekker, New York, USA.}  (1996).
+
+\bibitem[Zydney(2011)]{Zydney2011}
+{\sc Zydney, A.L.}
+High Performance Ultrafiltration Membranes: Pore Geometry and Charge Effects.
+{\it Membrane Science and Technology series.} {\bf 14}, 333-352 (2011).
+
+\end{thebibliography}
+
+
+
+
+
+\end{document}             % End of document.
