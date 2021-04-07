@@ -29,8 +29,18 @@ CM2_his = [];
 initial_peri = calcPerimeter(X, Nb, links);
 circularity_his = [];
 render_bm_rb();
-while clock < clockmax
+shape_i = 0;
+X2(:, 2) = 1.99921;    % to avoid ceiling oscillation
+% mention in the paper!!! 
+while clock <= clockmax
   clock = clock + 1;
+  if clock * dt > shape_i * (3 / 12)
+    save(sprintf('rising_bubble/10to10/wall_stiff_8000/shape/%d.mat', shape_i));
+    shape_i = shape_i + 1;
+  end
+  if clock == clockmax
+    break;
+  end
   step_bm_rb();
 
   % pause(1);

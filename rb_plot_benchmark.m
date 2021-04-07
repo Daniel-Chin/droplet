@@ -1,3 +1,5 @@
+clock = 1499;
+
 bm_table = readtable("RB_10to10Vis/data_10to10Vis.txt");
 sz = size(bm_table, 1);
 bm_cm_y = zeros(sz, 1);
