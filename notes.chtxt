@@ -195,18 +195,17 @@
         Citers of this paper
     overleaf clear cache
 }
-2do {
-    two droplets merging. circularity, polarity, and off-center distance
+mar {
+    contacted authors of Hysing 2009
+        got simulation results of 10:10 viscousity! 
+}
+4/15 archive notes {
+    a test case
+        two droplets spiral in, merge. 
+        plot circularity, polarity, and off-center distance
         N convergence
         dt convergence
-    energy dissipation plot from friction
-    Time profiling: computational efficiency
     more benchmark
-        see assessment paper
-            (1:1 viscosity benchmark)
-            refs
-            ! 3D cases
-        "passive" benchmarking
         Test cases mentioned in the 2018 final report
         test cases mentioned in Numerical Models of Surface Tension. Stephane Popinet. 
             Laplace’s Equilibrium and Spurious Currents
@@ -214,16 +213,33 @@
             // Capillary Oscillations
         Yi Sui. Numerical Simulations of Flows with Moving Contact Lines.
             // Droplet Spreading and Impact
-    .03 -> 0.03
-    gridlines on sliding exp
-    bigger axis numbers, x= ~10
-    caption: should be readable without depending on the main text
+        in paper "Kim, Peskin": look both ways (cite-er, cite-ee) for benchmarks
+    In paper: all ".03" should be "0.03"
+    
+    done:
+        compare shape * 13 time points
 }
-next {
-    Kim, Peskin: look both ways for references
+2do {
+    energy dissipation plot from friction
+    Time profiling: computational efficiency
+    major/minor gridlines on sliding exp
+    bigger axis numbers, *= ~10
+    caption: should be readable without depending on the main text
     papers
         Spizzichino, A., Goldring, S., & Feldman, Y. (2019). The immersed boundary method: application to two-phase immiscible flows. Commun. Comput. Phys, 25, 107-134.
         Simulating the dynamics of inextensible vesicles by the penalty immersed boundary method
         IMMERSED BOUNDARY METHOD FOR VARIABLE VISCOSITY AND VARIABLE DENSITY PROBLEMS USING FAST CONSTANT-COEFFICIENT LINEAR SOLVERS I: NUMERICAL METHOD AND RESULTS
-    contact authors of Hysing 2009
+    mention in paper: 
+        initialize the top wall so that there is no oscillation
+    
+    curve plot overlay: percentage error plot
+        denominator: max of function
+        or, just the abs of the difference. 
+    shape overlay: x range: [0, 0.6]
+    Legend: don't say "benchmark". say model name
+    run sim:
+        demo wallSplit0
+        demo wallAttach0
+        demo splitExp1
+
 }
