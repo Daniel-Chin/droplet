@@ -214,18 +214,27 @@ mar {
         Yi Sui. Numerical Simulations of Flows with Moving Contact Lines.
             // Droplet Spreading and Impact
         in paper "Kim, Peskin": look both ways (cite-er, cite-ee) for benchmarks
-    In paper: all ".03" should be "0.03"
-    
-    done:
-        compare shape * 13 time points
-}
-2do {
     energy dissipation plot from friction
-    Time profiling: computational efficiency
+    done:
+        In paper: all ".03" should be "0.03"
+        compare shape * 13 time points
+
+}
+4/15 work progress {
     major/minor gridlines on sliding exp
     bigger axis numbers, *= ~10
-    caption: should be readable without depending on the main text
-    papers
+    more demo timelapses
+    rising bubble shape overlay:
+        Legend: don't say "benchmark". say model name
+        shape overlay: x range: [0, 0.6]
+}
+2do {
+    run sim:
+        demo wallSplit0
+        demo wallAttach0
+        demo splitExp1
+    Time profiling: computational efficiency
+    read papers
         Spizzichino, A., Goldring, S., & Feldman, Y. (2019). The immersed boundary method: application to two-phase immiscible flows. Commun. Comput. Phys, 25, 107-134.
         Simulating the dynamics of inextensible vesicles by the penalty immersed boundary method
         IMMERSED BOUNDARY METHOD FOR VARIABLE VISCOSITY AND VARIABLE DENSITY PROBLEMS USING FAST CONSTANT-COEFFICIENT LINEAR SOLVERS I: NUMERICAL METHOD AND RESULTS
@@ -235,11 +244,8 @@ mar {
     curve plot overlay: percentage error plot
         denominator: max of function
         or, just the abs of the difference. 
-    shape overlay: x range: [0, 0.6]
-    Legend: don't say "benchmark". say model name
-    run sim:
-        demo wallSplit0
-        demo wallAttach0
-        demo splitExp1
-
+        ? characteristic velocity? scale? 
+        
+        re-run and save terminal state! 
+    caption: should be readable without depending on the main text
 }

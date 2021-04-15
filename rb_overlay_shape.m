@@ -43,6 +43,8 @@ for snap_i = [1:12]
   % saveas(gcf, sprintf('rising_bubble/10to10/wall_stiff_8000/shape/%d.pdf', snap_i));
   % saveas(gcf, sprintf('rising_bubble/10to10/wall_stiff_8000/shape/%d.png', snap_i));
 end
-axis equal;
 view(0, 90);
-legend(h, {"Benchmark", "Ours"});
+axis equal;
+axis([0 0.55 -.25 .8]);
+legend(h, {"Featflow", "Ours"}, 'Location', 'se');
+set(gca, 'FontSize', 20);

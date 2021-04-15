@@ -88,6 +88,6 @@ fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
   NO_SLIP_FORCE*SLIP_LENGTH_COEF / (dtheta2*WALL_STIFFNESS/2) ...
 );
 
-% RENDER_DEBUG = 0;
-RENDER_DEBUG = 1;
+RENDER_DEBUG = 0;
+% RENDER_DEBUG = 1;
 RENDER_INTERFACE_LINK = 1;
