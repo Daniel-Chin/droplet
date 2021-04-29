@@ -241,14 +241,10 @@ mar {
     mention in paper: 
         initialize the top wall so that there is no oscillation
     
-    curve plot overlay: percentage error plot
-        denominator: max of function
-        or, just the abs of the difference. 
-        ? characteristic velocity? scale? 
-        
-        re-run and save terminal state! 
     caption: should be readable without depending on the main text
     
+    re-run and save terminal state! 
+        for bm_rb 10:10
     matlab set interpreter to latex, and $N$...
         title('$N = 128$','interpreter','latex','fontsize',12)
         use 4e-3
