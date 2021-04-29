@@ -36,4 +36,7 @@ while clock <= clockmax
   if schedule_next_frame_pause
     pause;
   end
+  if mod(clock, 16) == 0
+    saveRecord();
+  end
 end

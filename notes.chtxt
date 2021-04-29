@@ -248,4 +248,22 @@ mar {
         
         re-run and save terminal state! 
     caption: should be readable without depending on the main text
+    
+    matlab set interpreter to latex, and $N$...
+        title('$N = 128$','interpreter','latex','fontsize',12)
+        use 4e-3
+    for equilibrium analysis:
+        [G = 600] inside figure as a legend
+        show y-axis altitude on shape figures
+        scatter plot x axis range consistent
+        swap x and y for the scatter. aligns with the droplet
+    circulatiry index: x range (0, 3)
+    
+    just use absolute error
+    red and black instead of red and blue
+        black always featflow. consistent! 
+    linewidth thiccer
+    legend:
+        featflow
+        IB
 }
