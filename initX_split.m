@@ -1,6 +1,6 @@
 % one droplet haging from ceiling
 
-init_circle_r = .4;
+init_circle_r = .3;
 init_circle_x = 0;
 init_circle_y = L * 0.5;
 dtheta = h / 2; % IB point spacing

@@ -7,7 +7,7 @@ initialize();
 init_a();
 initX_split();
 initInertia();
-big_G = 2300;
+big_G = 980;
 
 %% Run simulation
 tmax=4; % Run until time
@@ -15,7 +15,7 @@ clockmax=ceil(tmax/dt);
 clock = 0;
 render();
 while clock <= clockmax
-  if clock <= 2335
+  if big_G < 1813
     big_G = big_G + 0.5;
   end
   clock = clock + 1;
