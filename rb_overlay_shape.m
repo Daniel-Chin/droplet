@@ -10,7 +10,7 @@ for snap_i = [1:12]
   sz = size(bm_triag.Points);
 
   % hold off;
-  hi = trimesh(bm_triag.ConnectivityList, bm_triag.Points(:, 1), bm_triag.Points(:, 2), 'Color', 'b');
+  hi = trimesh(bm_triag.ConnectivityList, bm_triag.Points(:, 1), bm_triag.Points(:, 2), 'Color', 'k');
   h(1) = hi(1);
   % , 'DisplayName', 'Benchmark'
   hold on;
@@ -46,5 +46,5 @@ end
 view(0, 90);
 axis equal;
 axis([0 0.55 -.25 .8]);
-legend(h, {"Featflow", "Ours"}, 'Location', 'se');
+legend(h, {"Featflow", "IB"}, 'Location', 'se');
 set(gca, 'FontSize', 20);
