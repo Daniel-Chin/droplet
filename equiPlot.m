@@ -12,29 +12,18 @@ for big_G = [600 800 1000 1200]
   his = curvature_pairs(3:end-2, 1);
   cvt = - curvature_pairs(3:end-2, 2);
   analytical = (mean(his) - his) * (big_G / K) + mean(cvt);
-  plot(his, analytical, 'LineWidth', 1);
-  % if big_G == 600
-  %   axis([.75 1.6 -10 15]);
-  % end
-  % if big_G == 800
-  %   axis([.7 1.6 -10 15]);
-  % end
-  % if big_G == 1000
-  %   axis([.7 1.6 -10 15]);
-  % end
-  % if big_G == 1200
-  %   axis([.6 1.6 -10 15]);
-  % end
-  axis([.6 1.6 -10 15]);
+  plot(analytical, his, 'LineWidth', 1);
+  axis([-8 15 .6 1.6]);
   hold on;
-  line(xlim(), [0 0], 'Color', 'k');
-  plot(his, cvt, 'x', 'MarkerSize', 7);
+  line([0 0], ylim(), 'Color', 'k');
+  plot(cvt, his, 'x', 'MarkerSize', 7);
   if big_G == 600
-    set(get(ax, 'YLabel'), 'String', 'Curvature (1/cm)', 'interpreter', 'latex');
+    set(get(ax, 'YLabel'), 'String', 'Altitude (cm)', 'interpreter', 'latex');
   else
+    line(xlim(), [1.2 - .0006 * (big_G - 1200), 1.2 - .0006 * (big_G - 1200)], 'Color', [0 .5 0], 'LineWidth', 2);
     set(ax, 'ytick', []);
   end
-  set(get(ax, 'XLabel'), 'String', 'Altitude (cm)', 'interpreter', 'latex');
+  set(get(ax, 'XLabel'), 'String', 'Curvature (1/cm)', 'interpreter', 'latex');
   formatPlot();
   ax.FontSize = 18;
   
@@ -45,7 +34,8 @@ for big_G = [600 800 1000 1200]
   ax.FontSize = 18;
   if big_G > 600
     set(ax, 'ytick', []);
+    line(xlim(), [1.2 - .0006 * (big_G - 1200), 1.2 - .0006 * (big_G - 1200)], 'Color', [0 .5 0], 'LineWidth', 2);
   end
-
+  
   plot_col = plot_col + 1;
 end
