@@ -20,4 +20,4 @@ while terminal_id ~= id_1
   id_2 = links(direction, id_2);
 end
 
-save(sprintf('results/equilibrium/%d.mat', big_G), 'curvature_pairs');
+save(sprintf('results/equilibrium/%d.mat', big_G));
