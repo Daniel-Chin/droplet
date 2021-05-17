@@ -267,11 +267,12 @@ mar {
         DONE
 }
 2do {
-    run sim:
+    run sim: (with new feature `record`)
         demo wallSplit0
         demo wallAttach0
         demo splitExp1
     Time profiling: computational efficiency
+        remark: surfacesplice is expensive. vec_interp in Kim et al is expensive. 
     mention in paper: 
         initialize the top wall so that there is no oscillation
 
