@@ -242,7 +242,19 @@ mar {
         Spizzichino, A., Goldring, S., & Feldman, Y. (2019). The immersed boundary method: application to two-phase immiscible flows. Commun. Comput. Phys, 25, 107-134.
         Simulating the dynamics of inextensible vesicles by the penalty immersed boundary method
         IMMERSED BOUNDARY METHOD FOR VARIABLE VISCOSITY AND VARIABLE DENSITY PROBLEMS USING FAST CONSTANT-COEFFICIENT LINEAR SOLVERS I: NUMERICAL METHOD AND RESULTS
-    fix plot text interpreter
+    fixed plot text interpreter
+    for equilibrium analysis:
+        [G = 600] inside figure as a legend
+            northeast near droplet
+            INSTEAD I tried putting it on top. How is it? 
+        show y-axis altitude on shape figures
+            DONE
+        scatter plot x axis range consistent
+            DONE
+        swap x and y for the scatter. aligns with the droplet
+            DONE
+    circulatiry index: x range (0, 3)
+        DONE
 }
 2do {
     run sim:
@@ -252,15 +264,7 @@ mar {
     Time profiling: computational efficiency
     mention in paper: 
         initialize the top wall so that there is no oscillation
-        
-    for equilibrium analysis:
-        [G = 600] inside figure as a legend
-            northeast near droplet
-        show y-axis altitude on shape figures
-        scatter plot x axis range consistent
-        swap x and y for the scatter. aligns with the droplet
-    circulatiry index: x range (0, 3)
-    
+
     just use absolute error
     red and black instead of red and blue
         black always featflow. consistent! 
