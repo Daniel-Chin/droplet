@@ -243,6 +243,7 @@ mar {
         Simulating the dynamics of inextensible vesicles by the penalty immersed boundary method
         IMMERSED BOUNDARY METHOD FOR VARIABLE VISCOSITY AND VARIABLE DENSITY PROBLEMS USING FAST CONSTANT-COEFFICIENT LINEAR SOLVERS I: NUMERICAL METHOD AND RESULTS
     fixed plot text interpreter
+        all Latex now
     for equilibrium analysis:
         [G = 600] inside figure as a legend
             northeast near droplet
@@ -255,6 +256,15 @@ mar {
             DONE
     circulatiry index: x range (0, 3)
         DONE
+    rising bubble plot overlay:
+        just use absolute error
+        red and black instead of red and blue
+            black always featflow. consistent! 
+        linewidth thiccer
+        legend:
+            featflow
+            IB
+        DONE
 }
 2do {
     run sim:
@@ -265,17 +275,5 @@ mar {
     mention in paper: 
         initialize the top wall so that there is no oscillation
 
-    just use absolute error
-    red and black instead of red and blue
-        black always featflow. consistent! 
-    linewidth thiccer
-    legend:
-        featflow
-        IB
-    
-    axis label interpreter
-
     caption: should be readable without depending on the main text
 }
-
-After meeting: !!! equi_queue !!!
