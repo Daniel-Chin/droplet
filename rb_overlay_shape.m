@@ -46,5 +46,6 @@ end
 view(0, 90);
 axis equal;
 axis([0 0.55 -.25 .8]);
-legend(h, {"Featflow", "IB"}, 'Location', 'se');
+legend(h, {"Featflow", "IB"}, 'Location', 'se', 'interpreter', 'latex');
 set(gca, 'FontSize', 20);
+formatPlot();
