@@ -269,6 +269,55 @@ mar {
     added time profiling results
     added rising bubble bm to paper
 }
-2do {
+5/27 {
+    Done: 
+        splicing 6 cases legend: no hyphen
+        between sec 3 and sub sec 3.1: add text. The beginning of each section and subsection: talk about the section. Even 1-2 lines. 
+            e.g. in this section, we will give exmaple/show test case
+        check if N is defined before. 
+            consider: in the beginning, define every symbol
+        3.1.2 t=0.01 larger padding
+        instability <- dt -> very accurate
+        gas is .01 -> gas is 0.01
+        double check g/s as viscosity
+            is right
+        dimensions not in latex eq format
+        space between number and unit
+        figure caption not centered
+            solved. put everything in \caption{}
+        around line 540, math model for eq shape. align eqs. 
+        remove all "|" and hlines. 
+        enlarge the time profiling report
+        merge small paragraph together. 
+    DIDN'Ts:
+        N dt: more padding
+        positioning of figures
+            ???
+}
+6/3 {
     caption: should be readable without depending on the main text
+        ? repeating the same meaning twice? 
+        paraphrase is ok
+    the 2018 MPI report. the model and the solution. text and eqs. 
+        michael did that        
+    cite IBAMR (maybe github repo)
+}
+2do {
+    add figure reference to main text
+    
+    \citep
+    
+    wall slide terminal state 2x3 table
+        dt, N -> legend; subplot; one figure
+    
+    everywhere:
+        $dt$ $N$ $t$
+    
+    make sure the citation of the rising bubble. 
+    
+    send model to appendix
+    3.4 include boundary condition
+    
+    explain the new varaible after every eqn
+    comma, period, same line...
 }
