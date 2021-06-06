@@ -3,3 +3,4 @@ output/
 *.mp4
 *.mat
 RB_10to10Vis/
+*.log
