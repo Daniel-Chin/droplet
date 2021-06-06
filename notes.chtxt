@@ -303,26 +303,19 @@ mar {
     cite IBAMR (maybe github repo)
 }
 6/6 {
-    seperate the IB equations to three
+    seperate types of boundaries. n=1, 2, 3
     add figure reference to main text
     \citep
     wall slide terminal state 2x3 table
         dt, N -> legend; subplot; one figure
-}
-2do {    
     everywhere:
         $dt$ $N$ $t$
-    
-    make sure the citation of the rising bubble. 
-    
     send model to appendix
-    3.4 include boundary condition
-    
+        include boundary condition of the PDE
     explain the new varaible after every eqn
     comma, period, same line...
-    
-    seperate types of boundaries. s1 s2 s3
-    
-    small "f" for both fluid force and friction
     make it clear that f is not an IB force. It is reflected in a change of the wall force behavior. 
+}
+2do {    
+    In appendix: period? same line? 
 }
