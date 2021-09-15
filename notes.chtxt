@@ -316,6 +316,138 @@ mar {
     comma, period, same line...
     make it clear that f is not an IB force. It is reflected in a change of the wall force behavior. 
 }
-2do {    
-    In appendix: period? same line? 
+7/8 {    
+    In appendix: 
+        equations have period; 
+        ", \quad"...
+}
+7/12 {
+    eq 2.2
+        one alternative: break it into the two steps, the second step explaining that it's actually a sum of three. 
+        todo:
+            change w to i
+    s is the parametrization of the boundary
+        // track change when you edit this
+        parametrization variable
+    young.pdf:
+        labeling
+        what are the circles? 
+        t hat is in there
+        caption: mention t hat
+}
+7/13 {
+    below eq 2.6
+        surface energy: why not add an equation? 
+    be really clear with the methods!
+    make it clear that the magic numbers in the pseudo code is from MD_2018_its_the_bonds
+    function mu
+        make it clear that it's plug and play! out method is independant of the exact implementation of mu. Maybe state the limitation of the current mu function. Concise. 
+    rewrite incur-dismiss blah. Maybe don't talk about "incur" "dismiss"
+        1. static limit
+        2. in the base case, friction has no upper bound.
+        3. we: displace the marker to the upper bound once it exceeds. 
+        4. Look: the friction force will be always correct. 
+        5. Look: liquid can now slip. 
+        6. work done, heat dissapation
+        put pseudo code into paper. The multi-case friction implementation, prolly in WallForce.m
+    see if "integral formulation" can be helped with an equation. 
+        review the chapter. 
+        Reviewers/readers won't go between papers; so quick summaries help. 
+        approx the surface integral in "2.1" with a rieman sum, and this discretization may give just our method
+    pseudo code -> appendix
+    look again at 2.1-2.3. Do they mean s has to have length unit? Eulerian Force density VS lagrangian
+        yes, s has unit length. 
+        surface tension energy, and the unit of sigma. 
+        present next meeting. 
+}
+7/15 {
+    between 2.5 and 2.7: how to derive
+    T hat should not be discretized, change 2.5 - 2.7
+        1. define T
+        2. quote popinet
+        3. F2
+    the figure shows the post-discretization method, so it's not directly refering to the continuous model
+    mu numbers: state the wall and the liquid substance
+}
+7/21 {
+    reword the abstract
+        keep the old one
+        then, email prof. sanaei
+        DONE
+}
+7/29 {
+    2.5 to 2.7:
+        the first equal sign in 2.7 directly follows from 2.6
+        the second equal sign is just doing the integration
+    Done:
+        make sure mentioned that `s` is arc length
+        "X2" appears on three markers. better labeling
+        below (2.3), "X" should be "X_i"
+        S_i... Update the paragraph! 
+}
+8/3 {
+    organization:
+        first present the benchmark and the static equilibrium comparison with the analytical
+        then, (possible structure: static ones + dynamic ones)
+        - describe the simulation setup for each experiment. Domain size, boundary, physical, numerical parameters, etc. 
+        - If a value is constant for all experiments, then mention that at the beginning of results. e.g. THE BOUNDARY CONDITION!!! 
+    - be clear with the symmetry boundary trick. layout the computation
+    - people like showcasing various density ratio now 
+        how to mention our capability? 
+    - "IB" letters
+        we can even mention the deforming in the paper! 
+    droplet equilibrium analysiss:
+        specify WHEN they reach equilibrium. specify what we are doing
+        first take note, then consider if redo simulation
+    "allowed distance": explain
+    discretization
+        spatial, temporal discretization
+        forward, (explicit?) midpoint eular
+        in euqation form, text
+        dirac delta. cite the Peskin code repo
+    for splicing time-save:
+        just describe what we do
+    splicing threshold: specify rationale. 
+    answer "more details here on the actual implementation, i.e. the criteria under which you decide to add/remove markers". 
+}
+8/5 {
+    navier slip 
+        formal definition may be in Boris et al. pp.5-6
+        needs help with this reference! 
+            "3." v is the unit normal, sigma is the cauchy stress
+            z is arc length (from eq (1))
+            so tau is unit tangent (from tau def)
+        are they using a friction model?
+        how does this help justify using a friction model? 
+        can we ref this to define navier slip? 
+        
+        if it's not navier slip, ref the correct paper and refer to it using an accurate name. 
+}
+8/19 {
+    NBC (navier boundary condition) VS GNBC (generalized NBC)
+        NBC: slip v = k * viscous stress
+        GNBC: also add uncompensated Young stress. 
+        We do GNBC and assume viscous stress to be neglegible
+        ref: Qian, T., Wang, X. P., & Sheng, P. (2004). Power-law slip profile of the moving contact line in two-phase immiscible flows. Physical review letters, 93(9), 094501.
+}
+discard {
+    if it's not navier slip, ref the correct paper and refer to it using an accurate name. 
+}
+8/24 {
+    Add Young stress and GNBC (generalized Navier bound cond)   
+    do this
+        only read figures
+        add captions as you go
+    resolve all \daniel{} and \charles{}
+}
+next {
+    Michael and I worked on discretization. We have a draft in another overleaf document, almost ready to merge in. 
+}
+2do {
+    P. Yue and J. J. Feng, “Wall energy relaxation in the Cahn–Hilliard model for moving contact lines,” Phys. Fluids 23, 012106 (2011).
+    
+    convert all png to pdf.
+        may need to crop white padding
+        
+    mention "for timestepping". (the 5-step update)
 }
