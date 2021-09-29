@@ -440,14 +440,23 @@ discard {
         add captions as you go
     resolve all \daniel{} and \charles{}
 }
-next {
+9/15 {
+    convert all png to pdf.
+        may need to crop white padding
+    mention "for timestepping". (the 5-step update)
+}
+9/16 {
+    P. Yue and J. J. Feng, “Wall energy relaxation in the Cahn–Hilliard model for moving contact lines,” Phys. Fluids 23, 012106 (2011).
+}
+9/20 {
     Michael and I worked on discretization. We have a draft in another overleaf document, almost ready to merge in. 
 }
 2do {
-    P. Yue and J. J. Feng, “Wall energy relaxation in the Cahn–Hilliard model for moving contact lines,” Phys. Fluids 23, 012106 (2011).
-    
-    convert all png to pdf.
-        may need to crop white padding
+    boundary and discretization section location? the first subsec of "numerical"? 
+        equation of motions
+        problem domain
+        discretization
+        our methods
         
-    mention "for timestepping". (the 5-step update)
+        and, check "Setup details can be found in subsection \ref{subsec:dow}.". whoever refers to it should come after it. 
 }
