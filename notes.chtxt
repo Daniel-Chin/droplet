@@ -451,12 +451,12 @@ discard {
 9/20 {
     Michael and I worked on discretization. We have a draft in another overleaf document, almost ready to merge in. 
 }
-2do {
+9/30 {
     boundary and discretization section location? the first subsec of "numerical"? 
         equation of motions
         problem domain
         discretization
         our methods
         
-        and, check "Setup details can be found in subsection \ref{subsec:dow}.". whoever refers to it should come after it. 
+    and, check "Setup details can be found in subsection \ref{subsec:dow}.". whoever refers to it should come after it. 
 }

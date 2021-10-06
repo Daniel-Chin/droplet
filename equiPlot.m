@@ -12,11 +12,11 @@ for big_G = [600 800 1000 1200]
   his = curvature_pairs(3:end-2, 1);
   cvt = - curvature_pairs(3:end-2, 2);
   analytical = (mean(his) - his) * (big_G / K) + mean(cvt);
-  plot(analytical, his, 'LineWidth', 1);
+  AnalyticalLine = plot(analytical, his, 'LineWidth', 3, 'color', '#f70');
   axis([-8 15 .6 1.6]);
   hold on;
   line([0 0], ylim(), 'Color', 'k');
-  plot(cvt, his, 'x', 'MarkerSize', 7);
+  simDots = plot(cvt, his, '.', 'MarkerSize', 5, 'color', 'b');
   if big_G == 600
     set(get(ax, 'YLabel'), 'String', 'Altitude (cm)', 'interpreter', 'latex');
   else
@@ -34,8 +34,10 @@ for big_G = [600 800 1000 1200]
   ax.FontSize = 18;
   if big_G > 600
     set(ax, 'ytick', []);
-    line(xlim(), [1.2 - .0006 * (big_G - 1200), 1.2 - .0006 * (big_G - 1200)], 'Color', [0 .5 0], 'LineWidth', 2);
+    inflectionLine = line(xlim(), [1.2 - .0006 * (big_G - 1200), 1.2 - .0006 * (big_G - 1200)], 'Color', [0 .5 0], 'LineWidth', 2);
   end
   
   plot_col = plot_col + 1;
 end
+lgd = legend([simDots, AnalyticalLine, inflectionLine], {'Simulation', 'Analytical', sprintf('Inflection \npoint')}, 'Interpreter','latex');
+set(lgd, 'Position', [.26 .34 0 0], 'Units', 'normalized');

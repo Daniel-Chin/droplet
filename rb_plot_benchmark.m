@@ -1,5 +1,13 @@
-load('D:\IBM\main\rising_bubble\10to10\wall_stiff_8000\terminal_state.mat')
+load('rising_bubble\10to10\wall_stiff_8000\terminal_state.mat')
 clock = 1499;
+
+X = .1;
+Y = .19;
+WIDTH = .36;
+HEIGHT = .35;
+X_PAD = .5;
+Y_PAD = .43;
+TITLE_Y = -.5;
 
 FONT_SIZE_MAIN = 18;
 FONT_SIZE_LGD = 14;
@@ -25,6 +33,7 @@ set(ax, 'xtick', []);
 formatPlot();
 ax.FontSize = FONT_SIZE_MAIN;
 lgd.FontSize = FONT_SIZE_LGD;
+set(ax,'Units', 'normalized','Position',[X Y+Y_PAD WIDTH HEIGHT]);
 
 % plot absolute error. 
 % headache: they are not of the same sample rate. 
@@ -35,11 +44,13 @@ line(xlim(), [0 0], 'Color', 'k');
 
 lgd = legend("IB", "Featflow", 'Location', 'NW', 'interpreter', 'latex');
 ylabel("Error (cm)", 'interpreter', 'latex');
-xlabel("Time", 'interpreter', 'latex');
+xlabel("Time (s)", 'interpreter', 'latex');
 axis([0 3 -.0005 0.0025]);
+title('(a)', 'Units', 'normalized', 'Position', [.5 TITLE_Y 0], 'interpreter', 'latex');
 formatPlot();
 ax.FontSize = FONT_SIZE_MAIN;
 lgd.FontSize = FONT_SIZE_LGD;
+set(ax,'Units', 'normalized','Position',[X Y WIDTH HEIGHT]);
 
 ax = subplot(2, 2, 2);
 hold on; 
@@ -51,6 +62,7 @@ set(ax, 'xtick', []);
 formatPlot();
 ax.FontSize = FONT_SIZE_MAIN;
 lgd.FontSize = FONT_SIZE_LGD;
+set(ax,'Units', 'normalized','Position',[X+X_PAD Y+Y_PAD WIDTH HEIGHT]);
 
 ax = subplot(2, 2, 4);
 hold on; 
@@ -61,6 +73,9 @@ lgd = legend("IB", "Featflow", 'Location', 'NE', 'interpreter', 'latex');
 ylabel("Error", 'interpreter', 'latex');
 xlabel("Time (s)", 'interpreter', 'latex');
 axis([0 3 -.0005 0.0015]);
+title('(b)', 'Units', 'normalized', 'Position', [.5 TITLE_Y 0], 'interpreter', 'latex');
 formatPlot();
 ax.FontSize = FONT_SIZE_MAIN;
 lgd.FontSize = FONT_SIZE_LGD;
+preprint();
+set(ax,'Units', 'normalized','Position',[X+X_PAD Y WIDTH HEIGHT]);
