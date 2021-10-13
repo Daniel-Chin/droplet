@@ -460,3 +460,22 @@ discard {
         
     and, check "Setup details can be found in subsection \ref{subsec:dow}.". whoever refers to it should come after it. 
 }
+10/7 {
+    schematic of droplet on wall: merge (a) into (b)
+    schematic of rb:
+        "u=v=0" -> "no-slip no-penetration"
+    in "analytical cuvature": 
+        legend: multiline -> one line, font smaller
+        figure overall scale -> larger
+        main text has the color wrong. 
+}
+next {
+    done
+        schematic of droplet on wall: merge (a) into (b)
+        schematic of rb:
+            "u=v=0" -> "no-slip no-penetration"
+        in "analytical cuvature": 
+            legend: multiline -> one line, font smaller
+            figure overall scale -> larger
+            main text has the color wrong. 
+}

@@ -39,5 +39,6 @@ for big_G = [600 800 1000 1200]
   
   plot_col = plot_col + 1;
 end
-lgd = legend([simDots, AnalyticalLine, inflectionLine], {'Simulation', 'Analytical', sprintf('Inflection \npoint')}, 'Interpreter','latex');
+lgd = legend([simDots, AnalyticalLine, inflectionLine], {'Simulation', 'Analytical', 'Inflection point'}, 'Interpreter','latex');
+lgd.FontSize = 14;
 set(lgd, 'Position', [.26 .34 0 0], 'Units', 'normalized');
