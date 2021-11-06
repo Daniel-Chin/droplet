@@ -469,7 +469,7 @@ discard {
         figure overall scale -> larger
         main text has the color wrong. 
 }
-next {
+10/14 {
     done
         schematic of droplet on wall: merge (a) into (b)
         schematic of rb:
@@ -478,4 +478,57 @@ next {
             legend: multiline -> one line, font smaller
             figure overall scale -> larger
             main text has the color wrong. 
+    todo
+        schematic: add units. 
+            (this also makes it clear that they are lengths)
+        equi.pdf has inconsistency: "G" does not have units. 
+        add conclusion
+    Ask in email:
+        Are the equations we are solving non-dimensionalized? And when we are plotting stuff, do we plot dimensionalized quantities? 
+}
+10/21 {
+    done
+        schematic: add units. 
+            (this also makes it clear that they are lengths)
+        equi.pdf has inconsistency: "G" does not have units. 
+        conclusion first draft
+    ask guanhua: is the code dimensional?
+    then make sure everything is dimensioned. 
+    notations in the discretization section
+    f1 should be related to f_f. the current f1 describes the no-slip, which is not what we are using. Be clear
+}
+11/3 {
+    ask guanhua: is the code dimensional?
+        Guanhua: Yes, no dimensionless
+    resolved many comments
+    rewrite MCL. 
+        There were many mistakes. I fixed them. Also made a lot of structure improvements. 
+        It should be very nice now
+    proof read the paper up to results and fixed some things. 
+    discretization sec: changed equations to text. 
+}
+11/4 {
+    what is the curvature estimation algo? 
+        for every 3 points fit a circle...
+        cehck the relation with the finite diff method
+    todo {
+        spatial refinement -> spatial discretization parameter
+        check parameter order for all cases. 
+        domain is -> height of domain is
+        N -> kg m s ...
+        how do we estimate curvature from three points? 
+        0.25s, [where everything stops]
+        \cite -> actual author name, citation at end of sentence, if it applies. 
+        define circularity index
+        mention featflow: open-source CFD package. check the paper for accuracy
+        schematic: gas; 10 \times gas density
+        figure: should be 1 line. remove legend
+        f_min -> correct notation
+        upward vertical gas flow:
+            the boundary condition at y=0 is ... 30 * tanh
+        r, s, t for X3. 
+    }
+}
+todo {
+    then make sure everything is dimensioned. 
 }
