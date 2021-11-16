@@ -529,6 +529,61 @@ discard {
         r, s, t for X3. 
     }
 }
+11/11 {
+    done:
+        make sure everything is dimensioned. 
+        spatial refinement -> spatial discretization resolution
+        check parameter introduction order for all test cases. 
+        domain is -> height /size of domain is
+        N -> " g$\,$cm/s$^2$"
+        how do we estimate curvature from three points? 
+        define circularity index
+        schematic: gas; 10 \times gas densit
+        rb plot: should be 1 line. remove legend
+        f_min -> f_no slip
+        upward vertical gas flow
+        m -> cm; kg -> g
+        r, s, t for X3. 
+        summarize test cases. 
+        resolve comments
+    is featflow an open-source CFD package? 
+        the paper has it
+    scaler-scaler / scaler-vector multiplication style?
+        \cdot
+        \,
+        \times
+        ans:
+            \,
+    todo
+        r_h, s_h -> l, m. {0, 1, max_value}. define max. 
+        d_s -> \delta s
+        for the strucutre, we should have the same thing ij= (i×h,j×h)
+        lower-case all "i"mmersed "b"oundary "m"
+        schematic 1:
+            add "(periodic)"
+            remove right boundary effective parens. 
+            plot the mirrored droplet. 
+            remove sentence about force near 0. 
+        omega -> segment AB parametrized by s
+        three-phase -> contact point. consider "multi-phase"
+        MP and IS need a schematic
+}
 todo {
-    then make sure everything is dimensioned. 
+    r_h, s_h -> l, m. {0, 1, max_value}. define max. 
+    d_s -> \delta s
+    for the strucutre, we should have the same thing ij= (i×h,j×h)
+    lower-case all "i"mmersed "b"oundary "m"
+    schematic 1:
+        add "(periodic)"
+        remove right boundary effective parens. 
+        plot the mirrored droplet. 
+        remove sentence about force near 0. 
+    omega -> segment AB parametrized by s
+    three-phase -> contact point. consider "multi-phase"
+    MP and IS need a schematic
+}
+questions {
+    XXX did this and that \citep{YYY}. 
+    vs
+    \citet{YYY} did this and that. 
 }
