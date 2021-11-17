@@ -4,7 +4,7 @@ N = 96; % Number of grid cells
 % N = 192; % Number of grid cells
 L = 2.0; % Box size, cm
 
-K = 50; % Surface tension coefficient, N*10^-5
+K = 50; % Surface tension coefficient, g*cm/s^2 (= N*10^-5)
 % FAKE_REPEL_K = .00001;
 rho = .1; % air density g/cm2
 rho_heavy = 1; % density g/cm2
