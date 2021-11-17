@@ -568,19 +568,26 @@ discard {
         three-phase -> contact point. consider "multi-phase"
         MP and IS need a schematic
 }
+next {
+    done:
+        MP and IS need a schematic
+        discretization section rework
+            r_h, s_h -> l, m. {0, 1, max_value}. define max. 
+            d_s -> \delta s
+            for the strucutre, we should have the same thing ij= (i×h,j×h)
+        lower-case all "i"mmersed "b"oundary "m"
+        schematic 1:
+            add "(periodic)"
+            remove right boundary effective parens. 
+            plot the mirrored droplet. 
+            remove sentence about force near 0. 
+        explain /Omega
+        three-phase -> contact point. consider "multi-phase"
+        Figure 2 is not vector graphics; notations changed to match discretization section. 
+        we use the results of Featflow (an open-source CFD package) as the ``ground truth''
+        scaler multiplication now uses \,
+}
 todo {
-    r_h, s_h -> l, m. {0, 1, max_value}. define max. 
-    d_s -> \delta s
-    for the strucutre, we should have the same thing ij= (i×h,j×h)
-    lower-case all "i"mmersed "b"oundary "m"
-    schematic 1:
-        add "(periodic)"
-        remove right boundary effective parens. 
-        plot the mirrored droplet. 
-        remove sentence about force near 0. 
-    omega -> segment AB parametrized by s
-    three-phase -> contact point. consider "multi-phase"
-    MP and IS need a schematic
 }
 questions {
     XXX did this and that \citep{YYY}. 
