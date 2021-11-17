@@ -40,16 +40,13 @@ set(ax,'Units', 'normalized','Position',[X Y+Y_PAD WIDTH HEIGHT]);
 ax = subplot(2, 2, 3);
 hold on; 
 plot(dt * [1:clock], CM_his' - bm_cm_y(1:4:clock*4), 'Color', 'r');
-line(xlim(), [0 0], 'Color', 'k');
 
-lgd = legend("IB", "Featflow", 'Location', 'NW', 'interpreter', 'latex');
 ylabel("Error (cm)", 'interpreter', 'latex');
 xlabel("Time (s)", 'interpreter', 'latex');
 axis([0 3 -.0005 0.0025]);
 title('(a)', 'Units', 'normalized', 'Position', [.5 TITLE_Y 0], 'interpreter', 'latex');
 formatPlot();
 ax.FontSize = FONT_SIZE_MAIN;
-lgd.FontSize = FONT_SIZE_LGD;
 set(ax,'Units', 'normalized','Position',[X Y WIDTH HEIGHT]);
 
 ax = subplot(2, 2, 2);
@@ -67,15 +64,12 @@ set(ax,'Units', 'normalized','Position',[X+X_PAD Y+Y_PAD WIDTH HEIGHT]);
 ax = subplot(2, 2, 4);
 hold on; 
 plot(dt * [1:clock], circularity_his' - bm_table{:, 4}(1:4:clock*4), 'Color', 'r');
-line(xlim(), [0 0], 'Color', 'k');
 
-lgd = legend("IB", "Featflow", 'Location', 'NE', 'interpreter', 'latex');
 ylabel("Error", 'interpreter', 'latex');
 xlabel("Time (s)", 'interpreter', 'latex');
 axis([0 3 -.0005 0.0015]);
 title('(b)', 'Units', 'normalized', 'Position', [.5 TITLE_Y 0], 'interpreter', 'latex');
 formatPlot();
 ax.FontSize = FONT_SIZE_MAIN;
-lgd.FontSize = FONT_SIZE_LGD;
 preprint();
 set(ax,'Units', 'normalized','Position',[X+X_PAD Y WIDTH HEIGHT]);
