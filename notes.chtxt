@@ -568,7 +568,7 @@ discard {
         three-phase -> contact point. consider "multi-phase"
         MP and IS need a schematic
 }
-next {
+11/18 {
     done:
         MP and IS need a schematic
         discretization section rework
@@ -587,7 +587,22 @@ next {
         we use the results of Featflow (an open-source CFD package) as the ``ground truth''
         scaler multiplication now uses \,
 }
+next {
+    graphical abstract (thumbnail) selection
+    in which section do we include:
+        Github link to source code
+        figure plotters (reproducability as required by JFM)
+    JFM: "British spelling must be used"
+        is this important?
+    JFM: 
+        images should be EPS or TIFF
+    Movies:
+        quite stand-alone. no "multi-media view" found. 
+}
 todo {
+    JFM review-ready formatting
+        multi-media view
+        ...
 }
 questions {
     XXX did this and that \citep{YYY}. 
