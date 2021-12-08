@@ -587,24 +587,51 @@ discard {
         we use the results of Featflow (an open-source CFD package) as the ``ground truth''
         scaler multiplication now uses \,
 }
-next {
+11/24 {
     graphical abstract (thumbnail) selection
+        Figure 16, two rows
     JFM: "British spelling must be used"
         is this important?
+        change
     JFM: 
         images should be EPS or TIFF
+        use PDF for now
     Movies:
         quite stand-alone. no "multi-media view" found. 
     Declaration of interests is now mandatory. 
         "The authors report no conflict of interest."? 
+    todo
+        reference format. why is it different from the template?
+        Reynold for rising bubble and droplet on wall
+}
+12/2 {
+    done:
+        British spelling
+        thumbnail
+            "multiple panels will be rejected"
+            What I have: main.gif
+        reference format. why is it different from the template?
+            latex things
+            fixed
+        fix short title
+        Reynold for rising bubble and droplet on wall
+            rising bubble: 35. 
+            Droplet on wall: 150. 
+}
+next {
+    done:
+        Reynold for "IB" letters. 
+        mention: the typical lengthscale is the diameter of the droplet. 
+        results = verification subsec + applications of our methods subsec
+    "citet" style:
+        https://www.cambridge.org/core/services/aop-file-manager/file/5ff6ebbaa583bc0b4b5940c5/JFM-IFC-07-01-21.pdf
+        line 281, section 13, 
+        they want citet
+    comments
+        "citation seems to be missing here"
+        "like the wall"
 }
 todo {
-    JFM review-ready formatting
-        multi-media view
-        ...
 }
 questions {
-    XXX did this and that \citep{YYY}. 
-    vs
-    \citet{YYY} did this and that. 
 }
