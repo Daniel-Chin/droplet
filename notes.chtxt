@@ -618,7 +618,7 @@ discard {
             rising bubble: 35. 
             Droplet on wall: 150. 
 }
-next {
+12/9 {
     done:
         Reynold for "IB" letters. 
         mention: the typical lengthscale is the diameter of the droplet. 
@@ -630,6 +630,24 @@ next {
     comments
         "citation seems to be missing here"
         "like the wall"
+    todo
+        "displace, no-flux" figure:
+            explain more. 
+            where is the wall? 
+            where is the ground truth location?
+            no-penetration
+            check if "static-friction limit" wording is consistent with latest updates. 
+            consider writing out the modified version of 2.3 (is it just another term on the rhs?)
+}
+next {
+    done:
+        "displace, no-flux" figure:
+            explain more. 
+            where is the wall? 
+            where is the ground truth location?
+            no-penetration
+            check if "static-friction limit" wording is consistent with latest updates. 
+            consider writing out the modified version of eq 2.3 (is it just another term on the rhs?)
 }
 todo {
 }
