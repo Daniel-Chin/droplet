@@ -639,7 +639,7 @@ discard {
             check if "static-friction limit" wording is consistent with latest updates. 
             consider writing out the modified version of 2.3 (is it just another term on the rhs?)
 }
-next {
+12/16 {
     done:
         "displace, no-flux" figure:
             explain more. 
@@ -648,8 +648,42 @@ next {
             no-penetration
             check if "static-friction limit" wording is consistent with latest updates. 
             consider writing out the modified version of eq 2.3 (is it just another term on the rhs?)
+    todo
+        ell_0 should be i, ell_0
+        blue "x2" for fig 3
+        fig5: x_2, l-1   l   l+1
+        fig 9 abcd
+}
+12/23 {
+    done
+        ell_0 should be i, ell
+            for all figures
+            e.g. fig5: x_2, l-1   l   l+1
+        blue "x2" for fig 3
+        fig 9 abcd
+        add movies to overleaf
+        figure caption
+            like the figure 16 caption now says: "This figure depicts results from a simulation in which a big droplet catches a smaller droplet and coalesces with it. Time increases from the left to right. This test demonstrates the effect of droplet size in a single simulation." We should have all the information about what is contained in the figure, what the panels mean, and its significance, in the caption. do this for the rest of the figures?
+    todo
+        fig 9
+            have tick marks and axis label for (a) (b)
+        rising bubble
+            where's G? 
+            should we make 1000 to 1. 
+        get t=0 for lapsetable simulations. 
+        re-simulate the resample comparison, note the parameters. 
+}
+next {
+    done
+        fig 9
+            have tick marks and axis label for (a) (b)
+        rising bubble
+            where's G? added. 
+            should we make 1000 to 1? No. Simulation is different. 
 }
 todo {
+    get t=0 for lapsetable simulations. 
+    re-simulate the resample comparison, record the parameters. 
 }
 questions {
 }
