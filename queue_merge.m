@@ -59,6 +59,9 @@ for kk = [.0005, .0002, .0001; 64, 96, 128]
   %% Run simulation
   clockmax=ceil(tmax/dt);
   clock = 0;
+  % plot(0);
+  % hold on;
+  % render_phase = SPF - dt;
   render();
   area_his = [];
   area_his_i = 0;
@@ -140,6 +143,9 @@ for kk = [.0002, .0001, .00005; 96, 128, 192]
   tmax = .1; % Run until time
   clockmax=ceil(tmax/dt);
   clock = 0;
+  % plot(0);
+  % hold on;
+  % render_phase = SPF - dt;
   render_wide();
   area_his = [];
   area_his_i = 0;
