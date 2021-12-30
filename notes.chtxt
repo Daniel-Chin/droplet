@@ -680,10 +680,10 @@ next {
         rising bubble
             where's G? added. 
             should we make 1000 to 1? No. Simulation is different. 
+        get t=0 for lapsetable simulations. 
 }
 todo {
-    get t=0 for lapsetable simulations. 
-    re-simulate the resample comparison, record the parameters. 
+        re-simulate the resample comparison, record the parameters. 
 }
 questions {
 }
