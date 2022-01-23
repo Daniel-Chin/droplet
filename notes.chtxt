@@ -673,7 +673,7 @@ discard {
         get t=0 for lapsetable simulations. 
         re-simulate the resample comparison, note the parameters. 
 }
-next {
+2022/1/6{
     done
         fig 9
             have tick marks and axis label for (a) (b)
@@ -684,7 +684,24 @@ next {
         re-simulate the resample comparison, record the parameters. 
             same as sec 5.1 now. 
 }
+1/20 {
+    done
+        GNBC wording changed. check
+        friction equations: fix the order to introduce variable 
+        changed 
+            \bm{F}_T is now F_T, stress magnitude.
+            2.11 FT/||FT|| should be T_hat
+        young's -> young
+        move dow setup introduction from 5.1 to 4.3.1
+            refer to 4.3.1 in 5.1
+            and mention the gravity = 0 for 4.3.2 and .3
+    references broken
+}
 todo {
+    spelling Br -> US
+    process comments from the previous project.
+    check figures' numbers, Multimedia view
+    Check the captions of all figures, especially the ones with a Multimedia view.
 }
 questions {
 }
