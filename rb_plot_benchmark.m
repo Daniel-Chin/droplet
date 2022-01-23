@@ -1,7 +1,7 @@
 load('rising_bubble\10to10\wall_stiff_8000\terminal_state.mat')
 clock = 1499;
 
-X = .1;
+X = .11;
 Y = .19;
 WIDTH = .36;
 HEIGHT = .25;
@@ -29,7 +29,7 @@ hold on;
 plot(dt * [1:clock], CM_his, 'Color', 'r');
 plot(bm_table{:, 1}, bm_cm_y, 'Color', 'k');
 lgd = legend("IB", "Featflow", 'Location', 'NW', 'interpreter', 'latex');
-ylabel("Altitude (cm)", 'interpreter', 'latex');
+ylabel({"Center of mass"; "altitude (cm)"}, 'interpreter', 'latex');
 xlabel("Time (s)", 'interpreter', 'latex');
 % set(ax, 'xtick', []);
 title('(a)', 'Units', 'normalized', 'Position', [.5 TITLE_Y1 0], 'interpreter', 'latex');
@@ -44,7 +44,7 @@ ax = subplot(2, 2, 3);
 hold on; 
 plot(dt * [1:clock], CM_his' - bm_cm_y(1:4:clock*4), 'Color', 'r');
 
-ylabel("Altitude error (cm)", 'interpreter', 'latex');
+ylabel({"Center of mass"; "altitude error (cm)"}, 'interpreter', 'latex');
 xlabel("Time (s)", 'interpreter', 'latex');
 axis([0 3 -.0005 0.0025]);
 title('(c)', 'Units', 'normalized', 'Position', [.5 TITLE_Y 0], 'interpreter', 'latex');
