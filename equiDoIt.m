@@ -20,4 +20,4 @@ while terminal_id ~= id_1
   id_2 = links(direction, id_2);
 end
 
-save(sprintf('results/equilibrium/%d.mat', big_G));
+save(sprintf('results/%s/%d_%d.mat', exp_name, big_G, N));

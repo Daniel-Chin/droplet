@@ -1,5 +1,5 @@
-dt = 0.0001; % Time step, second
-N = 96; % Number of grid cells
+% dt = 0.0001; % Time step, second
+% N = 96; % Number of grid cells
 % N = 128; % Number of grid cells
 % N = 192; % Number of grid cells
 L = 2.0; % Box size, cm
