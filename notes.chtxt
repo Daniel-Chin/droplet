@@ -705,5 +705,12 @@ some day {
     check figures' numbers, Multimedia view
     Check the captions of all figures, especially the ones with a Multimedia view.
 }
+todo {
+    decribe one timestep. how you displace. forget about f_f and q. 
+        a little summary how the "conceptual" things are related to the implementation
+    for error analysis, use ultra run
+    alt-curvature:
+        filter the points for say 1mm away from the wall. 
+}
 questions {
 }

@@ -1,0 +1,68 @@
+1
+    rising bubble test case 1, 10:10 viscosity ratio
+
+2
+    droplet sliding down a wall
+    The gray markers in the background are visual helpers and do not interact with the physics. 
+    dt 0.0001 0.00005 0.00002
+    N 96 128 192
+
+3
+    two droplets merging
+    The gray markers in the background are visual helpers and do not interact with the physics. 
+    The contour lines show the velocity curl
+    64 0.0005
+    96 0.0002
+    128 0.0001
+
+4
+    six droplets merging
+    The black markers in the background are visual helpers and do not interact with the physics. 
+    The contour lines show the velocity curl
+    96 0.0002
+    128 0.0001
+    192 0.00005
+
+5
+    letters "IB" fall into an elastic pouch
+
+6
+    How sliding responds to droplet size
+    diameter .4 .5 .6 cm
+    The gray markers in the background are visual helpers and do not interact with the physics. 
+
+7
+    Big droplet catches up and merges with a small droplet
+    The gray markers in the background are visual helpers and do not interact with the physics. 
+
+8
+    The effect of interface re-sampling
+    The gray markers in the background are visual helpers and do not interact with the physics. 
+    re-sampling: off on
+
+9
+    Droplet splitting
+
+10
+    Droplets merging at the wall
+    The black markers in the background are visual helpers and do not interact with the physics. 
+    The contour lines show the velocity curl
+
+11
+    Droplet Splitting at the wall
+    The black markers in the background are visual helpers and do not interact with the physics. 
+    The contour lines show the velocity curl
+
+12
+    Droplet attaching to the wall
+    The black markers in the background are visual helpers and do not interact with the physics. 
+    The contour lines show the velocity curl
+
+13
+    Air bubble collides with water droplet
+    The black markers in the background are visual helpers and do not interact with the physics. 
+    The contour lines show the velocity curl
+
+13
+    Droplet leaves a trial on the wall
+    The gray markers in the background are visual helpers and do not interact with the physics. 
