@@ -81,11 +81,8 @@ RECORD_PATH = 'E:/IBM_Space/record/%d.mat';
 clockmax = ceil(tmax/dt);
 clock = 0;
 
-SLIP_LENGTH = SLIP_LENGTH_UNITS * h;
-SLIP_LENGTH_COEF = 1 / SLIP_LENGTH_UNITS;
-
 fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
-  NO_SLIP_FORCE*SLIP_LENGTH_COEF / (dtheta2*WALL_STIFFNESS/2) ...
+  NO_SLIP_FORCE / (dtheta2*WALL_STIFFNESS/2) ...
 );
 
 RENDER_DEBUG = 0;
