@@ -710,7 +710,7 @@ some day {
         a little summary how the "conceptual" things are related to the implementation
     for error analysis, use ultra run
 }
-next {
+3/6 {
     simulation X measurement
         is it true that:
             the total order of accuracy is the minimum of the order of accuracy of all multiplicative factors? 
@@ -722,6 +722,17 @@ next {
 todo {
     alt-curvature:
         filter the points for say 1mm away from the wall. 
+    check
+        \hat t VS \hat T
+    order of acc:
+        pair-wise slope should converge. 
+        also: L2 norm of fluid velocity field. 
+        use 1.5 steps, and make fine finer. 
+    upgrade 3d comments
+    friction limit is 0D! 
+    hydrophilic: reduce nonsense
+    young stress -> force
+    remove SLIP_LENGTH check, see the result. 
 }
 questions {
 }
