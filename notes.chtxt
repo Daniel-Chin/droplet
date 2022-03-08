@@ -720,6 +720,7 @@ some day {
             Why? 
 }
 todo {
+    fix ib2d
     alt-curvature:
         filter the points for say 1mm away from the wall. 
     check
