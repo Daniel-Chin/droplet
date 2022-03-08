@@ -75,8 +75,8 @@ SPLICE_WALL_THRESHOLD = h * 2.3;
 SPLICE_REJECT_N_STEPS = 2;
 splice_reject_remains = 0;
 
-OUTPUT_PATH = 'E:/IBM_Space/output/%d.png';
-RECORD_PATH = 'E:/IBM_Space/record/%d.mat';
+OUTPUT_PATH = strrep(getenv('h'), '\', '/') + "/d/IBM_space/output/%d.png";
+RECORD_PATH = strrep(getenv('h'), '\', '/') + "/d/IBM_space/record/%d.mat";
 
 clockmax = ceil(tmax/dt);
 clock = 0;
