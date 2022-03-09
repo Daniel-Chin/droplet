@@ -12,6 +12,7 @@ for ndt = [24 48 96 192; 0.0004 0.0002 0.0001 0.00005]
   % ax = subplot(2, 4, plot_col + 4);
   ax = subplot('Position', [(plot_col-1) * X_SPACE + .07, .13, .18, .3]);
   load(sprintf('results/equilibrium_conv/%d_%d.mat', big_G, N));
+  equiDoIt_exclude_too_close;
   his = curvature_pairs(3:end-2, 1);
   cvt = - curvature_pairs(3:end-2, 2);
   ana_slope = big_G / K;

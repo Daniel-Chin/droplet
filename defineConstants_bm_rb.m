@@ -40,8 +40,6 @@ tmax=3; % Run until time s
 clockmax=ceil(tmax/dt);
 NO_SLIP_FORCE = 0;
 FRICTION_ADJUST = 1;
-SLIP_LENGTH = 6 * h;
-SLIP_LENGTH_COEF = h / SLIP_LENGTH;
 
 VERTICAL_FLOW = 0;
 
@@ -52,4 +50,3 @@ WALL_EXISTS = 1;
 Nb3_space = 8;  % spacing of visual indicators
 
 WALL_SPACING = .5;
-SLIP_LENGTH_UNITS = 3 / WALL_SPACING;
