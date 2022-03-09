@@ -23,5 +23,5 @@ for j = 1 : Nb
     plot([X(j, 1), X(k, 1)], [X(j, 2), X(k, 2)], 'b', 'LineWidth', 2);
   end
 end
-title(sprintf('$G$ = %.0f\n', big_G), 'interpreter', 'latex');
+title(sprintf('$G$ = %.0f cm/s$^2$\n', big_G), 'interpreter', 'latex');
 hold off

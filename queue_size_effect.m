@@ -22,6 +22,9 @@ for SIZE = [.2 .25 .3]
   init_circle_pos(1, :) = [0, L * 0.8];
   initX_multi_half_circles();
   initInertiaNew();
+  % plot(0);
+  % hold on;
+  % render_phase = SPF - dt;
   render();
   while clock < clockmax
     clock = clock + 1;

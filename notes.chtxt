@@ -440,18 +440,300 @@ discard {
         add captions as you go
     resolve all \daniel{} and \charles{}
 }
-next {
-    Michael and I worked on discretization. We have a draft in another overleaf document, almost ready to merge in. 
-    
-    New meeting time? 
-        I have difficulty getting back; 
-        Michael got a parttime
-}
-2do {
-    P. Yue and J. J. Feng, “Wall energy relaxation in the Cahn–Hilliard model for moving contact lines,” Phys. Fluids 23, 012106 (2011).
-    
+9/15 {
     convert all png to pdf.
         may need to crop white padding
-        
     mention "for timestepping". (the 5-step update)
+}
+9/16 {
+    P. Yue and J. J. Feng, “Wall energy relaxation in the Cahn–Hilliard model for moving contact lines,” Phys. Fluids 23, 012106 (2011).
+}
+9/20 {
+    Michael and I worked on discretization. We have a draft in another overleaf document, almost ready to merge in. 
+}
+9/30 {
+    boundary and discretization section location? the first subsec of "numerical"? 
+        equation of motions
+        problem domain
+        discretization
+        our methods
+        
+    and, check "Setup details can be found in subsection \ref{subsec:dow}.". whoever refers to it should come after it. 
+}
+10/7 {
+    schematic of droplet on wall: merge (a) into (b)
+    schematic of rb:
+        "u=v=0" -> "no-slip no-penetration"
+    in "analytical cuvature": 
+        legend: multiline -> one line, font smaller
+        figure overall scale -> larger
+        main text has the color wrong. 
+}
+10/14 {
+    done
+        schematic of droplet on wall: merge (a) into (b)
+        schematic of rb:
+            "u=v=0" -> "no-slip no-penetration"
+        in "analytical cuvature": 
+            legend: multiline -> one line, font smaller
+            figure overall scale -> larger
+            main text has the color wrong. 
+    todo
+        schematic: add units. 
+            (this also makes it clear that they are lengths)
+        equi.pdf has inconsistency: "G" does not have units. 
+        add conclusion
+    Ask in email:
+        Are the equations we are solving non-dimensionalized? And when we are plotting stuff, do we plot dimensionalized quantities? 
+}
+10/21 {
+    done
+        schematic: add units. 
+            (this also makes it clear that they are lengths)
+        equi.pdf has inconsistency: "G" does not have units. 
+        conclusion first draft
+    ask guanhua: is the code dimensional?
+    then make sure everything is dimensioned. 
+    notations in the discretization section
+    f1 should be related to f_f. the current f1 describes the no-slip, which is not what we are using. Be clear
+}
+11/3 {
+    ask guanhua: is the code dimensional?
+        Guanhua: Yes, no dimensionless
+    resolved many comments
+    rewrite MCL. 
+        There were many mistakes. I fixed them. Also made a lot of structure improvements. 
+        It should be very nice now
+    proof read the paper up to results and fixed some things. 
+    discretization sec: changed equations to text. 
+}
+11/4 {
+    what is the curvature estimation algo? 
+        for every 3 points fit a circle...
+        cehck the relation with the finite diff method
+    todo {
+        spatial refinement -> spatial discretization parameter
+        check parameter order for all cases. 
+        domain is -> height of domain is
+        N -> kg m s ...
+        how do we estimate curvature from three points? 
+        0.25s, [where everything stops]
+        \cite -> actual author name, citation at end of sentence, if it applies. 
+        define circularity index
+        mention featflow: open-source CFD package. check the paper for accuracy
+        schematic: gas; 10 \times gas density
+        figure: should be 1 line. remove legend
+        f_min -> correct notation
+        upward vertical gas flow:
+            the boundary condition at y=0 is ... 30 * tanh
+        r, s, t for X3. 
+    }
+}
+11/11 {
+    done:
+        make sure everything is dimensioned. 
+        spatial refinement -> spatial discretization resolution
+        check parameter introduction order for all test cases. 
+        domain is -> height /size of domain is
+        N -> " g$\,$cm/s$^2$"
+        how do we estimate curvature from three points? 
+        define circularity index
+        schematic: gas; 10 \times gas densit
+        rb plot: should be 1 line. remove legend
+        f_min -> f_no slip
+        upward vertical gas flow
+        m -> cm; kg -> g
+        r, s, t for X3. 
+        summarize test cases. 
+        resolve comments
+    is featflow an open-source CFD package? 
+        the paper has it
+    scaler-scaler / scaler-vector multiplication style?
+        \cdot
+        \,
+        \times
+        ans:
+            \,
+    todo
+        r_h, s_h -> l, m. {0, 1, max_value}. define max. 
+        d_s -> \delta s
+        for the strucutre, we should have the same thing ij= (i×h,j×h)
+        lower-case all "i"mmersed "b"oundary "m"
+        schematic 1:
+            add "(periodic)"
+            remove right boundary effective parens. 
+            plot the mirrored droplet. 
+            remove sentence about force near 0. 
+        omega -> segment AB parametrized by s
+        three-phase -> contact point. consider "multi-phase"
+        MP and IS need a schematic
+}
+11/18 {
+    done:
+        MP and IS need a schematic
+        discretization section rework
+            r_h, s_h -> l, m. {0, 1, max_value}. define max. 
+            d_s -> \delta s
+            for the strucutre, we should have the same thing ij= (i×h,j×h)
+        lower-case all "i"mmersed "b"oundary "m"
+        schematic 1:
+            add "(periodic)"
+            remove right boundary effective parens. 
+            plot the mirrored droplet. 
+            remove sentence about force near 0. 
+        explain /Omega
+        three-phase -> contact point. consider "multi-phase"
+        Figure 2 is not vector graphics; notations changed to match discretization section. 
+        we use the results of Featflow (an open-source CFD package) as the ``ground truth''
+        scaler multiplication now uses \,
+}
+11/24 {
+    graphical abstract (thumbnail) selection
+        Figure 16, two rows
+    JFM: "British spelling must be used"
+        is this important?
+        change
+    JFM: 
+        images should be EPS or TIFF
+        use PDF for now
+    Movies:
+        quite stand-alone. no "multi-media view" found. 
+    Declaration of interests is now mandatory. 
+        "The authors report no conflict of interest."? 
+    todo
+        reference format. why is it different from the template?
+        Reynold for rising bubble and droplet on wall
+}
+12/2 {
+    done:
+        British spelling
+        thumbnail
+            "multiple panels will be rejected"
+            What I have: main.gif
+        reference format. why is it different from the template?
+            latex things
+            fixed
+        fix short title
+        Reynold for rising bubble and droplet on wall
+            rising bubble: 35. 
+            Droplet on wall: 150. 
+}
+12/9 {
+    done:
+        Reynold for "IB" letters. 
+        mention: the typical lengthscale is the diameter of the droplet. 
+        results = verification subsec + applications of our methods subsec
+    "citet" style:
+        https://www.cambridge.org/core/services/aop-file-manager/file/5ff6ebbaa583bc0b4b5940c5/JFM-IFC-07-01-21.pdf
+        line 281, section 13, 
+        they want citet
+    comments
+        "citation seems to be missing here"
+        "like the wall"
+    todo
+        "displace, no-flux" figure:
+            explain more. 
+            where is the wall? 
+            where is the ground truth location?
+            no-penetration
+            check if "static-friction limit" wording is consistent with latest updates. 
+            consider writing out the modified version of 2.3 (is it just another term on the rhs?)
+}
+12/16 {
+    done:
+        "displace, no-flux" figure:
+            explain more. 
+            where is the wall? 
+            where is the ground truth location?
+            no-penetration
+            check if "static-friction limit" wording is consistent with latest updates. 
+            consider writing out the modified version of eq 2.3 (is it just another term on the rhs?)
+    todo
+        ell_0 should be i, ell_0
+        blue "x2" for fig 3
+        fig5: x_2, l-1   l   l+1
+        fig 9 abcd
+}
+12/23 {
+    done
+        ell_0 should be i, ell
+            for all figures
+            e.g. fig5: x_2, l-1   l   l+1
+        blue "x2" for fig 3
+        fig 9 abcd
+        add movies to overleaf
+        figure caption
+            like the figure 16 caption now says: "This figure depicts results from a simulation in which a big droplet catches a smaller droplet and coalesces with it. Time increases from the left to right. This test demonstrates the effect of droplet size in a single simulation." We should have all the information about what is contained in the figure, what the panels mean, and its significance, in the caption. do this for the rest of the figures?
+    todo
+        fig 9
+            have tick marks and axis label for (a) (b)
+        rising bubble
+            where's G? 
+            should we make 1000 to 1. 
+        get t=0 for lapsetable simulations. 
+        re-simulate the resample comparison, note the parameters. 
+}
+2022/1/6{
+    done
+        fig 9
+            have tick marks and axis label for (a) (b)
+        rising bubble
+            where's G? added. 
+            should we make 1000 to 1? No. Simulation is different. 
+        get t=0 for lapsetable simulations. 
+        re-simulate the resample comparison, record the parameters. 
+            same as sec 5.1 now. 
+}
+1/20 {
+    done
+        GNBC wording changed. check
+        friction equations: fix the order to introduce variable 
+        changed 
+            \bm{F}_T is now F_T, stress magnitude.
+            2.11 FT/||FT|| should be T_hat
+        young's -> young
+        move dow setup introduction from 5.1 to 4.3.1
+            refer to 4.3.1 in 5.1
+            and mention the gravity = 0 for 4.3.2 and .3
+    references broken
+}
+1/23 {
+    spelling Br -> US
+    process comments from the previous project.
+}
+some day {
+    check figures' numbers, Multimedia view
+    Check the captions of all figures, especially the ones with a Multimedia view.
+}
+3/5 {
+    decribe one timestep. how you displace. forget about f_f and q. 
+        a little summary how the "conceptual" things are related to the implementation
+    for error analysis, use ultra run
+}
+3/6 {
+    simulation X measurement
+        is it true that:
+            the total order of accuracy is the minimum of the order of accuracy of all multiplicative factors? 
+        we got: 
+            circulariy measurement: order ~= 2
+            total: order ~= 5
+            Why? 
+}
+todo {
+    fix ib2d
+    alt-curvature:
+        filter the points for say 1mm away from the wall. 
+    check
+        \hat t VS \hat T
+    order of acc:
+        pair-wise slope should converge. 
+        also: L2 norm of fluid velocity field. 
+        use 1.5 steps, and make fine finer. 
+    upgrade 3d comments
+    friction limit is 0D! 
+    hydrophilic: reduce nonsense
+    young stress -> force
+    remove SLIP_LENGTH check, see the result. 
+}
+questions {
 }

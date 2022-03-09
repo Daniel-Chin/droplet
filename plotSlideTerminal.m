@@ -1,7 +1,8 @@
 close all;
 
+tiledlayout(2, 3, 'Padding', 'none', 'TileSpacing', 'compact'); 
 for plot_i = (1:6)
-  ax = subplot(2, 3, plot_i);
+  ax = nexttile;
   if mod(plot_i, 3) == 1
     N = 96;
   elseif mod(plot_i, 3) == 2
@@ -24,7 +25,7 @@ for plot_i = (1:6)
   % defineConstants();
   % initialize();
   load(sprintf( ...
-    "E:/IBM_Space/slide/record_%s_%d/45.mat", str_dt, N ...
+    "D:/IBM_Space/slide/record_%s_%d/45.mat", str_dt, N ...
   ));
 
   hold on;
@@ -60,3 +61,4 @@ for plot_i = (1:6)
   formatPlot();
   ax.FontSize = 12;
 end
+preprint();

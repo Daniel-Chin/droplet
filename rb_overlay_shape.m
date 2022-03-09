@@ -46,6 +46,12 @@ end
 view(0, 90);
 axis equal;
 axis([0 0.55 -.25 .8]);
-legend(h, {"Featflow", "IB"}, 'Location', 'se', 'interpreter', 'latex');
+legend(h, {"Featflow", "IB"}, 'Location', 'se', 'interpreter', 'latex', 'AutoUpdate', 'off');
 set(gca, 'FontSize', 20);
+
+drawArrow = @(x,y,varargin) quiver( x(1),y(1),x(2)-x(1),y(2)-y(1),0, varargin{:} );
+drawArrow([.37 .37], [0 .5], 'linewidth', 1, 'color', 'k');
+
 formatPlot();
+text(.38, .25, sprintf('Time \nincreasing'));
+preprint();

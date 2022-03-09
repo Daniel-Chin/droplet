@@ -1,0 +1,641 @@
+\documentclass[%
+ aip,
+% jmp,
+% bmf,
+% sd,
+% rsi,
+ amsmath,amssymb,
+% preprint,
+ reprint,
+ floatfix
+% author-year,
+% author-numerical
+]{revtex4-1}
+
+\usepackage{graphicx}% Include figure files
+\usepackage[caption=false]{subfig}
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+%\usepackage{times,newtxmath} % better than outdated mathptmx package
+%\usepackage[normalem]{ulem}
+\usepackage{xcolor}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\providecommand\bnabla{\boldsymbol{\nabla}}
+
+\allowdisplaybreaks
+
+\usepackage{CJKutf8} % to use CJK characters
+
+\usepackage[breaklinks=true]{hyperref} % make eq and ref links clickable for convenience
+
+
+
+\usepackage{xcolor}
+\usepackage{array}
+%\usepackage{longtable}
+\usepackage{natbib}
+
+\usepackage{graphicx,color}
+% \usepackage[section]{placeins}
+\usepackage{float}
+% \usepackage{graphicx,subfigure}
+%\usepackage{subcaption}
+\usepackage{epstopdf, epsfig}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{todonotes}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    urlcolor   = blue,
+    citecolor  = black,
+}
+\usepackage{verbatim}
+\usepackage{bm}
+\usepackage{diagbox}
+\usepackage{forloop}
+
+\usepackage{listings}
+\usepackage[numbered,framed]{matlab-prettifier}
+% \let\ph\mlplaceholder % shorter macro
+% \lstMakeShortInline"
+
+\lstset{
+  style              = Matlab-editor,
+  basicstyle         = \mlttfamily,
+  escapechar         = ",
+  mlshowsectionrules = true,
+}
+
+
+\newcommand{\pejman}[1]{\todo[inline,color=green!40]{Pejman: #1}}
+\newcommand{\daniel}[1]{\todo[inline,color=yellow!40]{Daniel: #1}}
+\newcommand{\michael}[1]{\todo[inline,color=red!40]{Michael: #1}}
+\newcommand{\charles}[1]{\todo[inline,color=blue!40]{Charles: #1}}
+
+\newcolumntype{A}[2]{%
+    >{\minipage{\dimexpr#1\linewidth-2\tabcolsep-#2\arrayrulewidth\relax}\vspace\tabcolsep}%
+    c<{\vspace\tabcolsep\endminipage}}
+
+\newenvironment{lapsetable}[2]{ % n_cols, wid
+    \tabular{
+        cc
+        *{#1}{>{\centering}A{#2}{1.5}}
+    }
+    \ignorespaces
+    }{
+    \tabularnewline
+    \endtabular\ignorespacesafterend
+}
+\newenvironment{shortlapsetable}[2]{ % n_cols, wid
+    \tabular{
+        c
+        *{#1}{>{\centering}A{#2}{1.5}}
+    }
+    \ignorespaces
+    }{
+    \tabularnewline
+    \endtabular\ignorespacesafterend
+}
+
+\newcounter{lapse_iter}
+\newcommand{\lapse}[9]{ % name, dt, N, dt_display, n_cols, *crop
+    \tabularnewline
+    #3 & #4
+    \forloop{lapse_iter}{1}{\not{\value{lapse_iter} > #5}}{
+        &
+        \includegraphics[width=\textwidth, trim={#6cm #7cm #8cm #9cm}, clip]{#1/output_#2_#3/\arabic{lapse_iter}.pdf}
+    }
+}
+\newcommand{\lapseShort}[6]{ % name, n_cols, width, *crop
+    \forloop{lapse_iter}{1}{\not{\value{lapse_iter} > #2}}{
+        &
+        \includegraphics[width=\textwidth, trim={#3cm #4cm #5cm #6cm}, clip]{#1/\arabic{lapse_iter}.pdf}
+    }
+}
+\newcommand{\scinote}[2]{{#1}$\times$10$^{#2}$}
+
+\begin{document}
+
+%\preprint{AIP/123-QED}
+
+\begin{CJK*}{UTF8}{} % to use CJK characters
+
+\title[]{Simulating liquid-gas interfaces and moving contact lines with the immersed boundary method}
+% Force line breaks with \\
+
+\author{Michael Y. Li (\CJKfamily{gbsn}宗泽舜)}
+\thanks{These authors contributed equally to this work.}
+\affiliation{Courant Institute of Mathematical Sciences, New York University,\\ New York, NY 10012-1110, USA}
+\author{Daniel Chin (\CJKfamily{gbsn}李新宇)}%
+% \email{Second.Author@institution.edu.}
+\thanks{These authors contributed equally to this work.}
+\affiliation{New York University Shanghai,\\ Shanghai, 200120, China}
+
+\author{Charles Puelz}
+\affiliation{Department of Pediatrics, Section of Cardiology, Texas Children's Hospital and Baylor College of Medicine,\\ Houston, TX 77030-2372, USA}
+
+\author{Pejman Sanaei}
+\email{psanaei@nyit.edu}
+\homepage{https://sites.google.com/nyit.edu/pejman-sanaei-webpage}
+\affiliation{Department of Mathematics, New York Institute of Technology,\\ New York, NY 10023-7692, USA}
+
+\date{\today}% It is always \today, today,
+             %  but any date may be explicitly specified
+
+%%%%%%%%%%%%%%%%%
+\begin{abstract}
+In this work, we combine the immersed boundary method with several techniques to simulate a moving liquid-gas interface on a solid surface. The first technique defines a moving contact line model and implements an extended Generalized Navier Boundary Condition at the immersed solid boundary. The static and dynamic contact line angles are endogenous instead of prescribed, and the solid boundary can be non-stationary with respect to time. The second technique simulates both a surface tension force and an unbalanced Young force with one general equation that does not involve estimating local curvature. The third technique splices liquid-gas interfaces to handle topological changes such as the coalescence and separation of liquid droplets or gas bubbles. Finally, the forth technique re-samples liquid-gas interface markers to ensure a near-uniform distribution without exerting artificial forces. We demonstrate empirical convergence of our methods on non-trivial examples and apply them to several benchmark cases, including a slipping droplet on a wall and a rising bubble.
+\end{abstract}
+
+\maketitle
+
+\end{CJK*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+Physical systems involving the coupling between a fluid and evolving immersed structures are usually impossible to describe analytically. The immersed boundary (IB) method is a numerical approach for solving such problems.  Traditionally, this method is used with the assumption that the immersed boundaries are massless~\cite{peskin1972flow}. The method describes the fluid in Eulerian coordinates and the immersed boundaries with arrays of linked Lagrangian markers. The fluid advects the markers and the markers exert forces onto the fluid. The massless-boundary assumption is suitable for describing thin elastic membranes common in biological applications, for example, the interaction between blood flow and heart valves~\cite{peskin1972flow}. Similarly, the massless-boundary assumption is appropriate for liquid-gas interfaces. Thus, with a surface tension model, the IB method is capable of modeling multi-phase fluid flow~\cite{leveque1997immersed, lorstad2004assessment, popinet2018numerical,  huang2018improved}. This introduces a new challenge, which is the moving contact line (MCL) problem that emerges when a solid boundary meets with a liquid-gas interface. \citet{lai2010numerical} proposed an MCL model that simulates Navier slip with the IB method, but it is limited to \textit{fixed} solid boundaries. Note that in their approach, the Navier slip boundary condition is used on the wall of the moving contact line to avoid the force singularity. 
+
+
+In this work, we describe an MCL model that imposes an extended Generalized Navier Boundary Condition (GNBC)~\cite{quian2003generalized} between a moving liquid-gas interface and an \textit{evolving} immersed boundary. Two types of immersed boundaries (liquid-gas interface, solid surface) coexist and are governed by the same IB numerical method. The slip condition used in this paper is informed by recent molecular dynamics (MD) simulations \cite{johansson2018molecular}. The resulting numerical scheme, unlike related works that either prescribe the contact angle \cite{muradoglu2010front,liu2015diffuse} or specify the marker velocity \cite{manservisi2009variational}, is capable of capturing both the \textit{static} and the \textit{dynamic} contact angles in an endogenous way. 
+
+In addition to the MCL model, we propose a surface tension model within the IB method. Using the IB method to simulate surface tension is often classified as a front-tracking scheme. Most front-tracking methods, including many IB variants, calculate the magnitude of surface tension by estimating the local curvature of the interface using three to six markers~\cite{leveque1997immersed, huang2018improved}. This approach is susceptible to errors and instability issues. \citet{tryggvason2001front} computed the surface tension using tangent vector subtraction in every Eulerian cell, thus omitting the need to estimate curvature. \citet{popinet1999front} used tangent vector subtraction for every link between adjacent Lagrangian markers, exploiting the IB method's Lagrangian representation of the structure. Our method uses tangent vector summation for every Lagrangian marker (instead of every link). The subtle shift in perspective brings a side benefit that the unbalanced Young force \cite{quian2003generalized} at the contact point is readily computed by the two markers at both ends of a liquid-gas interface. In addition, our approach uses a step-wise re-sampling technique to ensure a near-uniform distribution of Lagrangian markers in the liquid-gas interface. Finally, we employ a step-wise interface splicing method to implement interface topological changes including droplet coalescence and separation. 
+
+This study is motivated by a real-life industrial problem, presented by W.L.~Gore \& Associates in 2018 during the Mathematical Problems in Industry (MPI), which is a workshop that attracts leading applied mathematicians and scientists from universities, industry, and national laboratories~\cite{cimpeanu2021motion}. Catalysts are an integral part of many chemical processes. They are usually made of a dense but porous material such as activated carbon or zeolites, which provide a large surface area. Liquids that are produced as a byproduct of a gas reaction at the catalyst site are transported to the surface of the porous material, slowing down transport of the gaseous reactants to the catalyst active site. One example of this is in a sulfur dioxide filter, which converts gaseous sulfur dioxide to liquid sulfuric acid~\cite{kiradjiev2020simple,kiradjiev2021homogenized}. Such filters are used in power plants to remove the harmful sulfur dioxide that would otherwise contribute to acid rain. Understanding the dynamics of liquid droplets in the gas channel of a device is critical in order to maintain performance and durability of the catalyst assembly. Among several other tests, the methods presented in this paper are applied to simulate 2D droplets moving on a vertical wall, which corresponds to this application. In this paper, we also empirically study the spatial and temporal convergence of our methods, compare simulation results at equilibrium against an analytical solution, and benchmark our methods with several standard test cases.
+
+The paper is organized as follows: in Sec.~\ref{sec:numerical} we describe the IB method, the boundary conditions, the surface tension formulation, the moving contact line problem, the step-wise interface re-sampling technique, and the interface splicing technique. An approach for simulating variable fluid density is also discussed. We then introduce the discretization of the governing equations in Sec.~\ref{sec:discretization}. In Sec.~\ref{sec:veri}, we verify the accuracy of our simulation results. In Sec.~\ref{sec:app}, we apply our methods to several test cases. Finally, we conclude in Sec.~\ref{sec:conclusion} with a discussion of our model and results, along with some insight into real-world applications.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Equations of motion} \label{sec:numerical}
+In this section, we describe the IB method. This approach has proven to be an extremely versatile method for fluid-structure interaction problems since its development almost forty years ago~\cite{peskin1972flow,mcqueen1997shared,arthurs1998modeling,lai2000immersed,griffith2009simulating,balboa2011staggered,devendran2012immersed,sanaei2021flight}. The method represents the immersed structure with Lagrangian coordinates and the fluid with Eulerian or `lab frame' coordinates. The interactions between the two coordinate frames are communicated with integral transforms involving Dirac delta function kernels. For the solid surfaces and the variable density considered in this paper, we adopt the penalty immersed boundary (pIB) method \cite{kim2016penalty}. For example, the vertical wall introduces a set of \textit{tether points} that are fixed in space and represent the desired shape and location of the structure. The boundary markers are connected to the tether points via springs, and only the boundary markers interact with the fluid. Stiff springs approximate a rigid boundary. These stiff springs result in numerical stiffness but simplify the implementation. In practice, accurate results can be achieved with an appropriate choice of the spring constant, spatial resolution, time stepping, and other numerical parameters \cite{kim2016penalty,sanaei2021flight}. 
+
+The equations of motion for the coupled fluid-structure system are:
+\begin{multline}
+\rho_g\left(\cfrac{\partial\bm{u}}{\partial t}+\bm{u} \cdot \nabla\bm{u}\right) =
+    -\nabla p+\mu\Delta\bm{u}+\bm{f}_1+\bm{f}_2+\bm{f}_3,
+    \\
+    \nabla \cdot \bm{u}=0, \label{eq:ib-ns}
+\end{multline}    
+\begin{equation}
+\bm{f}_i(\bm{x},t)  = 
+    \begin{cases}
+    \int  \bm{F}_i(   s,t)\,\delta(\bm{x}-\bm{X}_i(s,t))\,ds,    \hspace{34pt} i = 1,2, \\ \\
+    \iint \bm{F}_i(r, s,t)\,\delta(\bm{x}-\bm{X}_i(r, s,t))\,ds\,dr, \quad i = 3, 
+    \end{cases}
+    \label{eq:ib-spread-force}
+\end{equation}    
+\begin{equation}    
+\cfrac{\partial\bm{X}_i}{\partial t}(t) =
+    \int\bm{u}(\bm{x},t)\,\delta(\bm{x}-\bm{X}_i(t)) \, d\bm{x}, \quad i = 1,2,3.
+    \label{eq:ib-advect}
+\end{equation}
+
+Here, $\rho_g$ is the density of the gas, $\mu$ is the dynamic viscosity of the gas and the liquid, and $t$ denotes the time variable. The function $\boldsymbol{u}(\boldsymbol{x},t)$ is the velocity and $\delta$ is the 2D Dirac delta function. The vectors $\boldsymbol{x}$ and $\boldsymbol{X}_i$ denote the Eulerian fluid coordinates and the Lagrangian structure coordinates. In this paper, we consider three types of immersed structures: a 1D wall boundary ($\bm{X}_1$), a 1D fluid-gas interface boundary ($\bm{X}_2$), and a 2D variable density area ($\bm{X}_3$). For the 1D structures, $s$ is the arc length that specifies a point on the boundary (i.e. an arc length-conserved parametrization of the 1D boundary). For the 2D structures, $(r,s)$ is a 2D equidistant parametrization of the area. The functions $\boldsymbol{f}_i$ and $\boldsymbol{F}_i$ are the Eulerian and the Lagrangian force densities corresponding to the immersed structures. The Lagrangian force densities $\boldsymbol{F}_1$ and $\boldsymbol{F}_2$ are 1D force densities but $\boldsymbol{F}_3$ is a 2D force density. The following subsections will introduce each type of immersed structure corresponding to $\boldsymbol{X}_i$ and define its Lagrangian force density $\boldsymbol{F}_i$. Equations (\ref{eq:ib-ns}) are the Navier-Stokes equations for incompressible flow of a viscous fluid. Equation (\ref{eq:ib-spread-force}) calculates the force imparted from the immersed structures onto the fluid by converting Lagrangian force densities to Eulerian force densities using the Dirac delta function kernel. Equation (\ref{eq:ib-advect}) also uses the Dirac delta function to enforce the condition that the velocity of the immersed structure is equal to the fluid velocity, corresponding to a no-slip and no-penetration condition between the fluid and structure. 
+
+\subsection {Boundary conditions} \label{sec:bc}
+\begin{figure}
+\centering
+\includegraphics[scale=0.35]{Fig1.pdf}
+\caption{\footnotesize {The underlying computational domain exposed to the fluid solver is 2 cm $\times$ 2 cm. The effective boundary conditions for the 1 cm $\times$ 2 cm problem domain are shown via parenthesized texts. The effective symmetry boundary is obtained by mirroring half of the simulation domain. The GNBC is obtained by adding a wall (see Sec.~\ref{subsec:wall}) at the left periodic boundary.}}
+\label{fig:domain}
+\end{figure}
+
+Our code is adapted from the Matlab implementation of the IB method by \citet{ib_matlab}, which uses periodic boundary conditions for the computational domain. In most of our simulations, we fold the domain in half to obtain a symmetry boundary condition on the left and right boundaries. This section describes our implementation of symmetry boundary conditions within Peskin's implementation. 
+
+If the computational domain exposed to the fluid solver is a square with side length $L$, as shown in Fig.~\ref{fig:domain}, then we select the left half of it to be the problem domain. According to Fig.~\ref{fig:domain}, $L=2$ is chosen. During each time step, once the Eulerian force densities (given by equation \ref{eq:ib-spread-force}) are imparted onto the grid, the simulation mirrors the Eulerian force densities matrix around $x = L/2$ (i.e. the dashed line in Fig.~\ref{fig:domain}) and adds them back to the original Eulerian force field. In this way, the fluid velocity field is always symmetric around $x = L/2$. 
+
+
+\subsection{Wall as an immersed boundary} \label{subsec:wall}
+The main case that motivates our study is the simulation of liquid droplets moving on a solid vertical wall. We simulate the wall as an immersed boundary. In this specific case, since the wall is static, it is arguably easier to treat the wall as a boundary condition. However, we want our MCL method to generalize to non-static solid surfaces (see e.g. Sec.~\ref{subsubsec:letters}), so we treat the wall as an immersed boundary to maximize generality. Each Lagrangian marker of the wall is tethered to its ground-truth location, thus ensuring no-penetration and no-slip. In this case, the Lagrangian force density corresponding to the 1D wall is
+\begin{equation}
+\bm{F}_1(s,t) = -k_1 \, (
+    \bm{X}_1(s,t) - \bm{Z}(s)
+). 
+\label{eq:wall-force}
+\end{equation}
+Equation (\ref{eq:wall-force}) describes the tether-point construction and the associated spring force on the boundary to model a no-slip and no-penetration wall. The parameter $k_1$ is the spring constant ($\text{g}/(\text{s}^2\,\text{cm})$) associated with the wall, which is a trade-off parameter between accuracy and numerical stability. The vector $\boldsymbol{Z}$ is the ground-truth location. At the start of the simulation, we usually initialize $\boldsymbol{X_1}(s,0) = \boldsymbol{Z}(s)$ (with Sec.~\ref{subsec:rb} as an exception). The wall behavior will be later modified in the MCL model, as described in Sec.~\ref{subsec:mcl}. 
+
+\subsection{Surface tension}
+We use the integral formulation as described by \citet{popinet2018numerical} to derive a model for surface tension. In this approach, each interface marker is pulled by its two neighbors at a constant magnitude. In contrast to the work by \citet{tryggvason2001front}, our method is entirely in the Lagrangian frame and does not estimate a tangent vector with a polynomial fit. Instead, the unit tangent vector is 
+\begin{equation}
+\bm{\hat{T}}(s, t) = \cfrac{\partial \bm{X}_2(s, t)}{\partial s}. 
+\end{equation}
+Then, the Lagrangian surface tension force density is
+\begin{equation}
+\bm{F}_2(s,t) = \sigma \cfrac{\partial \bm{\hat{T}}}{\partial s}, 
+\end{equation}
+where $\sigma$ is the surface tension coefficient. 
+Therefore, for a segment $AB$ of the liquid-gas interface as shown in Fig.~\ref{fig:integralFormulation}, we have
+\begin{equation}
+\int_{\Omega} \bm{F}_2 \, ds = \int_{A}^{B} \sigma \, d \bm{\hat{T}} = \sigma (\bm{\hat{T}}_B - \bm{\hat{T}}_A),
+\label{eq:tension}
+\end{equation}
+where $\Omega$ is the set of interface points $s$ on segment $AB$. $\bm{\hat{T}}_A$ and $\bm{\hat{T}}_B$ are the unit tangent vectors at $A$ and $B$, respectively. With this approach, the sum of surface tension forces in a closed loop is zero \cite{popinet2018numerical}. In our discrete implementation as shown in Fig.~\ref{fig:integralFormulation}, we first compute the tangent vectors pointing from one marker to its adjacent markers and then apply the corresponding force, of magnitude $\sigma$, onto the marker. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=7cm]{Fig2.pdf}
+    \caption{\footnotesize{An interface marker $X_{2, \ell}$ is responsible for the surface tension force on the red segment $AB$. $\bm{\hat{T}}_A$ (the unit tangent vector at $A$) is computed by subtracting the marker $X_{2, \ell}$ from the adjacent marker $X_{2, \ell-1}$. The difference between $\bm{\hat{T}}_A$ and $\bm{\hat{T}}_B$ (the unit tangent vector at $B$), multiplied by the tension coefficient $\sigma$, gives the surface tension force on the segment $AB$. $\Omega$ is the set of interface points $s$ on segment $AB$.%This is then numerically applied to point $X_{2, \ell}$. 
+    }}
+    \label{fig:integralFormulation}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=5cm]{Fig3.pdf}
+    \caption{\footnotesize{
+        The blue circles show the interface markers. The surface tension force is applied in the tangent direction $\bm{\hat{T}}$ from every marker to its two adjacent markers. This scheme leaves the two markers at the wall with only one adjacent marker, simulating the unbalanced Young force with the same method as the tension force. Notice that the sum of the tension forces on all markers is exactly the sum of unbalanced Young forces on the two markers, just inverted in direction.}}
+    \label{fig:young1}
+\end{figure}
+
+A consequence of this implementation is that when the gas-liquid interface meets a solid surface, the unbalanced Young force~\cite{quian2003generalized}, denoted by $\bm{f}_Y$, arises directly from the surface tension and is correctly imparted. As shown in Fig.~\ref{fig:young1}, at a contact point, there is one interface marker that only has one neighbor. The total force on this marker becomes tangent, instead of normal, to the interface. The horizontal component of this force is balanced by the tether force provided by the no-penetration wall, and the vertical component is the unbalanced Young force, i.e.
+\begin{equation}
+    \bm{f}_Y = \bm{\hat{T}} \, \sigma \cos\theta, \label{eq:young}
+\end{equation}
+where $\theta$ is the contact angle. To re-iterate, our numerical simulation never uses the above formulation of $\bm{f}_Y$, since the unbalanced Young force is already included in our surface tension implementation. 
+
+\subsection{Moving contact line and the extended Generalized Navier Boundary Condition} \label{subsec:mcl}
+The MCL problem refers to the apparent contradiction that contact lines can move on a no-slip wall. The mechanism of an MCL and how to simulate it had been largely a mystery until 1979~\cite{dussan1979spreading}. Since then, researchers have developed many numerical models of MCLs \cite{sui2014numerical, liu2015diffuse}. A recent study~\cite{johansson2015water} discovered that hydrogen bonds facilitate the no-slip behavior of water on hydrophilic surfaces. These bonds are orders of magnitudes stronger compared to the fluid's internal viscosity, so hydrophilic surfaces usually behave as if they were no-slip. This justifies the traditional no-slip assumption between water and hydrophilic surfaces. An MCL contradicts this assumption since the unbalanced Young stress at the contact point breaks hydrogen bonds, therefore allowing slip. For example, in the work by \citet{lai2010numerical}, MCL is simulated with IB by implementing a Generalized Navier Boundary Condition (as opposed to a no-slip condition) in the fluid solver. However, their work has two limitations: (i) the boundary condition is static and cannot be a solid structure that changes shape; (ii) the entire boundary allows slip, including segments far away from the MCLs. This section proposes a method to implement an extended GNBC which (i) works with the IB method, (ii) can be prescribed on to an immersed structure that changes shape over time, and (iii) only allows slip near the MCLs. 
+
+With a GNBC, the slip velocity is proportional to the sum of the tangential viscous stress and the unbalanced Young stress. Coincidentally, since the IB method sums the Eulerian force densities imparted from different types of boundaries, the local total tangential stress becomes readily available, so we have no need to distinguish the unbalanced Young stress from the internal viscous stress. In this light, we propose a wall friction model that is analogous to the viscous force within the fluid. More specifically, the viscous force is the friction between adjacent layers of the fluid while the wall friction is the friction between the wall and the first layer of the fluid. Note that using a linear friction model results in equations of motion identical to a GNBC. For example, when the unbalanced Young stress exactly cancels the friction force, the slip velocity will be constant, and the friction force will be proportional to the slip velocity. Moreover, we extend the GNBC so that weak tangential stresses result in a stationary contact. Specifically, define
+\begin{align}
+F_T & = \bm{F}_1 \cdot \bm{\hat{T}} , \\
+F_\text{static-limit} & =
+F_\text{no-slip} + \eta(\theta)
+\left|
+    \bm{u} \cdot \bm{\hat{T}}
+\right|,
+\label{eq:friction1}
+\end{align}
+where $F_T$ is the local tangential stress magnitude, $\bm{\hat{T}}$ is the unit vector tangent to the wall, $F_\text{static-limit}$ is the static stress threshold, $F_\text{no-slip}$ is the minimum friction force density (discussed below), $\theta$ is the contact angle, and $\eta$ is a mapping from the contact angle to a friction coefficient ($\text{g}/(\text{s} \, \text{cm})$). The resulting wall friction force density (1D) is defined as
+\begin{align}
+\bm{F}_f & = -\min ( F_T, F_\text{static-limit} )\,
+\bm{\hat{T}}.
+\label{eq:friction2}
+\end{align}
+Note that $F_T$ depends on the wall marker tether force density $\bm{F}_1$, which is how the IB method maintains the instantaneous local stress at the wall. 
+
+The function $\eta$ defines a friction coefficient ($\text{g}/(\text{s} \, \text{cm})$) in terms of the contact angle $\theta$ and is given by:
+\begin{equation}
+\eta(\theta) = 
+\begin{cases}
+    1.54 & \text{if   }\ \theta > 2, \\
+    - 8.48\,\theta + 18.5 & \text{if   }\ 1.117 < \theta \le 2, \\
+    - 19.1\,\theta + 30.31 & \text{if   }\ \theta \le 1.117. 
+\end{cases}
+\label{eqn:eta}
+\end{equation}
+The parameter values in (\ref{eqn:eta}) are based on measured results from the simulation of water-silica contact line movement by \citet{johansson2018molecular}. Linear interpolation of measured data points is used to obtain $\eta(\theta)$ as given in (\ref{eqn:eta}). Note that our MCL method is agnostic to the specific implementation of $\eta$, therefore future usages are free to modify $\eta$. In addition, according to (\ref{eq:friction2}), when the contact angle is large and the unbalanced Young force is small, such that $F_T < F_\text{static-limit}$, we have $\bm{F}_f = -F_T \, \bm{\hat{T}}$, in which the wall behaves as a no-slip boundary. This is what differentiates our method from the standard GNBC in which non-zero tangential stress, no matter how small, moves the contact line. Our extended GNBC allows no-slip under sufficiently small tangential stress, which better models physical reality. Additionally, the standard GNBC becomes a special case of our extended GNBC when $F_\text{no-slip} = 0$. 
+
+To incorporate extended GNBC into the IB method, at every time step, each wall marker is tangentially displaced until $F_T \, \bm{\hat{T}}$, the tangential component of the tether force, when computed on the displaced wall marker, becomes equal to $\bm{F}_f$ (see Fig.~\ref{fig:displace}). The ground-truth locations $\bm{Z}$ are unchanged, and the force density equation (\ref{eq:wall-force}) still holds. The velocity corresponding to the tangential displacement of the wall marker appears in the advection equation (\ref{eq:ib-advect}) for $i = 1$ as follows: 
+
+\begin{equation}
+\cfrac{\partial\bm{X}_1}{\partial t}(t) =
+    \int\bm{u}(\bm{x},t)\,\delta(\bm{x}-\bm{X}_1(t)) \, d\bm{x} + q \, \bm{\hat{T}}. 
+    \label{eq:advect-w-mcl}
+\end{equation}
+where $q \, \bm{\hat{T}} \, dt$ gives the displacement in a timestep $dt$. 
+
+\begin{figure}
+    \centering
+    \subfloat[]{\includegraphics[width=7cm]{Fig4a.pdf}}
+    \quad
+    \subfloat[]{\includegraphics[width=7cm]{Fig4b.pdf}}
+    \caption{\footnotesize{A close-up schematic of a wall marker denoted $\bm{X}_1$. Its ground-truth location is denoted $\bm{Z}$. $\bm{F}_1$ is the tether spring force. In (a), under the no-slip condition, equation (\ref{eq:wall-force}) would have brought $\bm{X}_1$ to the dotted circle position. To implement the extended GNBC, we vertically displace the marker by $q \, \bm{\hat{T}} \, dt$ so that the updated position results in a tether spring force whose vertical component equals to $\bm{F}_f$. (b) illustrates the other case where the spring force's vertical component does not exceed $F_\text{static-limit}$ even without having to slip, so no displacement happens and $q$ = 0. In general, $q \, \bm{\hat{T}} \, dt$, the tangential displacement of the marker, constitutes slip, where $q \, \bm{\hat{T}}$ is the slip velocity. There is never any normal displacement, ensuring no penetration. A wall marker stays inside the no-slip region between the two dashed lines. If the wall were no-slip, then $F_\text{static-limit}$ would be infinity, the no-slip region would be infinitely wide, and $q = 0$. 
+    }}
+    \label{fig:displace}
+\end{figure}
+
+We emphasize three outcomes from this approach: 
+\begin{itemize}
+    \item The contact line can now slip. Slipping corresponds to the accumulation of the tangential displacements of wall markers defined as $q \, \bm{\hat{T}} \,dt$. 
+    \item $F_T \, \bm{\hat{T}}$, the tangential component of the stress (i.e. the tether spring force) that the wall exerts onto the fluid, when computed on the displaced wall markers, equals the above formulated $\bm{F}_f$. 
+    \item The work done by the friction, i.e. heat dissipation, is accurately removed from the system since the tangential displacement of wall markers consumes potential energy in the tether springs. 
+    \item $\lVert \bm{F}_f \rVert$ can be viewed as the no-slip stress magnitude $F_T$ (or equivalently, the spring force computed before the displacement) with an upper bound of $F_\text{static-limit}$. In other words, $\lVert \bm{F}_f \rVert = \min ( F_T, F_\text{static-limit} )$. When $\lVert \bm{F}_f \rVert = F_\text{static-limit}$, wall markers get displaced ($|q| > 0$) and slipping occurs. The case of a no-slip boundary (see Sec.~\ref{subsec:wall}) corresponds to $\lVert \bm{F}_f \rVert = F_T$,  $F_\text{static-limit} = \infty$. In this scenario, the tangential stress, no matter how strong, is matched by the frictional force provided by the wall, so there is no-slip. 
+    \item The resulting macroscopic behaviors of extended GNBC are analogous to rigid body frictions. When the stress on the rigid body surface is lower than the static friction upper bound, the friction is static (no-slip). When the stress exceeds the upper bound, the rigid body slides (slips) and the sliding friction is approximately the upper bound of static friction ($\bm{F}_f$). 
+\end{itemize}
+The numerical implementation involves a trivial algorithm that associates each wall contact with a local region of the wall (usually six to eight mesh cells), so that the contact line velocity is available for calculating the friction force. 
+
+\subsection{Step-wise interface re-sampling}
+The surface tension is always normal to the interface, therefore, the fluid flow easily disrupts the distribution of the interface markers. To equi-distribute the markers on the structure,~\citet{lai2008immersed} used grid redistribution, while \citet{hou1994removing} and \citet{lai2010numerical} applied artificial tangential velocity. Our method is similar to grid redistribution in the sense that we add markers to wide gaps and remove them from tight spaces at every time step. Specifically, at each time step, the program iterates over all the interface markers. When the distance between any pair of markers exceeds $\sqrt{2}$ times their initial distance, the program inserts a new marker between them. When the distance between the outer two of any three adjacent markers become smaller than $\sqrt{2}/2$ times their initial distance, the program removes the inner marker of the three. 
+
+Whenever a marker is removed, the two adjacent markers are joined together and their coordinates are left untouched. However, a \textit{sharpness check} compares $\cos \alpha$ (where $\alpha$ is the angle formed by the three markers) with a threshold ($0.9$, in our case) to prevent the program from removing a marker that represents a relatively sharp corner and adversely affecting area and tension energy conservation. The sharpness check becomes irrelevant as the spatial resolution $N$ approaches infinity but improves simulation accuracy for finite values of $N$. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=8.5cm]{Fig5.pdf}
+    \label{fig:young}
+    \caption{\footnotesize{
+        The blue circles show four adjacent interface markers. When the distance between the inner two is larger than $\sqrt{2}$ times its initial length, we insert a new marker. IS is the intersection of two lines, one connecting $X_{2,\ell-1}$ to $X_{2,\ell}$ and the other connecting $X_{2,\ell+2}$ to $X_{2,\ell+1}$. MP is the midpoint of the line segment between $X_{2,\ell}$ and $X_{2,\ell+1}$. The green cross shows the new marker, which is a linear combination of MP and IS weighted by an amendment factor. 
+    }}
+    \label{fig:add-marker}
+\end{figure}
+On the other hand, when a marker is inserted (see Fig.~\ref{fig:add-marker}), the program calculates two locations: the midpoint (MP) between the two markers and the intersection (IS) of the extrapolated lines from four adjacent markers. A weighted average between MP and IS is used as the location for the newly inserted marker. The averaging is weighted by a \textit{re-sampling amendment factor}. If there is too much weight on the midpoint, the removal of markers will erroneously decrease tension energy while insertion will not increase tension energy. By having a proper weight on the extrapolated intersection, we can keep the \textit{bias} of the energy error to $0$ (although the \textit{variance} will still increase with time). On the other hand, too much weight on the extrapolated intersection leads to alternating jagged edges and eventually to instabilities. In our simulations, we set the re-sampling amendment factor to be $0.5$. The amendment factor becomes irrelevant as $N$ approaches infinity but improves simulation accuracy for finite values of $N$.
+
+Our re-sampling routine constantly computes and records energy errors due to the artificial removal and insertion of markers. At the end of a simulation, these errors can be plotted for evaluation. See Sec.~\ref{subsec:resample} for the apparent improvement that this technique brings. This re-sampling technique, however, is very difficult to extend to 3D with a surface mesh.  
+
+\subsection{Interface splicing} \label{subsec:splice}
+\begin{figure}
+\centering
+\subfloat[]{\includegraphics[scale=0.2]{Fig6a.pdf}}\quad
+\subfloat[]{\includegraphics[scale=0.32]{Fig6b.pdf}}\\
+\caption{\footnotesize{(a) Among the six interface splicing scenarios, three pairs are reversed in time and three pairs share the same implementation. (b) An important condition for splicing to occur is that the two interfaces are approaching each other, as shown with the violet arrows representing the velocity of each interface. When the distance between four involved markers become small enough, the algorithm splices the interfaces (removing two black links and adding two green links).}}
+\label{fig:splice}
+\end{figure}
+Figure~\ref{fig:splice}(a) shows six possible scenarios in which the liquid-gas interface changes topology and the chain of interface markers needs to be spliced: two droplets merging, one droplet splitting into two, a droplet attaching to the wall, a droplet detaching from the wall, a droplet splitting on the wall, and two droplets merging on the wall. Those six cases form three pairs of reversible processes as well as three pairs of scenarios whose implementations are exactly the same. The same-implementation cases are locally indistinguishable, since our splicing implementation is agnostic to the phase (liquid or gas) on each side. 
+
+To implement splicing, we store the interface markers in circular doubly linked lists. The linking direction preserves polarity information; if one follows the links in the positive direction, the liquid will always be on the right. Figure~\ref{fig:splice}(b) illustrates a splicing event. When the distance between two interfaces is smaller than a threshold, we check whether the two interfaces are approaching using the sign of the dot product of their velocities. If both conditions hold true, the interfaces are spliced together. In our method, we have two different distance thresholds, one for interface-interface events ($h$), and the other for interface-wall events ($2.3h$), where $h$ is the meshwidth (i.e. diameter of one Eulerian grid cell). These specific parameters result in stable splicing events according to our numerical tests. Lastly, a splicing event forces the simulation to skip the splicing subroutine for two subsequent time steps. This rule makes splicing events more atomic so that there will not be multiple splicing events competing to accomplish the same macroscopic effect.
+
+
+\subsection{Variable density}
+Our model uses the technique proposed by~\citet{kim2008numerical} to describe the different densities for the liquid and gas within and outside of the droplet, respectively. In this approach, a uniform 2D grid of Lagrangian markers is constructed in the liquid phase to represent the density difference. This difference is achieved by allowing the markers to have an effective mass by tethering them to their massive, Newtonian counterparts using the penalty immersed boundary (pIB) method. More formally, the Newtonian particles have velocity $\boldsymbol{v}$, 
+\begin{equation}
+\bm{v}(s,r,t) = \cfrac{\partial \bm{Y}(s,r,t)}{\partial t},
+\end{equation}
+where $\boldsymbol{Y}$ is the location of the Newtonian particles. 
+The forces on the Newtonian particles are the tether force and the gravity: 
+\begin{equation}
+\Delta \rho \, \cfrac{\partial \bm{v}(s,r,t)}{\partial t} = k_3 \, (
+    \bm{X}_3(s,r,t) - \bm{Y}(s,r,t)
+) - \Delta \rho \, G \, \bm{\hat{j}},
+\end{equation}
+where $\Delta \rho = \rho_l - \rho_g$ is the 2D density difference between the liquid and gas, $G$ is the gravitational constant, $\bm{\hat{j}}$ is the vertical unit vector, and $k_3$ is the spring constant ($\text{g}/(\text{s}^2\,\text{cm}^2)$) associated with the variable density method. A tether force is applied as a force density onto the fluid,
+\begin{equation}
+\bm{F}_3(s,r,t) = k_3 \, (
+    \bm{Y}(s,r,t) - \bm{X}_3(s,r,t)
+), 
+\end{equation}
+to couple the particles $\bm{X}_3$ with the Newtonian particles $\bm{Y}$. Our implementation uses the variable density method~\cite{kim2008numerical}, with several modifications. \citet{kim2008numerical} used a five-step update method for time stepping, while we use a coarser, midpoint method (see Sec.~\ref{sec:discretization}). We also set the \textit{allowed distance}\footnote{The \textit{allowed distance} is a parameter in the method by \citet{kim2008numerical}. It sets an upper bound for the distance between a boundary marker and its Newtonian counterpart. Our program monitors the maximum distance between a boundary marker and its Newtonian counterpart. Once it exceeds the allowed distance, the program raises a warning for the user to increase the pIB spring stiffness and rerun the simulation.} to be one tenth the mesh-width, i.e. $h/10$. 
+
+
+\section {Numerical discretization\label{sec:discretization}}
+
+For the spatial discretization, we use a global Navier-Stokes solver based on harmonics in the velocity field. This solver uses the Fast Fourier Transform to accelerate the computation, but at the cost of not being able to handle variable density/viscosity out-of-the-box. The time step is denoted by $dt$ with units of seconds. The spatial resolution parameter $N$, is the number of Eulerian cells in the problem domain along the $y$ axis. The length of cell side in the spatial discretization, i.e. the meshwidth, is denoted by $h$ with units of centimeters. Therefore, we always have $N \, h = L$, where $L$ is the height of the square computational domain as shown in Fig.~\ref{fig:domain}. 
+
+The time step index is denoted by $n \in \{0, 1, 2, ...\}$ and the physical time at time step $n$ is given by $t^n = n \, dt$. The discrete Eulerian space coordinates that label the cells in the Cartesian mesh are $(i, j) \in \{0, 1, 2, ..., N-1\}^2$. A physical cell position in the problem domain is given by ${\bm x}_{ij} = (i \, h, j \, h)$. The fluid velocity  $\boldsymbol{u}(x_{ij},t^n)$ at position $x_{ij}$ and time $t^n$ is approximated by the discrete fluid velocity, denoted by $\bm{u}_{ij}^n$. The array of discrete velocities at time step $n$ is denoted by ${\bm u}^n = (\bm{u}_{ij}^n)$. The discrete spatial parametrization variables for the immersed structures are $\ell \in \{0, 1, 2, ..., \ell_{max}\}$ and $m \in \{0, 1, 2, ..., m_{max}\}$ where $\ell_{max}$ and $m_{max}$ can change during simulation due to the interface re-sampling. A point within the parametrization of the immersed structure is given by $(r_\ell, s_m) = (\ell \, \Delta r, m \, \Delta s)$ where $\Delta r, \Delta s$ control the discrete spatial resolution of the structures. In our simulations, we initialize $\ell_{max}$ and $m_{max}$ so that $\Delta r = \Delta s = h / 2$. The discrete 2D structure positions corresponding to the variable density area $\bm{X}_3$ are indexed as  $\bm{X}_{3,\ell m}^n \approx \bm{X}_3(r_\ell,s_m,t^n)$, and we collect them in a single array denoted by $\bm{X}_3^n = (\bm{X}_{3,\ell m}^n)$. We use the same notation for the discretizations of the 1D wall boundary $\bm{X}_1$ as well as the 1D fluid-gas interface boundary $\bm{X}_2$, although in these cases there is only a single parametrization variable. We represent the array of discrete structure positions at time step $n$ by $\bm{X}^n = (\bm{X}_1^n,\bm{X}_2^n,\bm{X}_3^n)$.
+
+\begin{figure*}
+\centering{
+\includegraphics[scale=0.6]{Fig7.pdf}}
+\caption{\footnotesize{The upper panel shows the equilibrium droplet shape computed from our simulations. The lower panel displays altitude versus curvature for the hanging droplet. The analytical solution obtained by~\citet{cimpeanu2021motion} is shown by the orange line, and the blue scattered dots correspond to the curvature calculated from our simulation results. From left to right, the gravitational constant $G$ (cm$^2$/s) is gradually increased to alter the droplet shape. The green line highlights the location where curvature is zero, i.e. the inflection point in the droplet shape.}}
+\label{fig:h-curvature}
+\end{figure*}
+
+We use a \textit{midpoint method} for evolving the system in time that relies on quantities at intermediate time steps $\{\frac{1}{2}, \frac{3}{2}, ...\}$. This method improves stability and constrains numerical errors. Following the approach from works by~\citet{peskin2002immersed,ib_matlab}, the procedure below describes the time discretization for the equations of motion (\ref{eq:ib-ns}), (\ref{eq:ib-spread-force}), and (\ref{eq:ib-advect}): 
+\begin{enumerate}
+    \item Given the marker positions $\bm{X}^n$ and the fluid velocity $\bm{u}^n$, compute the first-order approximation of the marker positions at the midpoint step $\bm{X}^{n + 1/2}$ using equation (\ref{eq:ib-advect}). 
+    \item Given the marker positions at the midpoint step $\bm{X}^{n + 1/2}$, compute the force densities at the midpoint, denoted $\bm{f}^{n + 1/2}$, using equation (\ref{eq:ib-spread-force}). \footnotetext{converting the Lagrangian force density $\bm{F}$ to the Eulerian force density $\bm{f}$ uses the discrete 2D Dirac delta function \cite{peskin2002immersed}.}
+    \item Given the fluid velocity field $\bm{u}^n$ and the force densities at the midpoint step $\bm{f}^{n + 1/2}$, compute the fluid velocity field at both the midpoint $\bm{u}^{n + 1/2}$ and the next time step $\bm{u}^{n + 1}$, using equation (\ref{eq:ib-ns}). 
+    \item Given the marker positions $\bm{X}^n$ and the fluid velocity at the midpoint step $\bm{u}^{n + 1/2}$, advect the markers for time $dt$ to obtain the marker positions at the next time step $\bm{X}^{n + 1}$ using equation (\ref{eq:ib-advect}). 
+\end{enumerate}
+
+\section {Benchmark and convergence tests \label{sec:veri}}
+This section focuses on benchmark and convergence tests for our methods. In Sec.~\ref{subsec:equi}, we simulate a hanging droplet on a wall and compare our steady state results with an analytical solution~\cite{cimpeanu2021motion}. In Sec.~\ref{subsec:rb}, we compare our simulation results with an established variable density benchmark in which a bubble rises in a liquid column~\cite{turek2021numerical}. Finally, in Sec.~\ref{subsec:converg}, we describe results from nontrivial experiments to empirically study the convergence of our methods.
+
+
+
+\subsection {Droplet in hydro-static equilibrium on a wall}\label{subsec:equi}
+In this test, we compare our simulation results with an analytical solution for the interface shape of a droplet hanging on a vertical wall~\cite{cimpeanu2021motion}. The model describes the hydro-static equilibrium shape of a droplet hanging on a vertical wall as a partial differential equation expressed in Cartesian coordinates. The solution to this problem implies a linear relationship between the local curvature of the interface and the altitude. Details regarding derivation of the analytical solution are given in the work by \citet{cimpeanu2021motion}.  
+
+
+For these simulations, the time step is $dt=0.0001$ s, the spatial resolution parameter is $N=96$, the height of the computational domain is $L=2$ cm, the surface tension coefficient is $\sigma=100$ g\,cm/s$^2$, the gas density is $\rho_g=0.1$ g/cm$^2$, the liquid density is $\rho_l=1$ g/cm$^2$, and the viscosity is $\mu=1$ g/s. We run several simulations and vary the magnitude of gravity coefficient $G$ to compare curvatures in the equilibrium state with those from the analytical solution given in the work by~\citet{cimpeanu2021motion}. To estimate local curvature at each marker, we compute the circle that contains the three adjacent markers and calculate the inverse of the circle's signed radius. The simulations are terminated at $t = 0.25$ s, at which time all three cases have reached a steady state. Results are shown in Fig.~\ref{fig:h-curvature}. From left to right, the gravitational constant $G$ (cm$^2$/s) is gradually increased to alter the droplet shape. The upper panel depicts the equilibrium droplet shape computed by our simulations. A linear relation is observed between the 2D curvature and the altitude as shown in the lower panel. In addition, there is excellent agreement between our numerical results (blue scattered dots) and the analytical solution (orange line) given in the work by~\citet{cimpeanu2021motion}. However, noise can be observed around the contact points in the simulation, which would decrease as the spatial resolution is increased. In both panels, the green line represents the location where curvature is zero, i.e. the inflection point in the droplet shape.
+    
+
+\subsection {Rising bubble in a liquid column} \label{subsec:rb}
+In this section, we describe an application of our methods to a recently proposed transient multi-phase flow benchmark which describes a gas bubble rising in a liquid column~\cite{turek2021numerical}. This benchmark provides a reasonable experiment for the surface tension model, making it suitable for testing multi-phase flow methods. Specifically, we compare our simulation results to those calculated from Featflow, an open-source CFD package by~\citet{turek2021numerical}. The authors of this software provided results for a constant viscosity variant of their test case for our study. Details of the benchmark setup can be found in ``test case 1'' of the work by~\citet{turek2021numerical}, except that instead of a 1:10 viscosity ratio, our simulations use a 10:10 viscosity ratio.  
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{Fig8.pdf}
+\caption{\footnotesize{The schematic of the rising bubble benchmark case problem domain. The top and bottom walls are no-slip and no-penetration, while the left and right walls are no-penetration. The gas and the liquid form a 1:10 density ratio.}}
+\label{fig:rb_domain}
+\end{figure}
+
+In our simulation, the time step is $dt=0.002$ s, the spatial resolution parameter is $N=128$, the height of the computational domain is $L=2$ cm, the surface tension coefficient is $\sigma=24.5$ g\,cm/s$^2$, the gravitational acceleration is $G=0.98$ cm/s$^2$, the gas density is $\rho_g$ = $100$ g/cm$^2$, the liquid density is $\rho_l$ = $1000$ g/cm$^2$, the viscosity is $\mu$ = $10$ g/s for both fluids and the Reynolds number is \mbox{\textit{Re}} $= 35$. We use a symmetry boundary condition on the left and right boundaries that corresponds to a no-penetration condition. We treat the top wall (see Fig.~\ref{fig:rb_domain}) as a penalty immersed boundary with a forcing scheme similar to Sec.~\ref{subsec:wall} to make it a no-penetration and no-slip boundary. Note that the altitude of the top wall is initialized so that the spring force is already in equilibrium with the gravitational force on the fluid. In other words, the initial location of the top wall is slightly below the top boundary. Otherwise, the fluid column would undergo damped oscillations at the beginning of the simulation.
+
+\begin{figure*}
+\centering
+\includegraphics[scale=0.7]{Fig9.pdf}
+\caption{\footnotesize{A comparison of our simulation results against those computed from Featflow~\cite{turek2021numerical}. The model is of a rising gas bubble in a liquid column. (a) and (b) show the altitude evolution of the center of mass and the circularity index of the bubble respectively, for our simulation (IB) and Featflow. (c) and (d) show the absolute error of the IB and Featflow results corresponding to (a) and (b), respectively.}}
+\label{fig:bm_plot}
+\end{figure*}
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{Fig10.pdf}
+\caption{\footnotesize{A plot of the bubble shape over time for our simulation and the results generated from Featflow~\cite{turek2021numerical}. The axes units are in cm. The boundary of the bubble is shown at different points in time, with time increasing from bottom to top. The final bubble position corresponds to $t = 3$ s. Our method agrees extremely well with the results from Featflow~\cite{turek2021numerical}, even with a relatively coarse spatial resolution, $N=128$. This figure also provides more details on the rising bubble (Multimedia view).%See movie 1 for a video of this test.
+}}
+\label{fig:bm_shape}
+\end{figure}
+
+Figure~\ref{fig:bm_plot} depicts the center of mass and the circularity index calculated from our simulation results compared against those from Featflow~\cite{turek2021numerical}. To keep track of the center of mass of the bubble, the simulation initializes the problem domain with $\bm{X}_4$, an additional 2D equidistant grid of markers inside the bubble. $\bm{X}_4$ is solely for accounting purposes and does not exert any forces. The mean of the current positions of the markers $\bm{X}_4$ corresponds to the bubble's center of mass. The circularity index is defined in the work by~\citet{turek2021numerical}, which is the perimeter of an area-equivalent circle divided by the perimeter of the bubble. Our simulation does not calculate an area-equivalent circle but instead uses the initial circle circumference as a proxy, since in our simulations, area is well conserved over the course of the simulation. The center of mass and circularity index calculated from our simulations show good agreement with the Featflow benchmark results. Figure~\ref{fig:bm_shape} shows excellent agreement in the position and shape of our simulated bubble versus the benchmark results. See the Multimedia view for a video of this experiment.
+
+\subsection{Convergence tests} \label{subsec:converg}
+In this section, we describe the results of several tests in which we vary the time step and the spatial resolution to empirically verify convergence of our methods. For all tests in this section, the height of the computational domain is $L=2$ cm, the surface tension coefficient is $\sigma=50$ g\,cm/s$^2$, the gas density is $\rho_g=0.1$ g/cm$^2$, the liquid density is $\rho_l=1$ g/cm$^2$, and the viscosity is $\mu=0.01$ g/s. \charles{Daniel: I added the following sentence and changed the wording to be consistent with what we call the computational domain and what we call the problem domain. is this true for all the tests in this section?} The size of the computational domain is $2$ cm $\times$ $2$ cm and the size of the problem domain is $1$ cm $\times$ $2$ cm. Therefore $x\in[0, L/2]$, $y \in [0, L]$, where $L$ = $2$. Periodic boundary conditions are used for the top and bottom boundaries and a symmetry boundary condition is used for the left and right boundaries (see Sec.~\ref{sec:bc}).
+
+\subsubsection {Test 1: Sliding droplet} \label{sec:conv_dow}
+\begin{figure}
+\centering
+\includegraphics[scale=0.6]{Fig11.pdf} 
+\caption{\footnotesize{Test 1: this figure shows the final
+state of the sliding droplet simulation for several different values of $dt$ and $N$. The axes units are in cm. The simulation is terminated after the droplet stops moving. Notice the trail of fluid left by the droplet as it slides down the wall. Further increasing $N$ beyond $192$ yields no visible changes in the results. This figure also provides more details on the sliding droplet (Multimedia view).%See movie 2 for a video of this test.
+}}
+\label{fig:terminal}
+\end{figure}
+For this test, we simulate a droplet sliding down a vertical wall as shown in Fig.~\ref{fig:terminal}. The Reynolds number is \mbox{\textit{Re}} $%= 1 \, \text{g/cm}^2 \times 10 \, \text{cm/s} \times 0.2 \, \text{cm} \div 0.01 \, \text{g/s} 
+= 200$, where the typical length scale is the diameter of the droplet and the characteristic velocity is selected as the maximum velocity at \charles{this detail needs to be added? so and so....}  
+
+    
+There is a vertical wall at $x=0$, and the minimum static friction is $F_\text{no-slip}=25$ g$\,$/s$^2$. There is a uniform upward flow of gas which corresponds to a prescribed vertical component of the velocity at $y=0$. More precisely, the boundary condition at $y=0$ (i.e. top and bottom boundary) for the vertical velocity component is $30\tanh(4x / L)$ cm/s for $x \in [0, L/2]$. 
+
+We vary the time step $dt$ and the spatial resolution $N$. The final state of the sliding droplet simulation ($t = 0.15$ s) is shown. The results appear to converge if we increase the spatial resolution $N$ to $192$. Further increasing $N$ beyond this value yields no visible improvement. See the Multimedia view for a video of this test.
+
+\subsubsection {Test 2: Coalescence of two droplets}
+\begin{figure}
+\centering
+\begin{lapsetable}{6}{.123}
+$N$ & $dt$ & $t$=0 s&0.01 s&0.02 s&0.03 s&0.04 s&0.05 s
+\lapse{Fig12}{0.000500}{64} {\scinote{5}{-4}}{6}{5.5}{3.2}{4.8}{1.5}
+\lapse{Fig12}{0.000200}{96} {\scinote{2}{-4}}{6}{5.5}{3.2}{4.8}{1.5}
+\lapse{Fig12}{0.000100}{128}{\scinote{1}{-4}}{6}{5.5}{3.2}{4.8}{1.5}
+\end{lapsetable}
+\caption{\footnotesize{Test 2: this figure shows the coalescence of two droplets. Three levels of spatial and temporal resolutions are shown. Little improvement is gained from $N = 96$ to $N = 128$, rendering $N = 128$ a high enough spatial resolution, while holding other parameters constant. This figure also provides more details on the coalescence of two droplets (Multimedia view).%See movie 3 for a video of this test.
+}}
+\label{fig:merge_two}
+\end{figure}
+In test 2, we simulate two droplets coalescing without gravity. Results are shown in Fig.~\ref{fig:merge_two}. The coalescence of two droplets is an extremely challenging test case since the moment of droplet merging amplifies previous numerical perturbations. We increase the spatial and temporal resolutions (holding other parameters constant) and the simulation results show good spatial and temporal convergence with our surface tension model and interface splicing techniques. See the Multimedia view for a video of this test.
+
+\subsubsection {Test 3: Coalescence of six droplets}
+\begin{figure}
+\centering
+\begin{lapsetable}{6}{.13}
+$N$ & $dt$ & $t$=0 s&0.01 s&0.02 s&0.03 s&0.04 s&0.05 s
+\lapse{Fig13}{0.000200}{96} {\scinote{2}{-4}}{6}{3.4}{3.5}{2}{1.5}
+\lapse{Fig13}{0.000100}{128}{\scinote{1}{-4}}{6}{3.4}{3.5}{2}{1.5}
+\lapse{Fig13}{0.000050}{192}{\scinote{5}{-5}}{6}{3.4}{3.5}{2}{1.5}
+\end{lapsetable}
+\caption{\footnotesize{Test 3: six droplets coalesce under three levels of spatial and temporal resolutions. Little improvement is achieved from $N = 128$ to $N = 192$, rendering $N = 192$ a high enough spatial resolution, while holding other parameters constant. This figure also provides more details on coalescence of six droplets (Multimedia view).%See movie 4 for a video of this test.
+}}
+\label{fig:merge_six}
+\end{figure}
+Figure~\ref{fig:merge_six} shows our simulation results for coalescing six droplets for three levels of spatial and temporal resolutions. There is no gravity for test 3 either. This merging test is difficult since the variance of the system's response to the first coalescence event is amplified by the successive merging events. Our system demonstrates an interesting property that large values of $dt$ lead to instability issues, and slowly lowering $dt$ into a stable regime leads to fast convergence and high accuracy. See the Multimedia view for a video of this test.
+
+\subsubsection {Test 4: Letters "IB" fall into an elastic pouch}
+\label{subsubsec:letters}
+\begin{figure*}
+\centering
+\begin{lapsetable}{7}{.12}
+$N$ & $dt$ & $t$=0 s&0.03 s&0.06 s&0.09 s&0.12 s&0.15 s&0.24 s
+\lapse{Fig14}{0.0005}{96} {\scinote{5}{-4}}{7}{6}{4}{5}{5}
+\lapse{Fig14}{0.0003}{128}{\scinote{3}{-4}}{7}{6}{4}{5}{5}
+\end{lapsetable}
+\caption{\footnotesize{Test 4: letter-shaped droplets falling into an elastic pouch, simulated with two levels of spatial and temporal resolutions. This test highlights our method's ability to simulate an MCL on a changing-shape solid surface. This figure also provides more details on the falling of letter-shaped droplets (Multimedia view).%See movie 5 for a video of this experiment.
+}}
+\label{fig:letters}
+\end{figure*}
+Here we initialize liquid droplets in the shape of the letters ``IB" and let them fall into an elastic pouch. Results are shown in Fig.~\ref{fig:letters}. %In this test case, the height of the computational domain is $L=10$ cm, the tension coefficient is $\sigma=50$ g\,cm/s$^2$, the gas density is $\rho_g=0.1$ g/cm$^2$, the liquid density is $\rho_l=1$ g/cm$^2$, and the viscosity is $\mu=0.01$ g/s. 
+The Reynolds number \mbox{\textit{Re}} $ %1 \, \text{g/cm}^2 \times 40 \, \text{cm/s} \times 2 \, \text{cm} \div 0.01 \, \text{g/s} 
+= 8000$, where the typical length scale is $2$ cm, the width of the letter ``I''. At the beginning of the simulation, before the droplets interact with the pouch, they slightly change shape because of surface tension. As the droplets hit the pouch, the pouch deforms and the letter ``B'' changes topologically as the gas bubbles exit the droplet. This test demonstrates the capabilities of our method in an all-in-one setting. Note that here the solid membrane is dynamic, rendering static boundary conditions unusable. This shows that our methods are capable of simulating a moving contact line between a liquid-gas interface and a changing-shape solid surface, simulating fluid dynamics, surface tension, unbalanced Young stress, extended GNBC, and solid elasticity all at the same time. See the Multimedia view for a video of this test.
+
+
+
+\section {Applications} \label{sec:app}
+In this section, we describe applications of our methods to simulate several scenarios. In Sec.~\ref{subsec:dow}, we consider the effect of droplet size on its dynamics as it slides down a wall. The importance of our interface re-sampling technique is explored in Sec.~\ref{subsec:resample}. Finally, in Sec.~\ref{subsec:more_splice}, we showcase some additional tests in which interfaces are spliced to represent topological changes. All tests in Sec.~\ref{sec:app} share the following parameters. The surface tension coefficient is $\sigma=50$ g\,cm/s$^2$ and the gravitational acceleration is $G=980$ cm/s$^2$. The gas density is $\rho_g=0.1$ g/cm$^2$ and the liquid density is $\rho_l=1$ g/cm$^2$. The viscosity for both the liquid and gas phases is $\mu=0.01$ g/s.
+
+\subsection {Droplets sliding down a wall} \label{subsec:dow}
+In this section, we consider droplets sliding down a wall, where gravity competes against an upward air flow. \charles{Daniel: can you check the accuracy of the following sentence that I changed a bit?} The setup for the computational and problem domains can be found at the beginning of Sec.~\ref{sec:conv_dow}. 
+
+\subsubsection {Effect of droplet size}
+\begin{figure}
+\centering
+\begin{shortlapsetable}
+{6}{.12}
+Diameter & $t$=0 s&0.02 s&0.04 s&0.06 s&0.08 s&0.10 s
+\tabularnewline 0.4 cm
+\lapseShort{Fig15/output_0.400000}{6}{5}{4}{8.5}{1.7}
+\tabularnewline 0.5 cm
+\lapseShort{Fig15/output_0.500000}{6}{5}{4}{8.5}{1.7}
+\tabularnewline 0.6 cm
+\lapseShort{Fig15/output_0.600000}{6}{5}{4}{8.5}{1.7}
+\end{shortlapsetable}
+\caption{\footnotesize{This figure shows results from several simulations with various droplet sizes. We initialize the droplets as semi circles with diameters corresponding to $0.4$, $0.5$, and $0.6$ cm. The bigger droplets are heavier, so they slide down the wall more quickly. The smallest droplet is stationary. This figure also provides more details on sliding droplets with different sizes (Multimedia view).%See movie 6 for a video of these experiments.
+}}
+\label{fig:droplet_size}
+\end{figure}
+In Fig.~\ref{fig:droplet_size}, we analyze the dynamics of various sized droplets. The smallest droplet corresponding to the top panel of Fig.~\ref{fig:droplet_size} does not slide; rather, it obeys the ``no-slip" rule. This is consistent with reality and is implemented in our MCL model with the no-slip term (see Sec.~\ref{subsec:mcl}). Our method tracks the wall markers that are vertically displaced by the MCL model at every time step. We observe that vertical displacements only occur near the contact point (usually within 6 to 8 cells). This means that although our MCL model applies to the entire wall, the majority of the wall that interacts with the droplet behaves as a no-slip boundary, and only the contact region slips. This is consistent with previous literature which suggests that the fluid's internal viscous stress is not enough to incur apparent slip in subsonic flows with hydrophilic surfaces \cite{qian2004power}. The unbalanced Young force is the dominating tangential force near the contact point. See the Multimedia view for a video of these experiments. 
+
+\subsubsection {Large droplet merges with a small droplet}
+\begin{figure}
+\centering
+\begin{shortlapsetable}{8}{.12}
+$t$ = &0.01 s&0.02 s&0.03 s&0.04 s&0.05 s&0.06 s&0.07 s&0.08 s
+\tabularnewline
+\lapseShort{Fig16}{8}{5}{4}{8.5}{1.4}
+\end{shortlapsetable}
+\caption{\footnotesize{This figure shows results from a simulation in which a big droplet catches a smaller droplet and coalesces with it. Time increases from the left to right. This test demonstrates the effect of droplet size in a single simulation. This figure also provides more details on the coalescence of two sliding droplets (Multimedia view).%See movie 7 for a video of this experiment.
+}}
+\label{fig:big_chase_small}
+\end{figure}
+In Fig.~\ref{fig:big_chase_small}, we initialize two droplets of different sizes on the wall. The larger droplet slides down faster than the smaller one. Therefore, it catches the smaller droplet and coalesces with it. This test case shows the system's response to two different droplet sizes in one simulation and, at the same time, demonstrates the capabilities of our interface splicing capabilities at the wall. See the Multimedia view for a video of this experiment.
+
+
+
+\subsection {Performance of the re-sampling technique} \label{subsec:resample}
+
+\charles{details of computational and problem domains}
+
+\begin{figure}
+\centering
+\begin{shortlapsetable}{3}{.18}
+Re-sample & $t$=0.013 s&0.037 s&0.077 s
+\tabularnewline Off
+\lapseShort{Fig17/bad} {3}{3.5}{7}{6}{2}
+\tabularnewline On
+\lapseShort{Fig17/good}{3}{3.5}{7}{6}{2}
+\end{shortlapsetable}
+\caption{\footnotesize{This figure shows results from two simulations, one which uses the interface re-sampling technique (bottom), and one which does not (top). Without re-sampling, fluid flow advects the interface markers and the interface breaks into pieces, allowing for penetration through the interface. This shows the importance of our interface re-sampling technique. This figure also provides more details on the interface re-sampling of a sliding droplet (Multimedia view).%See movie 8 for a video of these experiments.
+}}
+\label{fig:resample_comp}
+\end{figure}
+Figure~\ref{fig:resample_comp} shows a comparison study on the effect of our step-wise re-sampling technique. In the upper row, we do not re-sample, resulting in badly distributed Lagrangian markers and, eventually, topological errors. In the lower row, the re-sampling technique is used and resolves this issue. See the Multimedia view for a side-by-side comparison video. 
+
+\subsection {Demos of interface splicing}
+
+\charles{details of computational and problem domains}
+
+\label{subsec:more_splice}
+\begin{figure*}
+\centering
+\begin{shortlapsetable}{7}{.13}
+&$t$\,=\,0.187 s&0.190 s&0.193 s&0.197 s&0.2 s&0.203 s&0.207 s
+\tabularnewline
+\lapseShort{Fig18}{7}{6.4}{4.2}{4.6}{4.8}
+\end{shortlapsetable}
+\caption{\footnotesize{This figure shows the results from a simulation in which a single droplet separates into two smaller ones. It showcases the ability of our interface splicing method to handle droplet separation. This figure also provides more details on the splicing of a droplet (Multimedia view).%See movie 9 for a video of this experiment.
+}}
+\label{fig:split}
+\end{figure*}
+    
+\begin{figure}
+\centering
+\begin{shortlapsetable}{8}{.12}
+$t$=&0.019 s&0.021 s&0.022 s&0.024 s&0.027 s&0.029 s&0.035 s&0.040 s
+\tabularnewline
+\lapseShort{Fig19}{8}{5}{4.8}{9.5}{3.5}
+\end{shortlapsetable}
+\caption{\footnotesize{This figure depicts the results from a simulation in which two droplets coalesce on the wall. This showcases the capacity of our interface splicing technique to handle droplet coalescence at the wall due to two approaching contact lines. This figure also provides more details on the splicing of a droplet (Multimedia view).%See movie 10 for a video of this experiment.
+}}
+\label{fig:wall_merge}
+\end{figure}
+Figure~\ref{fig:split} shows results from a simulation in which a single droplet separates into two smaller ones. After the splicing moment, surface tension quickly brings the sharp edge into the body of the droplet. See the Multimedia view for a video of this experiment. In figure~\ref{fig:wall_merge}, two droplets coalesce on the wall. This is one of the six basic cases of interface splicing introduced earlier in Sec.~\ref{subsec:splice}. See the Multimedia view for a video of this experiment. Additional simulations can be found in Figs.~\ref{fig:20}(a)-\ref{fig:20}(d). In Fig.~\ref{fig:20}(a), a droplet on the wall separates into two droplets as a results of a collision with the wall. A droplet attaches to the wall in Fig.~\ref{fig:20}(b). In Fig.~\ref{fig:20}(c), an air bubble collides with a droplet, showing the effect of variable density. Finally, in Fig.~\ref{fig:20}(d), a droplet slides down a wall, leaving behind a trail of small droplets.
+
+\begin{figure}
+\centering
+\subfloat[]{\includegraphics[scale=0.28]{Fig20a.pdf}}\quad
+\subfloat[]{\includegraphics[scale=0.28]{Fig20b.pdf}}\\
+\subfloat[]{\includegraphics[scale=0.28]{Fig20c.pdf}}\quad
+\subfloat[]{\includegraphics[scale=0.28]{Fig20d.pdf}}\\
+\caption{\footnotesize{(a) a droplet on the wall separates into two droplets (Multimedia view). (b) a droplet attaches to the wall (Multimedia view). (c) an air bubble collides with a droplet (Multimedia view). (d) a droplet slides down a wall, leaving behind a trail of small droplets (Multimedia view).}}
+\label{fig:20}
+\end{figure}
+    
+
+\section{Conclusions} \label{sec:conclusion}
+In this paper, we propose and test four techniques that use the immersed boundary method to simulate droplets and their interaction with a wall. An extended GNBC wall can be modeled as an immersed boundary and the friction forces are directly spread at the wall. The surface tension and the unbalanced Young force can be nicely integrated with the IB method by computing local unit vectors tangent to the interface. We also have shown that interface marker re-sampling is necessary to obtain accurate results. Our interface splicing method handles droplet coalescence, separation and other topological changes with stable splicing events. We also demonstrate empirical convergence of our methods on non-trivial examples and apply them to several benchmark cases, including a slipping droplet on a wall and a rising bubble. 
+
+
+The success of our methods demonstrates the rich extensibility of the IB method. We show that even complex dynamics such as the moving contact line on an evolving solid surface can be modeled with the IB method. Additionally, many equivalent ways of modeling the same phenomena can converge to the same results. For example, among many possible ways of implementing the wall friction, we choose to displace wall markers so that the tether force density equals the friction density, and the baseline IB method imparts the tether force onto the fluid. There are many other ways to do the same thing: for example, formulating the friction as an additional type of force, directly imparting the friction onto the fluid without intermediate markers, or prescribing the fluid velocity according to local tangential stress. 
+
+Our work is limited in several ways. Our methods assumes the fluid(s) to be incompressible. We expect the interface splicing method to be the most vulnerable to a compressible-flow setting. Inertia and compressibility will be likely to make the splicing events much less atomic. In addition, although our methods support variable density, it does not support variable viscosity. They only deal with multiple fluid phases of 1:1 viscosity ratio.
+
+
+\subsection*{Acknowledgements}
+C.P. and P.S gratefully acknowledge support from the National Science Foundation (NSF) under Grants No. RTG/DMS-1646339. P.S. is also supported by an Institutional Support of Research and Creativity (ISRC) grant provided by New York Institute of Technology and financial support from NSF under Grants No. DMS-2108161. We thank Otto Mierka and Stefan Turek for providing the 10:10 viscosity benchmark data for rising bubble test case 1. Several very helpful conversations with Guanhua Sun are gratefully acknowledged. 
+
+\section*{AUTHOR DECLARATIONS}
+
+\subsection*{Conflict of Interest}
+The authors have no conflict of interest to disclose.
+
+
+\subsection*{Author Contributions}
+M.Y.L. and D.C. contributed equally to this work.
+
+
+\section*{Data Availability Statement}
+The data that support the findings of this study are available
+from the corresponding author upon reasonable request.
+
+%\nocite{*}
+\section*{REFERENCES}
+\bibliography{bibliography}
+
+
+\end{document}             % End of document.

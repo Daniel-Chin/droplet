@@ -75,17 +75,14 @@ SPLICE_WALL_THRESHOLD = h * 2.3;
 SPLICE_REJECT_N_STEPS = 2;
 splice_reject_remains = 0;
 
-OUTPUT_PATH = 'E:/IBM_Space/output/%d.png';
-RECORD_PATH = 'E:/IBM_Space/record/%d.mat';
+OUTPUT_PATH = strrep(getenv('h'), '\', '/') + "/d/IBM_space/output/%d.png";
+RECORD_PATH = strrep(getenv('h'), '\', '/') + "/d/IBM_space/record/%d.mat";
 
 clockmax = ceil(tmax/dt);
 clock = 0;
 
-SLIP_LENGTH = SLIP_LENGTH_UNITS * h;
-SLIP_LENGTH_COEF = 1 / SLIP_LENGTH_UNITS;
-
 fprintf('Static friction goodness (shuold be >> 0 and < .5): %f\n', ...
-  NO_SLIP_FORCE*SLIP_LENGTH_COEF / (dtheta2*WALL_STIFFNESS/2) ...
+  NO_SLIP_FORCE / (dtheta2*WALL_STIFFNESS/2) ...
 );
 
 RENDER_DEBUG = 0;
