@@ -1,6 +1,7 @@
 render_phase = render_phase + dt;
 if render_phase >= SPF
   render_phase = render_phase - SPF;
+  disp("start render");
 
   hold on;
   if RENDER_DEBUG == 1
@@ -41,4 +42,5 @@ if render_phase >= SPF
   drawnow
   saveFrame();
   hold off
+  disp("fin render");
 end

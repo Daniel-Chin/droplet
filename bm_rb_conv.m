@@ -10,6 +10,7 @@ end
 for k = 1 : 4
   course(k + 5, :) = [N_course(k + 1), dt_course(1)];
 end
+course(end + 1, :) = [162 * 2, .0016 / 2];
 course = course(1:end, :);
 for k = course'
   clearvars -except k

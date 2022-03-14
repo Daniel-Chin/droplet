@@ -719,21 +719,40 @@ some day {
             total: order ~= 5
             Why? 
 }
-todo {
-    fix ib2d
-    alt-curvature:
-        filter the points for say 1mm away from the wall. 
-    check
-        \hat t VS \hat T
+3/8 {
+    upgrade 3d comments
+}
+3/10 {
     order of acc:
         pair-wise slope should converge. 
         also: L2 norm of fluid velocity field. 
         use 1.5 steps, and make fine finer. 
-    upgrade 3d comments
-    friction limit is 0D! 
-    hydrophilic: reduce nonsense
-    young stress -> force
-    remove SLIP_LENGTH check, see the result. 
+        check table.xlsx
+        table looks fine! 
+        table for the reponse. In manuscript, mention error. 
+    alt-curvature:
+        filter the points for say 1mm away from the wall. 
+    fix ib2d
+        add N, when does it slow down? 
+        it does not slow down! 
+}
+3/13 {
+    manuscript
+        section: surface tension and Young's forces
+        make the new sections blue
+        theta -> static vs dynamic
+        young stress -> force
+        check
+            \hat t VS \hat T
+        contact line -> contact point
+            first appearance: mention 2D vs 3D
+    add external force term for fric and young
+}
+todo {
+    alt-curvature:
+        fix dt
+        remove histogram, include droplet
+    add static contact in sim
 }
 questions {
 }

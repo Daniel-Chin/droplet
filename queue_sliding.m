@@ -4,17 +4,18 @@ global kp km dtheta K;
 global WALL_STIFFNESS PERFECT_WALL NO_SLIP_FORCE SLIP_LENGTH_COEF;
 global big_G;
 
-for DT = [0.00005, 0.00002]
-  for NN = [96, 128, 192]
+% for DT = [0.00005, 0.00002]
+for DT = [0.00001]
+  for NN = [96, 128, 192, 256]
     defineConstants();
     tmax = .15; % Run until time s
     dt = DT
     N = NN
     initialize();
-    OUTPUT_PLACE = sprintf('E:/IBM_Space/output_%f_%d', DT, NN);
+    OUTPUT_PLACE = sprintf(strrep(getenv('h'), '\', '/') + "/d/IBM_Space/output_%f_%d", DT, NN);
     mkdir(OUTPUT_PLACE);
     OUTPUT_PATH = OUTPUT_PLACE + "/%d.png";
-    RECORD_PLACE = sprintf('E:/IBM_Space/record_%f_%d', DT, NN);
+    RECORD_PLACE = sprintf(strrep(getenv('h'), '\', '/') + "/d/IBM_Space/record_%f_%d", DT, NN);
     mkdir(RECORD_PLACE);
     RECORD_PATH = RECORD_PLACE + "/%d.mat";
     RENDER_DEBUG = 0;
