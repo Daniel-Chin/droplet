@@ -4,14 +4,14 @@ global kp km dtheta K;
 global WALL_STIFFNESS PERFECT_WALL NO_SLIP_FORCE SLIP_LENGTH_COEF;
 global big_G;
 
-for SIZE = [.2 .25 .3]
+for SIZE = [.18 .2 .25]
   defineConstants();
   tmax = .15; % Run until time s
   initialize();
-  OUTPUT_PLACE = sprintf('E:/IBM_Space/size_effect/output_%f', SIZE*2);
+  OUTPUT_PLACE = strrep(getenv('h'), '\', '/') + sprintf("/d/IBM_Space/size_effect/output_%f", SIZE*2);
   mkdir(OUTPUT_PLACE);
   OUTPUT_PATH = OUTPUT_PLACE + "/%d.png";
-  RECORD_PLACE = sprintf('E:/IBM_Space/size_effect/record_%f', SIZE*2);
+  RECORD_PLACE = strrep(getenv('h'), '\', '/') + sprintf("/d/IBM_Space/size_effect/record_%f", SIZE*2);
   mkdir(RECORD_PLACE);
   RECORD_PATH = RECORD_PLACE + "/%d.mat";
   RENDER_DEBUG = 0;

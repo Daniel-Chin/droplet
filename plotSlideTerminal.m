@@ -1,31 +1,34 @@
 close all;
 
-tiledlayout(2, 3, 'Padding', 'none', 'TileSpacing', 'compact'); 
-for plot_i = (1:6)
+tiledlayout(1, 4, 'Padding', 'compact', 'TileSpacing', 'compact'); 
+for plot_i = (1:4)
   ax = nexttile;
-  if mod(plot_i, 3) == 1
+  if mod(plot_i, 4) == 1
     N = 96;
-  elseif mod(plot_i, 3) == 2
+  elseif mod(plot_i, 4) == 2
     N = 128;
     set(ax, 'ytick', []);
-  elseif mod(plot_i, 3) == 0
+  elseif mod(plot_i, 4) == 3
     N = 192;
     set(ax, 'ytick', []);
+  elseif mod(plot_i, 4) == 0
+    N = 256;
+    set(ax, 'ytick', []);
   end
-  if plot_i <= 3
-    dt     =  0.00005;
-    str_dt = '0.000050';
-    display_dt = '{5}\times10^{-5}';
+  if plot_i <= 4
+    dt     =  0.00001;
+    str_dt = '0.000010';
+    display_dt = '{1}\times10^{-5}';
     set(ax, 'xtick', []);
   else
-    dt     =  0.00002;
-    str_dt = '0.000020';
-    display_dt = '{2}\times10^{-5}';
+    % dt     =  0.00002;
+    % str_dt = '0.000020';
+    % display_dt = '{2}\times10^{-5}';
   end
   % defineConstants();
   % initialize();
   load(sprintf( ...
-    "D:/IBM_Space/slide/record_%s_%d/45.mat", str_dt, N ...
+    strrep(getenv('h'), '\', '/') + "/d/IBM_Space/slide/convergence/record_%s_%d/180.mat", str_dt, N ...
   ));
 
   hold on;

@@ -4,9 +4,9 @@ global kp km dtheta K;
 global WALL_STIFFNESS PERFECT_WALL NO_SLIP_FORCE SLIP_LENGTH_COEF;
 global big_G;
 
-% for DT = [0.00005, 0.00002]
-for DT = [0.00001]
-  for NN = [96, 128, 192, 256]
+for DT = [0.00002, 0.00001]
+% for DT = [0.00001]
+  for NN = [256, 96, 128, 192]
     defineConstants();
     tmax = .15; % Run until time s
     dt = DT

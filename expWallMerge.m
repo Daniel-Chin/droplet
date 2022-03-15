@@ -3,9 +3,8 @@ global dt Nb N h rho mu ip im a;
 global kp km dtheta K;
 global WALL_STIFFNESS PERFECT_WALL NO_SLIP_FORCE SLIP_LENGTH_COEF;
 defineConstants();
-K = 100; % Surface tension coefficient, N*10^-5
-NO_SLIP_FORCE = 4;
-FRICTION_ADJUST = 30;
+dt = 0.0002; % Time step, second
+N = 64; % Number of grid cells
 L = 3;
 initialize();
 init_a();
@@ -27,7 +26,7 @@ clockmax=ceil(tmax/dt);
 clock = 0;
 render();
 while clock <= clockmax
-  if clock <= 250
+  if clock <= 100
     big_G = big_G - 10;
   end
   clock = clock + 1;
