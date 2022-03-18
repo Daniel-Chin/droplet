@@ -1,34 +1,32 @@
 close all;
 
-tiledlayout(1, 4, 'Padding', 'compact', 'TileSpacing', 'compact'); 
-for plot_i = (1:4)
+tiledlayout(2, 3, 'Padding', 'compact', 'TileSpacing', 'compact'); 
+for plot_i = (1:6)
   ax = nexttile;
-  if mod(plot_i, 4) == 1
-    N = 96;
-  elseif mod(plot_i, 4) == 2
+  col = mod(plot_i, 3);
+  if col == 1
     N = 128;
-    set(ax, 'ytick', []);
-  elseif mod(plot_i, 4) == 3
+  elseif col == 2
     N = 192;
     set(ax, 'ytick', []);
-  elseif mod(plot_i, 4) == 0
+  elseif col == 0
     N = 256;
     set(ax, 'ytick', []);
   end
-  if plot_i <= 4
+  if plot_i <= 3
     dt     =  0.00001;
     str_dt = '0.000010';
     display_dt = '{1}\times10^{-5}';
     set(ax, 'xtick', []);
   else
-    % dt     =  0.00002;
-    % str_dt = '0.000020';
-    % display_dt = '{2}\times10^{-5}';
+    dt     =  0.00002;
+    str_dt = '0.000020';
+    display_dt = '{2}\times10^{-5}';
   end
   % defineConstants();
   % initialize();
   load(sprintf( ...
-    strrep(getenv('h'), '\', '/') + "/d/IBM_Space/slide/convergence/record_%s_%d/180.mat", str_dt, N ...
+    strrep(getenv('h'), '\', '/') + "/d/IBM_Space/slide/convergence_static_54/record_%s_%d/107.mat", str_dt, N ...
   ));
 
   hold on;

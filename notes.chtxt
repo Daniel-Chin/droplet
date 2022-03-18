@@ -748,17 +748,20 @@ some day {
             first appearance: mention 2D vs 3D
     add external force term for fric and young
 }
-todo {
-    alt-curvature:
-        fix dt
-        remove histogram, include droplet
+3/17 {
     add static contact in sim
         leave trails
             remove, since included in conv slide
         wall split / merge / attach
+        conv slide terminal state figure
         big catch small
         effect of size
-        conv slide terminal state figure
+}
+todo {
+    alt-curvature:
+        fix dt
+        remove histogram, include droplet
+    update all videos
     mention static = 90 in tests
 }
 questions {

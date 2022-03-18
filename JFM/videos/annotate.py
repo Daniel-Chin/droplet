@@ -60,54 +60,47 @@ def main():
     x = buildCommand(filename, texts)
     system(x)
 
-    filename = '2_conv_drop_slide_3x3.mp4'
+    filename = '2_conv_drop_slide_2x4.mp4'
     texts = []
     texts.append(Text(
-        'Droplet sliding down a wall', 
+        'Droplet sliding \ndown a wall', 
         TOP, 
     ))
-    texts[-1].fontsize = '100'
-    texts[-1].x = '800'
-    texts.append(Text(
-        '''The gray markers in the background are visual 
-helpers and do not interact with the physics.''', 
-    ))
-    texts[-1].fontsize = '72'
-    texts[-1].x = '800'
-    texts[-1].y = '150'
-    texts.append(Text(
-        'dt=\n0.0001', 
-    ))
-    texts[-1].fontsize = '48'
-    texts[-1].x = '20'
-    texts[-1].y = '400'
-    texts.append(Text(
-        'dt=\n0.00005', 
-    ))
-    texts[-1].fontsize = '48'
-    texts[-1].x = '20'
-    texts[-1].y = '1400'
+    texts[-1].fontsize = '70'
     texts.append(Text(
         'dt=\n0.00002', 
     ))
     texts[-1].fontsize = '48'
-    texts[-1].x = '20'
-    texts[-1].y = '2400'
+    texts[-1].x = '60'
+    texts[-1].y = '400'
+    texts.append(Text(
+        'dt=\n0.00001', 
+    ))
+    texts[-1].fontsize = '48'
+    texts[-1].x = '60'
+    texts[-1].y = '1300'
+    N_LEFT = 440
+    N_PAD = 990
     texts.append(Text(
         'N=96', BOTTOM, 
     ))
     texts[-1].fontsize = '48'
-    texts[-1].x = 'w/2-850-text_w'
+    texts[-1].x = str(N_LEFT + N_PAD * 0)
     texts.append(Text(
         'N=128', BOTTOM, 
     ))
     texts[-1].fontsize = '48'
-    texts[-1].x = 'w/2-text_w/2'
+    texts[-1].x = str(N_LEFT + N_PAD * 1)
     texts.append(Text(
         'N=192', BOTTOM, 
     ))
     texts[-1].fontsize = '48'
-    texts[-1].x = 'w/2+850'
+    texts[-1].x = str(N_LEFT + N_PAD * 2)
+    texts.append(Text(
+        'N=256', BOTTOM, 
+    ))
+    texts[-1].fontsize = '48'
+    texts[-1].x = str(N_LEFT + N_PAD * 3)
     x = buildCommand(filename, texts)
     system(x)
     
@@ -194,28 +187,23 @@ helpers and do not interact with the physics.''',
         TOP, 
     ))
     texts.append(Text(
+        'Diameter=0.36', 
+    ))
+    texts[-1].fontsize = '36'
+    texts[-1].x = 'w/2-650-text_w'
+    texts[-1].y = 'h-text_h*2'
+    texts.append(Text(
         'Diameter=0.4', 
     ))
-    texts[-1].fontsize = '24'
-    texts[-1].x = 'w/2-850-text_w'
-    texts[-1].y = 'h-text_h*2-20'
+    texts[-1].fontsize = '36'
+    texts[-1].x = 'w/2-text_w/2'
+    texts[-1].y = 'h-text_h*2'
     texts.append(Text(
         'Diameter=0.5', 
     ))
-    texts[-1].fontsize = '24'
-    texts[-1].x = 'w/2-text_w/2'
-    texts[-1].y = 'h-text_h*2-20'
-    texts.append(Text(
-        'Diameter=0.6', 
-    ))
-    texts[-1].fontsize = '24'
-    texts[-1].x = 'w/2+850'
-    texts[-1].y = 'h-text_h*2-20'
-    texts.append(Text(
-        'The gray markers in the background are visual helpers and do not interact with the physics. ', 
-        BOTTOM, 
-    ))
-    texts[-1].fontsize = '24'
+    texts[-1].fontsize = '36'
+    texts[-1].x = 'w/2+680'
+    texts[-1].y = 'h-text_h*2'
     x = buildCommand(filename, texts)
     system(x)
     
@@ -225,11 +213,7 @@ helpers and do not interact with the physics.''',
         'Big droplet catches up and merges with a small droplet', 
         TOP, 
     ))
-    texts.append(Text(
-        'The gray markers in the background are visual \nhelpers and do not interact with the physics. ', 
-    ))
-    texts[-1].fontsize = '24'
-    texts[-1].y = '910'
+    texts[-1].fontsize = '26'
     x = buildCommand(filename, texts)
     system(x)
     
@@ -328,19 +312,19 @@ interact with the physics. The contour lines show the velocity curl. ''',
     x = buildCommand(filename, texts)
     system(x)
     
-    filename = '14_demo_leave_trail.mp4'
-    texts = []
-    texts.append(Text(
-        'Droplet leaves a trial on the wall', 
-        TOP, 
-    ))
-    texts.append(Text(
-        '''The gray markers in the background are visual 
-helpers and do not interact with the physics. ''', 
-    ))
-    texts[-1].y = '910'
-    texts[-1].fontsize = '24'
-    x = buildCommand(filename, texts)
-    system(x)
+#     filename = '14_demo_leave_trail.mp4'
+#     texts = []
+#     texts.append(Text(
+#         'Droplet leaves a trial on the wall', 
+#         TOP, 
+#     ))
+#     texts.append(Text(
+#         '''The gray markers in the background are visual 
+# helpers and do not interact with the physics. ''', 
+#     ))
+#     texts[-1].y = '910'
+#     texts[-1].fontsize = '24'
+#     x = buildCommand(filename, texts)
+#     system(x)
 
 main()
