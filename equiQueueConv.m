@@ -3,7 +3,7 @@ clc; clear all; close all;
 global dt Nb N h rho mu ip im a;
 global kp km dtheta K;
 global WALL_STIFFNESS PERFECT_WALL NO_SLIP_FORCE SLIP_LENGTH_COEF;
-global big_G;
+global big_G; STATIC_CONTACT_ANGLE;
 
 exp_name = "equilibrium_conv";
 big_G = 1000; % cm/s2
