@@ -756,13 +756,23 @@ some day {
         conv slide terminal state figure
         big catch small
         effect of size
+    update all videos
+}
+3/19 {
+    discuss the new parts
+    Do the figure filenames still need to be "Fig.x"?
+        yes
+    unbalanced Young's -> Young's
+    \partial t -> dt
+    In Fig.5, move "fluid flow" label to the right. 
+        remove the two left arrows
+    mention static angle in tests
 }
 todo {
     alt-curvature:
         fix dt
         remove histogram, include droplet
-    update all videos
-    mention static = 90 in tests
+        actaully, try smaller dt and see if std decreases instead of stagnates. 
 }
 questions {
 }
