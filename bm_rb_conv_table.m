@@ -50,12 +50,12 @@ for kkk = [1 2]
     fprintf("%d & %f & %f & %f & %f & ", N, dt, CM_error, ci_error, u_error);
     if first
       first = false;
-      fprintf("NA & NA & NA \n");
+      fprintf("NA & NA & NA \\\\ \n");
     else
       CM_order = (log(abs(CM_error)) - last_log_CM_e) / (log(1 / N) - last_log_N);
       ci_order = (log(abs(ci_error)) - last_log_ci_e) / (log(1 / N) - last_log_N);
       u_order = (log(abs(u_error)) - last_log_u_e) / (log(1 / N) - last_log_N);
-      fprintf("%f & %f & %f \n", CM_order, ci_order, u_order);
+      fprintf("%f & %f & %f \\\\ \n", CM_order, ci_order, u_order);
     end
     last_log_N = log(1 / N);
     last_log_CM_e = log(abs(CM_error));
