@@ -773,6 +773,7 @@ todo {
         fix dt
         remove histogram, include droplet
         actaully, try smaller dt and see if std decreases instead of stagnates. 
+        when computing curvature, normalize estimation range! 
 }
 questions {
 }
