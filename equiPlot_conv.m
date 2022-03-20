@@ -21,7 +21,7 @@ for N = [24 48 96 192]
   AnalyticalLine = plot(analytical, his, 'LineWidth', 3, 'color', '#f70');
   axis([-20 20 .6 1.6]);
   hold on;
-  fprintf("dt=%f N=%3d std=%f\n", dt, N, std(cvt - analytical));
+  fprintf("dt=%f N=%3d std=%f slope_err=%f\n", dt, N, std(cvt - analytical), slope_err);
   line([0 0], ylim(), 'Color', 'k');
   simDots = plot(cvt, his, '.', 'MarkerSize', 5, 'color', 'b');
   if N == 24
