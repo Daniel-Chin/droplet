@@ -9,6 +9,8 @@ for big_G = [600 800 1000 1200]
   % ax = subplot(2, 4, plot_col + 4);
   ax = subplot('Position', [(plot_col-1) * X_SPACE + .07, .13, .18, .3]);
   load(sprintf('results/equilibrium/%d.mat', big_G));
+  curavture_estimation_radius = 2;
+  equiDoIt_normalized();
   his = curvature_pairs(3:end-2, 1);
   cvt = - curvature_pairs(3:end-2, 2);
   analytical = (mean(his) - his) * (big_G / K) + mean(cvt);

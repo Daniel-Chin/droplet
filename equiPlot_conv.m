@@ -6,13 +6,12 @@ big_G = 1000;
 
 equiDefineConstants();
 plot_col = 1;
-for ndt = [24 48 96 192; 0.0004 0.0002 0.0001 0.00005]
-  N = ndt(1);
-  dt = ndt(2);
+for N = [24 48 96 192]
   % ax = subplot(2, 4, plot_col + 4);
   ax = subplot('Position', [(plot_col-1) * X_SPACE + .07, .13, .18, .3]);
   load(sprintf('results/equilibrium_conv/%d_%d.mat', big_G, N));
-  equiDoIt_exclude_too_close;
+  curavture_estimation_radius = round(N / 24);
+  equiDoIt_normalized();
   his = curvature_pairs(3:end-2, 1);
   cvt = - curvature_pairs(3:end-2, 2);
   ana_slope = big_G / K;
@@ -37,20 +36,21 @@ for ndt = [24 48 96 192; 0.0004 0.0002 0.0001 0.00005]
   
   % ax = subplot(2, 4, plot_col);
   ax = subplot('Position', [(plot_col-1) * X_SPACE + .045, .49, .23, .34]);
-  if N == 24
-    nbins = 4;
-    rep = 8;
-  elseif N == 48
-    nbins = 5;
-    rep = 4;
-  elseif N == 96
-    nbins = 6;
-    rep = 2;
-  elseif N == 192
-    nbins = 15;
-    rep = 1;
-  end
-  hist3(repmat([cvt his], rep, 1), "Nbins", [nbins 12]);
+  % if N == 24
+  %   nbins = 4;
+  %   rep = 8;
+  % elseif N == 48
+  %   nbins = 5;
+  %   rep = 4;
+  % elseif N == 96
+  %   nbins = 6;
+  %   rep = 2;
+  % elseif N == 192
+  %   nbins = 15;
+  %   rep = 1;
+  % end
+  % hist3(repmat([cvt his], rep, 1), "Nbins", [nbins 12]);
+  equiRenderOne();
   title(sprintf('$dt$ = %.5f s \n$N$ = %d \n', dt, N), 'interpreter', 'latex');
   formatPlot();
   ax.FontSize = 18;
@@ -59,7 +59,7 @@ for ndt = [24 48 96 192; 0.0004 0.0002 0.0001 0.00005]
   %   set(ax, 'ytick', []);
   %   set(ax, 'ztick', []);
   % end
-  axis([-20 20 .6 1.6 0 50]);
+  % axis([-20 20 .6 1.6 0 50]);
   inflectionLine = line(xlim(), [1.2 - .0006 * (big_G - 1200), 1.2 - .0006 * (big_G - 1200)], 'Color', [0 .5 0], 'LineWidth', 2);
   
   plot_col = plot_col + 1;
