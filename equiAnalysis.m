@@ -21,7 +21,7 @@ while clock < clockmax
     alt = curvature_pairs(3:end-2, 1);
     cvt = - curvature_pairs(3:end-2, 2);
     fit_result = polyfit(cvt, alt, 1);
-    slope_err = fit_result(1) - K / big_G;
+    slope_err = fit_result(1) - (- K / big_G);
     slope_err_his_i = slope_err_his_i + 1;
     slope_err_his(1, slope_err_his_i) = clock * dt;
     slope_err_his(2, slope_err_his_i) = slope_err;
