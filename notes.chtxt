@@ -768,12 +768,25 @@ some day {
         remove the two left arrows
     mention static angle in tests
 }
+3/15 {
+    alt-curv slope error. see emails. 
+    ask Charles for the one GNBC reference we will use. 
+}
 todo {
+    analyze slope error in response to finer dt. 
+        dt=0.000025 N= 96
+        or dt=0.000050 N>192
+    
+    go over comments in main. 
+    go over the responses
+    min, max -> \min, \max
     alt-curvature:
         fix dt
         remove histogram, include droplet
         actaully, try smaller dt and see if std decreases instead of stagnates. 
         when computing curvature, normalize estimation range! 
+    filename
+    technique, step -> extension
 }
 questions {
 }
