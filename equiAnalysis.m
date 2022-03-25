@@ -32,7 +32,7 @@ while clock < clockmax
   end
 end
 
-save(sprintf('results/%s/%d_%d.mat', exp_name, big_G, N));
+save(sprintf('results/%s/%d_%d_%f.mat', exp_name, big_G, N, dt));
 % hold off;
 % plot(slope_err_his(1, :), slope_err_his(2, :));
 % hold on;
