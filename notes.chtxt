@@ -772,21 +772,24 @@ some day {
     alt-curv slope error. see emails. 
     ask Charles for the one GNBC reference we will use. 
 }
+next {
+    order of acc table: which one to include in main? 
+    done:
+        min, max -> \min, \max
+        technique, step -> extension
+        rename filename
+        upload videos
+}
 todo {
-    analyze slope error in response to finer dt. 
-        dt=0.000025 N= 96
-        or dt=0.000050 N>192
-    
-    go over comments in main. 
-    go over the responses
-    min, max -> \min, \max
     alt-curvature:
         fix dt
         remove histogram, include droplet
         actaully, try smaller dt and see if std decreases instead of stagnates. 
         when computing curvature, normalize estimation range! 
-    filename
-    technique, step -> extension
+            done
+        analyze slope error in response to finer dt. 
+            dt=0.000025 N= 96
+            or dt=0.000050 N>192
 }
 questions {
 }
