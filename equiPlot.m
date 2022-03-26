@@ -1,3 +1,7 @@
+% Inches:
+% 0.1 0.2 10 6
+% 10.1 6.4
+
 close all;
 hold off;
 
