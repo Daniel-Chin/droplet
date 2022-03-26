@@ -17,7 +17,7 @@ for big_G = [600 800 1000 1200]
   equiDoIt_normalized();
   his = curvature_pairs(3:end-2, 1);
   cvt = - curvature_pairs(3:end-2, 2);
-  analytical = (mean(his) - his) * (big_G / K) + mean(cvt);
+  analytical = (mean(his) - his) * (big_G / K * (rho_heavy - rho)) + mean(cvt);
   AnalyticalLine = plot(analytical, his, 'LineWidth', 3, 'color', '#f70');
   axis([-8 15 .6 1.6]);
   hold on;
