@@ -14,6 +14,8 @@ for N = [24 48 96 192]
   equiDoIt_normalized();
   his = curvature_pairs(3:end-2, 1);
   cvt = - curvature_pairs(3:end-2, 2);
+  fit_result = polyfit(cvt, his, 1);
+  slope_err = fit_result(1) - K / big_G;
   ana_slope = big_G / K;
   ana_interc = mean(cvt);
   m_h = mean(his);
