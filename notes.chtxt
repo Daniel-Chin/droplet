@@ -772,13 +772,23 @@ some day {
     alt-curv slope error. see emails. 
     ask Charles for the one GNBC reference we will use. 
 }
-next {
+3/26 {
     order of acc table: which one to include in main? 
+        only N. 
     done:
         min, max -> \min, \max
         technique, step -> extension
         rename filename
         upload videos
+    air density! 
+        once included, the analytical solution is the same with the simulation points. 
+    fig7 pooof
+        fixed
+    in rising bubble order of acc
+        use abs(err)
+        remove last row. 
+        add this table to referee 3
+        add to manuscript
 }
 todo {
     alt-curvature:
@@ -790,6 +800,7 @@ todo {
         analyze slope error in response to finer dt. 
             dt=0.000025 N= 96
             or dt=0.000050 N>192
+    fig a b should be two PDFs. 
 }
 questions {
 }
