@@ -15,7 +15,7 @@ for j = Nb:-1:1
         displace_2 = p_2 - p;
         dot_prod = dot(displace_1, displace_2) / norm(displace_1) / norm(displace_2);
         % sharpness control
-        if isnan(dot_prod) || dot_prod > -.9
+        if isnan(dot_prod) || dot_prod < -.9
           holes_i = holes_i + 1;
           holes(holes_i) = j;
           % plot(X(j, 1), X(j, 2), 'ro');
