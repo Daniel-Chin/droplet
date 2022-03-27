@@ -780,8 +780,6 @@ some day {
         technique, step -> extension
         rename filename
         upload videos
-    air density! 
-        once included, the analytical solution is the same with the simulation points. 
     fig7 pooof
         fixed
     in rising bubble order of acc
@@ -789,8 +787,6 @@ some day {
         remove last row. 
         add this table to referee 3
         add to manuscript
-}
-todo {
     alt-curvature:
         fix dt
         remove histogram, include droplet
@@ -800,6 +796,10 @@ todo {
         analyze slope error in response to finer dt. 
             dt=0.000025 N= 96
             or dt=0.000050 N>192
+        air density! 
+            once included, the analytical solution is the same with the simulation points. 
+}
+todo {
     fig a b should be two PDFs. 
 }
 questions {
