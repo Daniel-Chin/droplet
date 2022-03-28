@@ -30,7 +30,7 @@ for N = [24 48 96 192]
   m_a = mean(alt);
   analytical = (alt - m_a) * ana_slope + ana_interc;
   AnalyticalLine = plot(analytical, alt, 'LineWidth', 3, 'color', '#f70');
-  axis([-20 20 .6 1.6]);
+  axis([-8 15 .6 1.6]);
   hold on;
   l2_err = std(cvt - analytical);
   fprintf("%f & %3d & %f & ", dt, N, l2_err);
